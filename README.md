@@ -6,16 +6,21 @@ fully static website.
 Todo:
 
 - [x] Dev Server (with Hot Reloading) - env for port is missing.
-- [ ] Getting Started Documentation
-- [ ] Process Static HTML (404, Imprint, About)
+- [x] Getting Started Documentation
+- [x] Process Static HTML (404, Imprint, About)
 - [ ] Process Styles (SCSS, PostCSS, Tailwind)
-- [ ] Templating System (I would like to test Nunjucks)
+- [x] Templating System (I would like to test Nunjucks)
 - [ ] Create Static Pages
   - [ ] Create Frame
   - [ ] 404
   - [ ] Index
   - [ ] Categories
 - [ ] Create Blog Entries
+  - [ ] Add Read time indicator
+- [ ] Collect Meta Information about Blog Posts
+  - [ ] Construct list of categories (to be included in page frame)
+  - [ ] Create Start Page with list of last created blogs
+  - [ ] Add Search to Page
 
 # Getting Started
 
