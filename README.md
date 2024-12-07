@@ -21,7 +21,7 @@ Todo:
   - [ ] Construct list of categories (to be included in page frame)
   - [ ] Create Start Page with list of last created blogs
   - [ ] Add Search to Page
-- [ ] Automatically host web page.
+- [ ] Automatically host web page
 
 # Getting Started
 
