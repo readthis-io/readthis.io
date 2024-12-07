@@ -1,0 +1,60 @@
+{
+  "name": "blog",
+  "packageManager": "yarn@4.5.3",
+  "version": "0.0.1",
+  "keywords": [
+    "readthis",
+    "readthis.io",
+    "blog",
+    "development",
+    "software",
+    "tech"
+  ],
+  "contributors": [
+    {
+      "name": "Senad Redzic",
+      "url": "https://www.linkedin.com/in/senad-redzic/",
+      "email": "senad@readthis.io"
+    },
+    {
+      "name": "Aiko Jansen",
+      "url": "https://www.linkedin.com/in/aikojansen/",
+      "email": "aiko@readthis.io"
+    }
+  ],
+  "description": "Tech-Blog about everything we find interesting.",
+  "homepage": "https://readthis.io",
+  "bugs": {
+    "url": "https://github.com/readthis-io/blog/issues",
+    "email": "info@readthis.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:readthis-io/blog.git"
+  },
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": "20.12.0"
+  },
+  "engineStrict": true,
+  "private": true,
+  "scripts": {
+    "test": "eslint",
+    "build": "gulp build",
+    "watch": "gulp watch"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "@types/browser-sync": "^2.29.0",
+    "@types/fs-extra": "^11",
+    "@types/gulp": "^4.0.17",
+    "browser-sync": "^3.0.3",
+    "eslint": "^9.16.0",
+    "fs-extra": "^11.2.0",
+    "globals": "^15.13.0",
+    "gulp": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0"
+  }
+}

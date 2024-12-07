@@ -1,0 +1,29 @@
+{
+  "cSpell.words": [
+    "Aiko",
+    "dotenv",
+    "eslintcache",
+    "jscoverage",
+    "jspm",
+    "Microbundle",
+    "Nuxt",
+    "pids",
+    "readthis",
+    "Redzic",
+    "Senad",
+    "stylelintcache",
+    "vuepress",
+    "wscript"
+  ],
+  "editor.rulers": [
+    80
+  ],
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "editor.formatOnSave": true,
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
