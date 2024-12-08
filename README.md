@@ -23,7 +23,7 @@ Todo:
   - [ ] Add Search to Page
 - [ ] Automatically host web page
 - [ ] Add Cookie Banner and Enable Google Analytics
-- [ ] Fix HMR for Styles
+- [x] Fix HMR for Styles
 - [ ] Make static resources immutable by using the file hash as name.
 
 # Getting Started
