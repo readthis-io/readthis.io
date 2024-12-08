@@ -8,7 +8,7 @@ Todo:
 - [x] Dev Server (with Hot Reloading) - env for port is missing.
 - [x] Getting Started Documentation
 - [x] Process Static HTML (404, Imprint, About)
-- [ ] Process Styles (SCSS, PostCSS, Tailwind)
+- [x] Process Styles (SCSS, PostCSS, Tailwind)
 - [x] Templating System (I would like to test Nunjucks)
 - [ ] Create Static Pages
   - [ ] Create Frame
@@ -22,6 +22,8 @@ Todo:
   - [ ] Create Start Page with list of last created blogs
   - [ ] Add Search to Page
 - [ ] Automatically host web page
+- [ ] Add Cookie Banner and Enable Google Analytics
+- [ ] Fix HMR for Styles
 - [ ] Make static resources immutable by using the file hash as name.
 
 # Getting Started

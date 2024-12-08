@@ -57,5 +57,5 @@ export const staticPages: TaskFunction = () => {
 };
 
 export const watchStaticPages = () => {
-  gulp.watch("webpage/**/[^_]*.njk", staticPages);
+  gulp.watch("webpage/**/*.njk", staticPages);
 };
