@@ -22,6 +22,7 @@ Todo:
   - [ ] Create Start Page with list of last created blogs
   - [ ] Add Search to Page
 - [ ] Automatically host web page
+- [ ] Make static resources immutable by using the file hash as name.
 
 # Getting Started
 

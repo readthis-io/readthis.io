@@ -31,9 +31,9 @@ export const staticPages: TaskFunction = () => {
         removeStyleLinkTypeAttributes: true,
         removeScriptTypeAttributes: true,
         removeRedundantAttributes: true,
-        // removeOptionalTags: true,
-        // removeEmptyElements: false,
-        // removeEmptyAttributes: false,
+        removeOptionalTags: false,
+        removeEmptyElements: false,
+        removeEmptyAttributes: false,
         removeComments: true,
         removeAttributeQuotes: false,
         processConditionalComments: false,
@@ -47,19 +47,15 @@ export const staticPages: TaskFunction = () => {
       })
     )
     .pipe(
-      rename((path) => {
-        console.log(path);
-
-        return {
-          dirname: path.basename === "index" ? "." : path.basename,
-          basename: "index",
-          extname: ".html",
-        };
-      })
+      rename((path) => ({
+        dirname: path.basename === "index" ? "." : path.basename,
+        basename: "index",
+        extname: ".html",
+      }))
     )
     .pipe(dest("dist/"));
 };
 
 export const watchStaticPages = () => {
-  gulp.watch("webpage/*.html", staticPages);
+  gulp.watch("webpage/**/[^_]*.njk", staticPages);
 };
