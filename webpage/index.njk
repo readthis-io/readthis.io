@@ -1,0 +1,16 @@
+{% extends "_frame.njk" %} 
+
+{%block content %}
+<p class="pt-6 space-y-4">
+  Welcome to ReadThis.
+</p>
+
+{% for blog in blogs %}
+<div>
+  <h2>{{blog.title}}</h2>
+  
+  {{blog.description}}
+</div>
+{% endfor %}
+
+{% endblock %} 

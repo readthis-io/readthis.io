@@ -1,0 +1,35 @@
+{
+  "cSpell.words": [
+    "Aiko",
+    "dotenv",
+    "eslintcache",
+    "hljs",
+    "jscoverage",
+    "jspm",
+    "linkified",
+    "linkify",
+    "Microbundle",
+    "Nuxt",
+    "pids",
+    "prefixer",
+    "readthis",
+    "Redzic",
+    "Senad",
+    "stylelintcache",
+    "tseslint",
+    "vuepress",
+    "wscript"
+  ],
+  "editor.rulers": [
+    80
+  ],
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "editor.formatOnSave": true,
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
+}

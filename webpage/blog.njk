@@ -1,0 +1,20 @@
+{% extends "_frame.njk" %} 
+
+{% block styles %}
+<link rel="stylesheet" href="blog.css">
+{% endblock %} 
+
+{% block title %} {{title}}  {% endblock %} 
+
+{% block heading %} {{title}}  {% endblock %} 
+
+{%block content %}
+<h1>{{title}}</h1>
+<div>Topic: {{topic}}</div>
+<div>Tags: {{tags}}</div>
+
+<div>Blog entry: 
+
+{{blog|safe}}
+</div>
+{% endblock %} 
