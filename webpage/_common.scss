@@ -8,48 +8,49 @@
 $font-stack: Helvetica, Arial;
 $primary-color: #333;
 
-html, body {
-    margin: 0;
-    padding: 0; 
-    
-    $font-stack: list.append($font-stack, sans-serif);
-    font: $font-stack;
+html,
+body {
+  margin: 0;
+  padding: 0;
 
-    color: $primary-color;
+  $font-stack: list.append($font-stack, sans-serif);
+  font: $font-stack;
 
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  color: $primary-color;
+
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
 
-    grid-template-areas: 
-    'header header'
-    'nav content'
-    'nav footer';
+  grid-template-areas:
+    "header header"
+    "nav content"
+    "nav footer";
 }
 
 nav {
-    grid-area: nav;
-    background-color: blue;
+  grid-area: nav;
+  background-color: blue;
 }
 
 footer {
-    grid-area: footer;
-    background: red;
+  grid-area: footer;
+  background: red;
 }
 
 header {
-    grid-area: header;
-    background-color: green;
+  grid-area: header;
+  background-color: green;
 }
 
 main {
-    grid-area: content;
-    overflow-y: auto;
-    overflow-x: hidden;
+  grid-area: content;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

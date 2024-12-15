@@ -11,6 +11,6 @@ export const makeContext = (
     mode: mode,
     entries: entries,
     outputDirectory: path.join("dist", "webpage"),
-    blogsPerPage: 3,
+    blogsPerPage: 6,
   };
 };

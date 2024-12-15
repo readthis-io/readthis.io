@@ -4083,7 +4083,7 @@ const RAW_RUNTIME_STATE =
     ]],\
     ["highlight.js", [\
       ["npm:11.10.0", {\
-        "packageLocation": "../../.yarn/berry/cache/highlight.js-npm-11.10.0-2560016492-10c0.zip/node_modules/highlight.js/",\
+        "packageLocation": "./.yarn/unplugged/highlight.js-npm-11.10.0-2560016492/node_modules/highlight.js/",\
         "packageDependencies": [\
           ["highlight.js", "npm:11.10.0"]\
         ],\

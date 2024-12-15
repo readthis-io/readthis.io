@@ -26,7 +26,7 @@ const renderIndex = async (chunks: BlogEntry[][], ctx: Context) => {
       styles: ["index.css"],
       blogs: chunks[0],
       current: 1,
-      total: chunks.length / ctx.blogsPerPage,
+      total: chunks.length,
     },
     ctx.mode === "production" ? "Minify" : "Do Not Minify",
   );
@@ -44,7 +44,7 @@ const renderPagination = async (chunks: BlogEntry[][], ctx: Context) => {
         styles: ["index.css"],
         blogs: chunks[0],
         current: page + 1,
-        total: chunks.length / ctx.blogsPerPage,
+        total: chunks.length,
       },
       ctx.mode === "production" ? "Minify" : "Do Not Minify",
     );

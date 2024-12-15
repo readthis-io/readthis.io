@@ -4966,6 +4966,9 @@ __metadata:
     typescript-eslint: "npm:^8.18.0"
     yargs: "npm:^17.7.2"
     zod: "npm:^3.24.1"
+  dependenciesMeta:
+    highlight.js@11.10.0:
+      unplugged: true
   languageName: unknown
   linkType: soft
 

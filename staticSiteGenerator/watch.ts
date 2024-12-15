@@ -13,7 +13,12 @@ export const watch = async (mode: "production" | "debug") => {
 
   chokidar.watch(["blog/", "webpage/"]).on("all", async (event, path) => {
     console.log("Detected Change: ", event, path);
-    await build(mode);
-    browserSync.reload();
+
+    try {
+      await build(mode);
+      browserSync.reload();
+    } catch (e) {
+      console.log("Compilation failed", e);
+    }
   });
 };
