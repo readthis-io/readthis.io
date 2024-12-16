@@ -3,6 +3,7 @@ title: Hello
 tags:
   - into
   - tes
+slug: test
 topic: coding
 description: |
   ## Heading
@@ -17,10 +18,6 @@ created: "2024-12-12T10:00:55Z"
 # Hello
 
 How are you.
-
-Here is a simple footnote[^1]. With some additional text after it.
-
-[^1]: My reference.
 
 This is a link, that should be linkified www.google.de
 

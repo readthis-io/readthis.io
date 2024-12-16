@@ -1,9 +1,9 @@
 import path from "path";
 import fs from "fs-extra";
 
-import { Context } from "./Context.js";
-import { BlogEntry } from "./BlogEntry.js";
-import { renderTemplate } from "./renderTemplate.js";
+import { Context } from "../Context.js";
+import { BlogEntry } from "../BlogEntry.js";
+import { renderTemplate } from "../renderTemplate.js";
 
 interface BlogParameter {
   blog: string;

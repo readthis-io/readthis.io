@@ -51,6 +51,7 @@ const RAW_RUNTIME_STATE =
           ["html-minifier", "npm:4.0.0"],\
           ["marked", "npm:15.0.3"],\
           ["marked-alert", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:2.1.2"],\
+          ["marked-extended-tables", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:1.0.10"],\
           ["marked-footnote", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:1.2.4"],\
           ["marked-gfm-heading-id", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:4.1.1"],\
           ["marked-highlight", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:2.2.1"],\
@@ -4674,6 +4675,28 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["marked-extended-tables", [\
+      ["npm:1.0.10", {\
+        "packageLocation": "../../.yarn/berry/cache/marked-extended-tables-npm-1.0.10-23e9cea7f6-10c0.zip/node_modules/marked-extended-tables/",\
+        "packageDependencies": [\
+          ["marked-extended-tables", "npm:1.0.10"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:1.0.10", {\
+        "packageLocation": "./.yarn/__virtual__/marked-extended-tables-virtual-d308750864/3/.yarn/berry/cache/marked-extended-tables-npm-1.0.10-23e9cea7f6-10c0.zip/node_modules/marked-extended-tables/",\
+        "packageDependencies": [\
+          ["marked-extended-tables", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:1.0.10"],\
+          ["@types/marked", null],\
+          ["marked", "npm:15.0.3"]\
+        ],\
+        "packagePeers": [\
+          "@types/marked",\
+          "marked"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["marked-footnote", [\
       ["npm:1.2.4", {\
         "packageLocation": "../../.yarn/berry/cache/marked-footnote-npm-1.2.4-0988f23f78-10c0.zip/node_modules/marked-footnote/",\
@@ -6938,6 +6961,7 @@ const RAW_RUNTIME_STATE =
           ["html-minifier", "npm:4.0.0"],\
           ["marked", "npm:15.0.3"],\
           ["marked-alert", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:2.1.2"],\
+          ["marked-extended-tables", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:1.0.10"],\
           ["marked-footnote", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:1.2.4"],\
           ["marked-gfm-heading-id", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:4.1.1"],\
           ["marked-highlight", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:2.2.1"],\

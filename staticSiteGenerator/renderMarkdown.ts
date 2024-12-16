@@ -6,6 +6,9 @@ import hljs from "highlight.js";
 // import footnote from "marked-footnote";
 import alert from "marked-alert";
 
+// @ts-expect-error No Typing available
+import table from "marked-extended-tables";
+
 // TODO: AJ: 2024.12.13: Footnote throws an exception. No idea why, disabling
 // for now.
 
@@ -18,6 +21,7 @@ const marked = new Marked({
   .use(linkify())
   .use(gfmHeadingId())
   .use(alert())
+  .use(table())
   .use(
     markedHighlight({
       emptyLangClass: "hljs",

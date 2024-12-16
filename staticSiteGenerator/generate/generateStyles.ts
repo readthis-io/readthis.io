@@ -10,7 +10,7 @@ import path from "path";
 //@ts-expect-error there are no typings for this library.
 import sass from "@csstools/postcss-sass";
 
-import { Context } from "./Context.js";
+import { Context } from "../Context.js";
 
 const prodProcessor = postcss(sass(), tailwind(), preset(), prefixer(), nano());
 

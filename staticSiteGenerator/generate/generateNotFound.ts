@@ -1,19 +1,19 @@
 import path from "path";
 import fs from "fs-extra";
 
-import { Context } from "./Context.js";
-import { renderTemplate } from "./renderTemplate.js";
+import { Context } from "../Context.js";
+import { renderTemplate } from "../renderTemplate.js";
 
-type IndexParameter = object;
+type NotFound = object;
 
 export const generateNotFound = async (ctx: Context): Promise<void> => {
-  const html = await renderTemplate<IndexParameter>(
+  const html = await renderTemplate<NotFound>(
     "webpage/notFound.njk",
     {
       heading: "ReadThis",
       title: "ReadThis",
-      styles: ["index.css"],
-      categories: ctx.categories,
+      styles: ["notFound.css"],
+      ...ctx,
     },
     ctx.mode === "production" ? "Minify" : "Do Not Minify",
   );

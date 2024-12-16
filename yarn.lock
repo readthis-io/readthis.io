@@ -3502,6 +3502,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"marked-extended-tables@npm:^1.0.10":
+  version: 1.0.10
+  resolution: "marked-extended-tables@npm:1.0.10"
+  peerDependencies:
+    marked: ">=3 <15"
+  checksum: 10c0/a248c1c2648a44443196e8f5e5a40100b364da0c23878ddf84709b77fad59cd1e0183fe364f160e40b3776d5d042eab66a0fc015f9ac75be8c20b3df305255ed
+  languageName: node
+  linkType: hard
+
 "marked-footnote@npm:^1.2.4":
   version: 1.2.4
   resolution: "marked-footnote@npm:1.2.4"
@@ -4951,6 +4960,7 @@ __metadata:
     html-minifier: "npm:^4.0.0"
     marked: "npm:^15.0.3"
     marked-alert: "npm:^2.1.2"
+    marked-extended-tables: "npm:^1.0.10"
     marked-footnote: "npm:^1.2.4"
     marked-gfm-heading-id: "npm:^4.1.1"
     marked-highlight: "npm:^2.2.1"

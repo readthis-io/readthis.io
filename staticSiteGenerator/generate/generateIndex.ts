@@ -1,9 +1,9 @@
 import path from "path";
 import fs from "fs-extra";
 
-import { Context } from "./Context.js";
-import { renderTemplate } from "./renderTemplate.js";
-import { BlogEntry } from "./BlogEntry.js";
+import { Context } from "../Context.js";
+import { renderTemplate } from "../renderTemplate.js";
+import { BlogEntry } from "../BlogEntry.js";
 
 interface IndexParameter {
   blogs: BlogEntry[];

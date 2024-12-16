@@ -1,12 +1,14 @@
 import fs from "fs-extra";
 
-import { generateStyles } from "./generateStyles.js";
+import { generateStyles } from "./generate/generateStyles.js";
 import { parseBlogEntries } from "./parseBlogEntries.js";
-import { generateBlogEntries } from "./generateBlog.js";
-import { generateIndex } from "./generateIndex.js";
-import { generateNotFound } from "./generateNotFound.js";
+import { generateBlogEntries } from "./generate/generateBlog.js";
+import { generateIndex } from "./generate/generateIndex.js";
+import { generateNotFound } from "./generate/generateNotFound.js";
 import { makeContext } from "./makeContext.js";
-import { generateCategories } from "./generateCategories.js";
+import { generateCategories } from "./generate/generateCategories.js";
+import { generateImprint } from "./generate/generateImprint.js";
+import { generateAboutUs } from "./generate/generateAboutUs.js";
 
 /**
  * Generates the static website, parsing all source elements, including the
@@ -28,4 +30,6 @@ export const build = async (mode: "production" | "debug") => {
   await generateIndex(ctx);
   await generateNotFound(ctx);
   await generateCategories(ctx);
+  await generateImprint(ctx);
+  await generateAboutUs(ctx);
 };
