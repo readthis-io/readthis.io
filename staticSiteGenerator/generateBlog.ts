@@ -25,6 +25,7 @@ const generateBlogEntry = async (
       blog: entry.html,
       tags: entry.tags,
       topic: entry.topic,
+      categories: ctx.categories,
     },
     ctx.mode === "production" ? "Minify" : "Do Not Minify",
   );

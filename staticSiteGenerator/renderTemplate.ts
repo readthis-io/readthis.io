@@ -3,6 +3,8 @@ import nun from "nunjucks";
 import { minify } from "html-minifier";
 import fs from "fs-extra";
 
+import { Category } from "./Context.js";
+
 /**
  * Parameters used in _frame.njk.
  */
@@ -10,6 +12,7 @@ export interface PageFrameParameter {
   styles: string[];
   title: string;
   heading: string;
+  categories: Category[];
 }
 
 export const renderTemplate = async <TTemplate>(

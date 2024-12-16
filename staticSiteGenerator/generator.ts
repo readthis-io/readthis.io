@@ -5,7 +5,8 @@ import { parseBlogEntries } from "./parseBlogEntries.js";
 import { generateBlogEntries } from "./generateBlog.js";
 import { generateIndex } from "./generateIndex.js";
 import { generateNotFound } from "./generateNotFound.js";
-import { makeContext } from "./generateContext.js";
+import { makeContext } from "./makeContext.js";
+import { generateCategories } from "./generateCategories.js";
 
 /**
  * Generates the static website, parsing all source elements, including the
@@ -26,4 +27,5 @@ export const build = async (mode: "production" | "debug") => {
   await generateBlogEntries(ctx);
   await generateIndex(ctx);
   await generateNotFound(ctx);
+  await generateCategories(ctx);
 };

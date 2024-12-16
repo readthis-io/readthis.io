@@ -46,7 +46,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:11.0.0"],\
           ["globals", "npm:15.13.0"],\
           ["gray-matter", "npm:4.0.3"],\
-          ["highlight.js", "npm:11.10.0"],\
+          ["highlight.js", "npm:11.11.0"],\
           ["hljs", "npm:6.2.3"],\
           ["html-minifier", "npm:4.0.0"],\
           ["marked", "npm:15.0.3"],\
@@ -4082,10 +4082,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["highlight.js", [\
-      ["npm:11.10.0", {\
-        "packageLocation": "./.yarn/unplugged/highlight.js-npm-11.10.0-2560016492/node_modules/highlight.js/",\
+      ["npm:11.11.0", {\
+        "packageLocation": "../../.yarn/berry/cache/highlight.js-npm-11.11.0-3c9c4e55b7-10c0.zip/node_modules/highlight.js/",\
         "packageDependencies": [\
-          ["highlight.js", "npm:11.10.0"]\
+          ["highlight.js", "npm:11.11.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6933,7 +6933,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:11.0.0"],\
           ["globals", "npm:15.13.0"],\
           ["gray-matter", "npm:4.0.3"],\
-          ["highlight.js", "npm:11.10.0"],\
+          ["highlight.js", "npm:11.11.0"],\
           ["hljs", "npm:6.2.3"],\
           ["html-minifier", "npm:4.0.0"],\
           ["marked", "npm:15.0.3"],\

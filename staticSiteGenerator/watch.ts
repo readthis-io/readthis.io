@@ -3,7 +3,7 @@ import browserSync from "browser-sync";
 
 import { build } from "./generator.js";
 import { parseBlogEntries } from "./parseBlogEntries.js";
-import { makeContext } from "./generateContext.js";
+import { makeContext } from "./makeContext.js";
 
 export const watch = async (mode: "production" | "debug") => {
   const entries = await parseBlogEntries();

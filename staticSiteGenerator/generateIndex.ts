@@ -27,6 +27,7 @@ const renderIndex = async (chunks: BlogEntry[][], ctx: Context) => {
       blogs: chunks[0],
       current: 1,
       total: chunks.length,
+      categories: ctx.categories,
     },
     ctx.mode === "production" ? "Minify" : "Do Not Minify",
   );
@@ -42,9 +43,10 @@ const renderPagination = async (chunks: BlogEntry[][], ctx: Context) => {
         heading: "ReadThis",
         title: "ReadThis",
         styles: ["index.css"],
-        blogs: chunks[0],
+        blogs: chunks[page],
         current: page + 1,
         total: chunks.length,
+        categories: ctx.categories,
       },
       ctx.mode === "production" ? "Minify" : "Do Not Minify",
     );

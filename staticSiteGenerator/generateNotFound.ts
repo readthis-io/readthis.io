@@ -13,6 +13,7 @@ export const generateNotFound = async (ctx: Context): Promise<void> => {
       heading: "ReadThis",
       title: "ReadThis",
       styles: ["index.css"],
+      categories: ctx.categories,
     },
     ctx.mode === "production" ? "Minify" : "Do Not Minify",
   );
