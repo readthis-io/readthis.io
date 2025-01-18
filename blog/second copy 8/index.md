@@ -1,16 +1,10 @@
 ---
-title: Hello
+title: Keyboard review - NuPhy Air75 V2
 tags:
   - into
-  - tes
+  - test
 topic: coding
-description: |
-  ## Heading
-
-  * Bullet
-  * Points
-
-  Multi line description, that supports MD too.
+description: Multi line description, that supports MD too.
 created: "2024-12-13T10:00:55Z"
 ---
 

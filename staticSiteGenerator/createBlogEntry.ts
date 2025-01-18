@@ -29,6 +29,7 @@ export const createBlogEntry = async (
     slug: createSlug(frontMatter.data.slug, extractFileName(frontMatter.path)),
     tags: frontMatter.data.tags,
     title: frontMatter.data.title,
+    featured_image: frontMatter.data.featured_image,
     topic: frontMatter.data.topic,
   };
 };

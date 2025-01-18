@@ -4,13 +4,7 @@ tags:
   - into
   - tes
 topic: coding
-description: |
-  ## Heading
-
-  * Bullet
-  * Points
-
-  Multi line description, that supports MD too.
+description: Multi line description, that supports MD too.
 created: "2024-12-13T10:00:55Z"
 ---
 

@@ -1,8 +1,61 @@
-{% extends "_frame.njk" %} 
-
-
-{% block title %} About Us {% endblock %} 
-
-{%block content %}
-About Us
-{% endblock %} 
+{% extends "_frame.njk" %}
+{% import "_components.njk" as components %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+  <div class="max-w-3xl mx-auto px-6">
+    <div class=" ">
+      <h1>About read{this}.io</h1>
+      <div>
+        <p>
+          Welcome to ReadThis, a technical blog created by developers, for developers. We share in-depth technical insights, best
+          practices, and real-world solutions from our daily engineering challenges.
+        </p>
+        <div class=" rounded-md">
+          <h2>Our Mission</h2>
+          <p>
+            We believe in the power of knowledge sharing within the developer community. Our platform focuses on delivering
+            high-quality, practical technical content that helps developers solve real problems and improve their craft.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 mt-12">
+          <div class="bg-white p-6 rounded-md shadow-md">
+            <h3>What We Cover</h3>
+            <ul class="list-disc list-inside ">
+              <li>
+                System Architecture Deep Dives</li>
+              <li>
+                Performance Optimization Techniques</li>
+              <li>
+                Code Quality & Best Practices</li>
+              <li>
+                DevOps & Infrastructure</li>
+              <li>
+                Engineering Case Studies</li>
+              <li>
+                Developer Tooling & Productivity</li>
+            </ul>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3>Contribute</h3>
+            <p class="mb-4">
+              Are you a developer with insights to share? We welcome technical articles, code reviews, and engineering case studies
+              from the community.
+            </p>
+            {{ components.primaryButton("/contact", "Join Our Writers") }}
+          </div>
+        </div>
+        <div class="mt-12">
+          <h2>Why ReadThis?</h2>
+          <p>
+            Unlike typical tech blogs, we focus on the nitty-gritty details that matter to developers. Our articles include actual
+            code examples, performance metrics, and practical implementation guides. No marketing fluff, just pure technical
+            content.
+          </p>
+          <blockquote>
+            By developers, for developers - sharing real-world engineering experiences and solutions.
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

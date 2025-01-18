@@ -1,0 +1,20 @@
+{# Primary Button #}
+{% macro primaryButton(href, text) %}
+  <a href="{{ href }}" class="px-4 py-2 bg-secondary text-white rounded-sm hover:bg-opacity-90 transition-colors">
+    {{ text }}
+  </a>
+{% endmacro %}
+
+{# Secondary Button/Link #}
+{% macro secondaryButton(href, text) %}
+  <a href="{{ href }}" class="text-white hover:text-secondary transition-colors">
+    {{ text }}
+  </a>
+{% endmacro %}
+
+{# Navigation Link #}
+{% macro navLink(href, text) %}
+  <a href="{{ href }}" class="text-white hover:text-secondary transition-colors">
+    {{ text }}
+  </a>
+{% endmacro %} 

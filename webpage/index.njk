@@ -1,42 +1,58 @@
-{% extends "_frame.njk" %} 
-
-{%block content %}
-
-<div class="wrapper">
-  <div class="content">
-
-<h1>ReadThis.io</h1>
-
-<p class="pt-6 space-y-4">
-  Welcome to ReadThis.
-</p>
-
-{% for blog in blogs %}
-  <a 
-    href="/blog/{{blog.slug}}" 
-    class="blog"
-  >  
-    {{blog.description | safe}}
-  </a>
-{% endfor %}
-</div>
-
-<div class="pagination">
-  
-  <ul>
-    {% for i in range(1, total + 1) %}
-    <li>
-      <a 
-        href="/{{i}}" 
-        class="{{ "active" if i == current else "inactive" }}"
-      >
-        {{i}}
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
-
-</div>
-
-{% endblock %} 
+{% extends "_frame.njk" %}
+{% block content %}
+  <div class="wrapper">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {% for blog in blogs %}
+        <a
+          href="/blog/{{ blog.slug }}"
+          class="blog-card group flex flex-col bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          {# Image Section #}
+          <div class="relative h-68">
+            {% if blog.featured_image %}
+              <img src="{{ blog.featured_image }}" alt="{{ blog.title }}" class="w-full h-full object-cover"/>
+            {% else %}
+              <img src="/images/blog/nuphy_keyboard.png" alt="{{ blog.title }}" class="w-full h-full object-cover"/>
+            {% endif %}
+          </div>
+          {# Content Section #}
+          <div
+            class="px-6 py-4 flex flex-col flex-grow">
+            {# Meta Information #}
+            {# TODO SR 2025-01-18 We need to discuss which data should be displayed here #}
+        
+            {# Title & Description #}
+            <h2 class="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
+              {{ blog.title }}
+            </h2>
+            <div class="post-description text-primary/70 font-light text-sm">
+              {{ blog.description | safe }}
+            </div>
+            {# Tags #}
+            <div class="flex flex-wrap gap-2 mt-4">
+              {% for tag in blog.tags %}
+                <span class="text-xs font-mono px-2 py-1 bg-gray-light text-primary/70 rounded">
+                  #{{ tag }}
+                </span>
+              {% endfor %}
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    {# Pagination #}
+    <div class="pagination mt-12">
+      <ul class="flex justify-center gap-2">
+        {% for i in range(1, total + 1) %}
+          <li>
+            <a
+              href="/{{ i }}"
+              class="px-4 py-2 rounded {{ 'bg-primary text-white' if i == current else 'bg-gray-light text-primary hover:bg-primary/10'
+                }}">
+              {{ i }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

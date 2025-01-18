@@ -1,41 +1,134 @@
+{% import "_components.njk" as components %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{title}}</title>
-
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ title }}</title>
     {% for style in styles %}
-      <link rel="stylesheet" href="/{{style}}" />
+      <link rel="stylesheet" href="/{{ style }}"/>
     {% endfor %}
   </head>
-  <body>
-    <header>
-      {{title}}
-    </header>
-
-    <nav>
-      Categories:
-
-      <ul>
-        {% for category in categories %}
-          <li>
-            <a href="/category/{{category.slug}}">
-              {{category.category}} ({{category.count}})
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-
-      <div>
+  <body class="bg-white">
+    <header class="bg-primary">
+      <div class="container mx-auto flex items-center justify-between px-6 py-4">
+        <div class="flex items-center">
+          <a href="/" class="flex items-center">
+            <img src="/images/readthis_logo.svg" alt="ReadThis Logo" class="h-8 w-auto"/>
+          </a>
+        </div>
+        <div class="flex items-center space-x-6">
+          {{ components.secondaryButton("/about", "About") }}
+          {{ components.primaryButton("/contact", "Contact Us") }}
+        </div>
       </div>
-    </nav>
-
-    <main>{% block content %} ReadThis.io {% endblock %}</main>
-
-    <footer>
-      <a href="/imprint">Imprint</a>
-      <a href="/about">About</a>
+    </header>
+    <div
+      class="container mx-auto px-6 flex flex-col md:flex-row gap-8 mt-6">
+      <!-- Mobile Topics Dropdown -->
+      <details class="md:hidden ">
+        <summary class="w-full flex items-center justify-between px-4 py-2 bg-primary text-white rounded-sm cursor-pointer">
+          <span class="font-mono">
+            // Topics</span>
+          <span class="transition-transform group-open:rotate-180 icon chevron w-4 h-4 bg-white"></span>
+        </summary>
+        <nav class="mt-2 bg-primary rounded-sm p-4">
+          <ul class="space-y-2 font-mono">
+            {% for category in categories %}
+              <li>
+                <a href="/category/{{ category.slug }}" class="flex items-center text-white hover:text-secondary transition-colors">
+                  <span class="bg-secondary mr-2 icon arrow w-3 h-3"></span>
+                  {{ category.category }}
+                  <span class="ml-auto text-secondary">({{ category.count }})</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </details>
+      <!-- Desktop Sidebar -->
+      <nav class="hidden md:block md:w-64 shrink-0 sticky top-6   self-start">
+        <div class="bg-gray-light border border-primary/5 backdrop-blur-sm rounded-md p-4">
+          <div class="font-mono text-primary mb-4">// Topics</div>
+          <ul class="space-y-3 font-mono">
+            {% for category in categories %}
+              <li>
+                <a href="/category/{{ category.slug }}" class="flex items-center text-primary hover:text-secondary transition-colors">
+                  <span class="bg-secondary mr-2 icon arrow w-4 h-4"></span>
+                  {{ category.category }}
+                  <span class="ml-auto text-secondary">({{ category.count }})</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </nav>
+      <!-- Main Content -->
+      <main>
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+    <footer class="bg-primary text-white py-8 mt-12">
+      <div class="container mx-auto px-6">
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Company Links -->
+          <div>
+            <h4 class="font-mono text-secondary mb-4">// Company</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="/about" class="text-white hover:text-secondary transition-colors">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="/imprint" class="text-white hover:text-secondary transition-colors">
+                  Imprint
+                </a>
+              </li>
+              <li>
+                <a href="/privacy" class="text-white hover:text-secondary transition-colors">
+                  Data Privacy
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- Social Media -->
+          <div>
+            <h4 class="font-mono text-secondary mb-4">// Connect</h4>
+            <div class="flex space-x-4">
+              <a
+                href="https://github.com/readthis-io"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-white hover:text-secondary transition-colors">
+                <span class="icon github w-6 h-6 bg-white"></span>
+              </a>
+              <a
+                href="https://twitter.com/readthis"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-white hover:text-secondary transition-colors">
+                <span class="icon twitter w-6 h-6 bg-white"></span>
+              </a>
+              <a
+                href="https://linkedin.com/company/readthis"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-white hover:text-secondary transition-colors">
+                <span class="icon linkedin w-6 h-6 bg-white"></span>
+              </a>
+            </div>
+          </div>
+          <!-- Copyright -->
+          <div class="text-left md:text-right">
+            <h4 class="font-mono text-secondary mb-4">// ReadThis</h4>
+            <p class="text-white/70 text-sm">
+              © 2025 ReadThis.io <br/> All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

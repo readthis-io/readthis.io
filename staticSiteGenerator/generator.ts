@@ -9,6 +9,8 @@ import { makeContext } from "./makeContext.js";
 import { generateCategories } from "./generate/generateCategories.js";
 import { generateImprint } from "./generate/generateImprint.js";
 import { generateAboutUs } from "./generate/generateAboutUs.js";
+import { generateFonts } from "./generate/generateFonts.js";
+import { generateImages } from "./generate/generateImages.js";
 
 /**
  * Generates the static website, parsing all source elements, including the
@@ -25,6 +27,8 @@ export const build = async (mode: "production" | "debug") => {
 
   // TODO: this method should return the mapped filenames, so we can use the
   // content hashed based name, instead of the real one.
+  await generateFonts(ctx);
+  await generateImages(ctx);
   await generateStyles(ctx);
   await generateBlogEntries(ctx);
   await generateIndex(ctx);
@@ -32,4 +36,5 @@ export const build = async (mode: "production" | "debug") => {
   await generateCategories(ctx);
   await generateImprint(ctx);
   await generateAboutUs(ctx);
+  await generateStyles(ctx);
 };

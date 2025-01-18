@@ -10,6 +10,7 @@ interface BlogParameter {
   topic: string;
   tags: string[];
   title: string;
+  featured_image?: string;
 }
 
 const generateBlogEntry = async (
@@ -21,6 +22,7 @@ const generateBlogEntry = async (
     {
       heading: entry.title,
       title: entry.title,
+      featured_image: entry.featured_image,
       styles: ["blog.css"],
       blog: entry.html,
       tags: entry.tags,

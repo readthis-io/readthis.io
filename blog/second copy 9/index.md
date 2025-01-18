@@ -1,16 +1,17 @@
 ---
-title: Hello
+title: Keyboard review - NuPhy Air75 V2
 tags:
   - into
   - tes
 topic: coding
 description: |
-  ## Heading
+  Multi line description, that supports MD too. Multi line 
+  description, that supports MD too.
 
-  * Bullet
-  * Points
-
-  Multi line description, that supports MD too.
+  Multi line 
+  description, that supports MD too.
+  Multi line 
+  description, that supports MD too.
 created: "2024-12-13T10:00:55Z"
 ---
 
@@ -27,6 +28,9 @@ This is a link, that should be linkified www.google.de
 | H1                        | H2  | H3  |
 | ------------------------- | --- | --- |
 | This cell spans 3 columns |     |     |
+
+This is how images should look like:
+![NuPhy Air75 V2](/images/blog/nuphy_keyboard2.webp)
 
 Another table:
 

@@ -1,0 +1,105 @@
+@use "../_common.scss";
+@use "github-dark.scss";
+
+.blog-content {
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-primary font-bold mt-8 mb-4;
+  }
+
+  h1 { @apply text-3xl; }
+  h2 { @apply text-2xl; }
+  h3 { @apply text-xl; }
+  h4 { @apply text-lg; }
+
+  p {
+    @apply mb-6 leading-relaxed text-primary/80;
+  }
+
+ 
+  ul, ol {
+    @apply my-6 ml-6;
+
+    li {
+      @apply mb-2 text-primary/80;
+    }
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+ 
+  a {
+    @apply text-secondary hover:text-primary underline transition-colors;
+  }
+
+ 
+  img {
+    @apply rounded-lg border-2 border-primary my-8 mx-auto;
+  }
+
+  table {
+    @apply w-full my-6 border-collapse;
+
+    th, td {
+      @apply border-2 border-primary/10 px-4 py-2 text-left;
+    }
+
+    th {
+      @apply bg-gray-light font-mono text-primary/70;
+    }
+
+    tr {
+      @apply hover:bg-gray-light transition-colors;
+    }
+  }
+
+  blockquote {
+    @apply my-6 pl-4 border-l-4 border-secondary italic;
+    
+    p {
+      @apply text-primary/70;
+    }
+  }
+
+  hr {
+    @apply my-8 border-t-2 border-primary/10;
+  }
+
+  dl {
+    @apply my-6;
+
+    dt {
+      @apply font-bold text-primary mb-1;
+    }
+
+    dd {
+      @apply ml-4 mb-4 text-primary/80;
+    }
+  }
+
+  ul li::marker {
+    @apply text-secondary;
+  }
+
+  ul ul, ul ol, ol ul, ol ol {
+    @apply my-2 ml-6;
+  }
+
+  > *:first-child {
+    @apply mt-0;
+  }
+
+  > *:last-child {
+    @apply mb-0;
+  }
+}
+.blong-post-content {
+  code {
+    @apply rounded-md;
+  }
+}

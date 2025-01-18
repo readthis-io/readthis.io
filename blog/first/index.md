@@ -1,21 +1,14 @@
 ---
-title: Hello
+title: Keyboard review - NuPhy Air75 V2
+featured_image: /images/blog/nuphy_keyboard.png
 tags:
   - into
   - tes
 slug: test
-topic: coding
-description: |
-  ## Heading
-
-  * Bullet
-  * Points
-
-  Multi line description, that supports MD too.
+topic: hardware
+description: Multi line description, that supports MD too.
 created: "2024-12-12T10:00:55Z"
 ---
-
-# Hello
 
 How are you.
 
