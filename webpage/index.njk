@@ -11,17 +11,15 @@
             {% if blog.featured_image %}
               <img src="{{ blog.featured_image }}" alt="{{ blog.title }}" class="w-full h-full object-cover"/>
             {% else %}
-              <img src="/images/blog/nuphy_keyboard.png" alt="{{ blog.title }}" class="w-full h-full object-cover"/>
+              <img src="/images/blog/nuphy_keyboard.webp" alt="{{ blog.title }}" class="w-full h-full object-cover"/>
             {% endif %}
           </div>
           {# Content Section #}
-          <div
-            class="px-6 py-4 flex flex-col flex-grow">
+          <div class="px-6 py-4 flex flex-col flex-grow">
             {# Meta Information #}
             {# TODO SR 2025-01-18 We need to discuss which data should be displayed here #}
-        
             {# Title & Description #}
-            <h2 class="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
+              <h2 class="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
               {{ blog.title }}
             </h2>
             <div class="post-description text-primary/70 font-light text-sm">

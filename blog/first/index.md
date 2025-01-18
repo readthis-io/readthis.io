@@ -1,6 +1,6 @@
 ---
 title: Keyboard review - NuPhy Air75 V2
-featured_image: /images/blog/nuphy_keyboard.png
+featured_image: /images/blog/nuphy_keyboard.webp
 tags:
   - into
   - tes
