@@ -15,7 +15,15 @@
     @apply mb-6 leading-relaxed text-primary/80;
   }
 
- 
+  iframe {
+    @apply w-full aspect-video mb-8 rounded-lg border-2 border-primary;
+    max-height: 80vh;
+  }
+
+  pre {
+    @apply my-4 rounded-lg border-2 border-primary/10 overflow-x-auto;
+  }
+
   ul, ol {
     @apply my-6 ml-6;
 
@@ -32,12 +40,10 @@
     @apply list-decimal;
   }
 
- 
   a {
     @apply text-secondary hover:text-primary underline transition-colors;
   }
 
- 
   img {
     @apply rounded-lg border-2 border-primary my-8 mx-auto;
   }
@@ -98,8 +104,18 @@
     @apply mb-0;
   }
 }
+
 .blong-post-content {
   code {
     @apply rounded-md;
+  }
+
+  .iframe-container {
+    @apply relative w-full overflow-hidden rounded-lg border-2 border-primary mb-8;
+    padding-top: 56.25%;
+
+    iframe {
+      @apply absolute top-0 left-0 w-full h-full border-0;
+    }
   }
 }
