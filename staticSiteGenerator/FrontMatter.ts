@@ -8,7 +8,8 @@ export const frontMatterScheme = z.object({
     tags: z.string().array(),
     description: z.string(),
     created: z.string().datetime({ offset: true }),
-    featured_image: z.string().optional(),
+    featuredImage: z.string().optional(),
+    author: z.string(),
   }),
 
   path: z.string(),

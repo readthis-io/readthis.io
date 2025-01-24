@@ -1,0 +1,25 @@
+@use "../_common.scss";
+
+h1 {
+  @apply text-4xl font-bold text-primary mb-8;
+}
+
+h2 {
+  @apply text-2xl font-bold text-primary mb-4;
+}
+
+h3 {
+  @apply text-lg font-bold text-primary mb-2;
+}
+
+p {
+  @apply text-primary/70 leading-relaxed;
+}
+
+ 
+
+ul {
+  li {
+    @apply mb-2;
+  }
+} 

@@ -4932,6 +4932,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"reading-time@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "reading-time@npm:1.5.0"
+  checksum: 10c0/0f730852fd4fb99e5f78c5b0cf36ab8c3fa15db96f87d9563843f6fd07a47864273ade539ebb184b785b728cde81a70283aa2d9b80cba5ca03b81868be03cabc
+  languageName: node
+  linkType: hard
+
 "readthis@workspace:.":
   version: 0.0.0-use.local
   resolution: "readthis@workspace:."
@@ -4969,6 +4976,7 @@ __metadata:
     postcss: "npm:^8.4.49"
     postcss-preset-env: "npm:^10.1.1"
     prettier: "npm:^3.4.2"
+    reading-time: "npm:^1.5.0"
     slugify: "npm:^1.6.6"
     tailwindcss: "npm:^3.4.16"
     tsx: "npm:^4.19.2"

@@ -8,6 +8,7 @@ slug: test
 topic: hardware
 description: Multi line description, that supports MD too.
 created: "2024-12-12T10:00:55Z"
+author: Aiko Jansen
 ---
 
 How are you.

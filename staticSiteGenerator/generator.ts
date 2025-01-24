@@ -11,6 +11,8 @@ import { generateImprint } from "./generate/generateImprint.js";
 import { generateAboutUs } from "./generate/generateAboutUs.js";
 import { generateFonts } from "./generate/generateFonts.js";
 import { generateImages } from "./generate/generateImages.js";
+import { generateContact } from "./generate/generateContact.js";
+import { generatePrivacy } from "./generate/generatePrivacy.js";
 
 /**
  * Generates the static website, parsing all source elements, including the
@@ -36,5 +38,7 @@ export const build = async (mode: "production" | "debug") => {
   await generateCategories(ctx);
   await generateImprint(ctx);
   await generateAboutUs(ctx);
+  await generateContact(ctx);
+  await generatePrivacy(ctx);
   await generateStyles(ctx);
 };

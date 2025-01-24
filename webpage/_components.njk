@@ -17,4 +17,11 @@
   <a href="{{ href }}" class="text-white hover:text-secondary transition-colors">
     {{ text }}
   </a>
+{% endmacro %}
+
+{# Inline Link #}
+{% macro link(href, text) %}
+  <a href="{{ href }}" class="text-secondary hover:text-primary transition-colors">
+    {{ text }}
+  </a>
 {% endmacro %} 

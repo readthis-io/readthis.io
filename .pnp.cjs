@@ -60,6 +60,7 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.49"],\
           ["postcss-preset-env", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:10.1.2"],\
           ["prettier", "npm:3.4.2"],\
+          ["reading-time", "npm:1.5.0"],\
           ["slugify", "npm:1.6.6"],\
           ["tailwindcss", "npm:3.4.16"],\
           ["tsx", "npm:4.19.2"],\
@@ -6932,6 +6933,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["reading-time", [\
+      ["npm:1.5.0", {\
+        "packageLocation": "../../.yarn/berry/cache/reading-time-npm-1.5.0-be83d947c6-10c0.zip/node_modules/reading-time/",\
+        "packageDependencies": [\
+          ["reading-time", "npm:1.5.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["readthis", [\
       ["workspace:.", {\
         "packageLocation": "./",\
@@ -6970,6 +6980,7 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.49"],\
           ["postcss-preset-env", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:10.1.2"],\
           ["prettier", "npm:3.4.2"],\
+          ["reading-time", "npm:1.5.0"],\
           ["slugify", "npm:1.6.6"],\
           ["tailwindcss", "npm:3.4.16"],\
           ["tsx", "npm:4.19.2"],\

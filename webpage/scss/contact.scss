@@ -1,0 +1,36 @@
+@use "../_common.scss";
+
+h1 {
+  @apply text-4xl font-bold text-primary mb-8;
+}
+
+h2 {
+  @apply text-2xl font-bold text-primary mb-4;
+}
+
+h3 {
+  @apply text-lg font-bold text-primary mb-2;
+}
+
+p {
+  @apply text-primary/70 leading-relaxed;
+}
+
+.contact-form {
+  input, textarea {
+    @apply transition-colors duration-200;
+    
+    &:focus {
+      @apply border-secondary;
+    }
+  }
+}
+
+// Add shadow hover effect to cards
+.bg-white {
+  @apply transition-shadow duration-200;
+  
+  &:hover {
+    @apply shadow-lg;
+  }
+} 

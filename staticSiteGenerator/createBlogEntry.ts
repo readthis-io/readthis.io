@@ -1,4 +1,5 @@
 import path from "path";
+import readingTime from "reading-time";
 
 import { BlogEntry } from "./BlogEntry.js";
 import { createSlug } from "./createSlug.js";
@@ -29,7 +30,9 @@ export const createBlogEntry = async (
     slug: createSlug(frontMatter.data.slug, extractFileName(frontMatter.path)),
     tags: frontMatter.data.tags,
     title: frontMatter.data.title,
-    featured_image: frontMatter.data.featured_image,
+    featuredImage: frontMatter.data.featuredImage,
+    author: frontMatter.data.author,
+    readingTime: readingTime(frontMatter.content).text,
     topic: frontMatter.data.topic,
   };
 };

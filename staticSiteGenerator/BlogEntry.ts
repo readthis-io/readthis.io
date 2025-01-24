@@ -7,5 +7,7 @@ export interface BlogEntry {
   description: string;
   markdown: string;
   html: string;
-  featured_image?: string;
+  featuredImage?: string;
+  author: string;
+  readingTime: string;
 }

@@ -1,8 +1,121 @@
-{% extends "_frame.njk" %} 
+{% extends "_frame.njk" %}
+{% import "_components.njk" as components %}
+{% block title %}Imprint{% endblock %}
+{% block content %}
+  <div class="max-w-3xl mx-auto px-6">
+    <div>
+      <h1>Imprint (Impressum)</h1>
+      
+      <div class="mt-8 space-y-8">
+        <!-- Information according to § 5 TMG -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          
+          <div class="space-y-4">
+            <div>
+              <p class="text-primary/70">
+                Aiko Jansen & Senad Redzic<br/>
+                Königstraße 38<br/>
+                70173 Stuttgart<br/>
+                Germany
+              </p>
+            </div>
 
+            <div>
+              <h3 class="font-mono text-primary/70 mb-2">Contact</h3>
+              <p class="text-primary/70">
+                Email: {{ components.link("mailto:info@readthis.io", "info@readthis.io") }}<br/>
+              </p>
+            </div>
+          </div>
+        </div>
 
-{% block title %}Legal Stuff {% endblock %} 
+        <!-- Responsible for Content -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="font-mono text-primary mb-4">// Editorial Responsibility</h2>
+          <div class="space-y-4">
+            <p class="text-primary/70">
+              Responsible for the content:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p class="text-primary/70">
+                  <strong>Aiko Jansen</strong><br/>
+                  CTO @NC-Vision GmbH<br/>
+                  Königstraße 38<br/>
+                  70173 Stuttgart
+                </p>
+              </div>
+              <div>
+                <p class="text-primary/70">
+                  <strong>Senad Redzic</strong><br/>
+                  AI/ML Team Lead @NC-Vision GmbH<br/>
+                  Königstraße 38<br/>
+                  70173 Stuttgart
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-{%block content %}
-Legal Stuff
+        <!-- Code and Knowledge Disclaimer -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="font-mono text-primary mb-4">// Code and Knowledge Disclaimer</h2>
+          <div class="space-y-4">
+            <p class="text-primary/70">
+              All code examples, technical solutions, and knowledge shared on this platform are provided 
+              "as is" without warranty of any kind, either express or implied. The authors and 
+              contributors shall not be liable for any damages or consequences arising from the use 
+              or implementation of the shared content.
+            </p>
+            <p class="text-primary/70">
+              While we strive to ensure the accuracy and reliability of our content, users are 
+              responsible for evaluating and testing any code or solutions before implementing them 
+              in their own projects. We strongly recommend thorough testing and validation in a 
+              safe environment before any production use.
+            </p>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="font-mono text-primary mb-4">// General Disclaimer</h2>
+          
+          <div class="space-y-4">
+            <div>
+              <h3 class="font-mono text-primary/70 mb-2">Liability for Content</h3>
+              <p class="text-primary/70">
+                The contents of our pages have been created with great care. However, 
+                we cannot guarantee the accuracy, completeness, and timeliness of the content. 
+                As service providers, we are responsible for our own content on these pages 
+                according to § 7 Abs.1 TMG. According to §§ 8 to 10 TMG, however, we are not 
+                obligated to monitor transmitted or stored third-party information or to 
+                investigate circumstances that indicate illegal activity.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-mono text-primary/70 mb-2">Liability for Links</h3>
+              <p class="text-primary/70">
+                Our offer contains links to external websites of third parties, on whose 
+                contents we have no influence. Therefore, we cannot assume any liability 
+                for these external contents. The respective provider or operator of the 
+                pages is always responsible for the content of the linked pages.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-mono text-primary/70 mb-2">Copyright</h3>
+              <p class="text-primary/70">
+                The content and works created by the site operators on these pages are 
+                subject to German copyright law. Duplication, processing, distribution, 
+                or any form of commercialization of such material beyond the scope of the 
+                copyright law shall require the prior written consent of its respective author 
+                or creator.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %} 

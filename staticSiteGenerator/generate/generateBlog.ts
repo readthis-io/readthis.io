@@ -11,6 +11,8 @@ interface BlogParameter {
   tags: string[];
   title: string;
   featured_image?: string;
+  author: string;
+  readingTime: string;
 }
 
 const generateBlogEntry = async (
@@ -22,11 +24,13 @@ const generateBlogEntry = async (
     {
       heading: entry.title,
       title: entry.title,
-      featured_image: entry.featured_image,
+      featured_image: entry.featuredImage,
       styles: ["blog.css"],
       blog: entry.html,
       tags: entry.tags,
       topic: entry.topic,
+      author: entry.author,
+      readingTime: entry.readingTime,
       categories: ctx.categories,
     },
     ctx.mode === "production" ? "Minify" : "Do Not Minify",
