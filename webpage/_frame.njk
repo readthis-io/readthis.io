@@ -3,57 +3,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
+    <meta
+    name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Basic SEO -->
-    <title>{{ title }}{% if not isHomePage %} - ReadThis{% endif %}</title>
+    <title>{{ title }}
+      {% if not isHomePage %}
+        - ReadThis{% endif %}
+    </title>
     <meta name="description" content="{{ description | default('Technical insights and best practices from experienced developers. Deep dives into system architecture, performance optimization, and engineering case studies.') }}"/>
-    <meta name="keywords" content="technical blog, software development, {{ keywords | default('system architecture, engineering, development, programming') }}"/>
-    <meta name="author" content="{{ author | default('Aiko Jansen, Senad Redzic') }}"/>
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://readthis.io{{ page.url }}"/>
-    
-    <!-- Open Graph / Facebook -->
+    <meta
+      name="keywords"
+      content="technical blog, software development, {{ keywords | default('system architecture, engineering, development,
+        programming') }}"/>
+    <meta
+    name="author" content="{{ author | default('Aiko Jansen, Senad Redzic') }}"/> <!-- Canonical URL -->
+    <link
+    rel="canonical" href="https://readthis.io{{ page.url }}"/> <!-- Open Graph / Facebook -->
     <meta property="og:type" content="{{ ogType | default('website') }}"/>
     <meta property="og:url" content="https://readthis.io{{ page.url }}"/>
     <meta property="og:title" content="{{ title }}{% if not isHomePage %} - ReadThis{% endif %}"/>
     <meta property="og:description" content="{{ description | default('Technical insights and best practices from experienced developers. Deep dives into system architecture, performance optimization, and engineering case studies.') }}"/>
     <meta property="og:image" content="https://readthis.io{{ featured_image | default('/images/readthis_default.webp') }}"/>
-    <meta property="og:site_name" content="ReadThis"/>
-    
-    <!-- Twitter -->
+    <meta
+    property="og:site_name" content="ReadThis"/> <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:url" content="https://readthis.io{{ page.url }}"/>
     <meta name="twitter:title" content="{{ title }}{% if not isHomePage %} - ReadThis{% endif %}"/>
     <meta name="twitter:description" content="{{ description | default('Technical insights and best practices from experienced developers. Deep dives into system architecture, performance optimization, and engineering case studies.') }}"/>
-    <meta name="twitter:image" content="https://readthis.io{{ featured_image | default('/images/readthis_default.webp') }}"/>
-    <meta name="twitter:creator" content="@readthis"/>
-    
-    <!-- Additional SEO -->
+    <meta
+      name="twitter:image"
+      content="https://readthis.io{{ featured_image | default('/images/readthis_default.webp') }}"/>
+    <meta
+    name="twitter:creator" content="@readthis"/> <!-- Additional SEO -->
     <meta name="robots" content="index, follow"/>
     {% if readingTime %}
-    <meta property="article:reading_time" content="{{ readingTime }}"/>
+      <meta property="article:reading_time" content="{{ readingTime }}"/>
     {% endif %}
     {% if publishDate %}
-    <meta property="article:published_time" content="{{ publishDate }}"/>
+      <meta property="article:published_time" content="{{ publishDate }}"/>
     {% endif %}
     {% if tags %}
-    {% for tag in tags %}
-    <meta property="article:tag" content="{{ tag }}"/>
-    {% endfor %}
+      {% for tag in tags %}
+        <meta property="article:tag" content="{{ tag }}"/>
+      {% endfor %}
     {% endif %}
-
     <!-- Styles -->
     {% for style in styles %}
       <link rel="stylesheet" href="{{ style }}"/>
     {% endfor %}
-    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png"/>
     <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png"/>
-  
   </head>
   <body class="bg-white">
     <header class="bg-primary">
@@ -158,7 +159,7 @@
                 <span class="icon twitter w-6 h-6 bg-white"></span>
               </a>
               <a
-                href="https://linkedin.com/company/readthis"
+                href="https://linkedin.com/company/readthis-io"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-white hover:text-secondary transition-colors">
@@ -170,9 +171,7 @@
           <div class="text-left md:text-right">
             <h4 class="font-mono text-secondary mb-4">// ReadThis</h4>
             <p class="text-white/70 text-sm">
-              {{ generationTime }} <br />
-              © 2025 - {{ year }} ReadThis.io <br/>
-              All rights reserved.
+              {{ generationTime }} <br/> © 2025 - {{ year }} ReadThis.io <br/> All rights reserved.
             </p>
           </div>
         </div>
