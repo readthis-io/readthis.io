@@ -41,6 +41,7 @@
   "private": true,
   "scripts": {
     "test": "eslint",
+    "build": "tsc",
     "start": "tsx staticSiteGenerator/main"
   },
   "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead",

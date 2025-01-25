@@ -31,20 +31,26 @@ const generateStyle = async (
     path: string;
     content: string;
   },
-  mode: "debug" | "production",
+  ctx: Context,
 ): Promise<{
   path: string;
   style: string;
 }> => {
-  const processor = mode === "production" ? prodProcessor : debugProcessor;
+  const processor = ctx.mode === "production" ? prodProcessor : debugProcessor;
 
   const css = await processor.process(obj.content, {
     from: obj.path,
     to: "dist/webpage/",
   });
+
+  let result = css.toString();
+  for (const [name, key] of Object.entries(ctx.staticFonts)) {
+    result = result.replace(name, key);
+  }
+
   return {
     path: obj.path,
-    style: css.toString(),
+    style: result,
   };
 };
 
@@ -56,9 +62,10 @@ const writeStyle = async (
   ctx: Context,
 ): Promise<{ key: string; file: string }> => {
   const base =
-    ctx.mode === "debug"
-      ? path.basename(obj.path, ".scss")
-      : generateHash(obj.style);
+    //ctx.mode === "debug"
+    //  ? path.basename(obj.path, ".scss")
+    // :
+    generateHash(obj.style);
 
   const target = path.join(
     ctx.outputDirectory,
@@ -70,7 +77,7 @@ const writeStyle = async (
   await fs.writeFile(target, obj.style);
   return {
     key: path.basename(obj.path, ".scss"),
-    file: `static/styles/${base}.css`,
+    file: `/static/styles/${base}.css`,
   };
 };
 
@@ -86,7 +93,7 @@ export const generateStyles = async (ctx: Context): Promise<Styles> => {
   );
 
   const styles = await Promise.all(
-    files.map((file) => generateStyle(file, ctx.mode)),
+    files.map((file) => generateStyle(file, ctx)),
   );
 
   const generated = await Promise.all(

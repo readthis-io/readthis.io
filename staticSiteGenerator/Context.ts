@@ -11,6 +11,10 @@ export interface Styles {
   [name: string]: string;
 }
 
+export interface Fonts {
+  [name: string]: string;
+}
+
 export interface Context {
   mode: "production" | "debug";
   outputDirectory: string;
@@ -18,6 +22,7 @@ export interface Context {
   blogsPerPage: number;
   categories: Category[];
   staticStyles: Styles;
+  staticFonts: Fonts;
   generationTime: string;
   year: string;
 }

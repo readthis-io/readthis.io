@@ -37,6 +37,7 @@ export const makeContext = (
     blogsPerPage: 6,
     categories: extractCategories(entries),
     staticStyles: {},
+    staticFonts: {},
     generationTime: new Date().toISOString(),
     year: new Date().getFullYear().toString(),
   };

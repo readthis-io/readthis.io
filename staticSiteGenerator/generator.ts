@@ -29,7 +29,7 @@ export const build = async (mode: "production" | "debug") => {
 
   // TODO: this method should return the mapped filenames, so we can use the
   // content hashed based name, instead of the real one.
-  await generateFonts(ctx);
+  ctx.staticFonts = await generateFonts(ctx);
   await generateImages(ctx);
   ctx.staticStyles = await generateStyles(ctx);
   await generateBlogEntries(ctx);
