@@ -52,19 +52,24 @@
           <div class="flex items-center gap-4">
             <span class="font-mono text-primary/70">// Share this article</span>
             <div class="flex gap-3">
+              <!-- Twitter Share -->
               <a
-                href="https://twitter.com/readthis"
+                href="https://twitter.com/intent/tweet?url=https://readthis.io{{ page.url }}&text={{ title | urlencode }}"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Share on Twitter"
                 class="text-white hover:text-secondary transition-colors">
-                <span class="icon twitter w-6 h-6 bg-primary"></span>
+                <span class="icon twitter w-6 h-6 bg-primary hover:bg-secondary"></span>
               </a>
+              
+              <!-- LinkedIn Share -->
               <a
-                href="https://linkedin.com/company/readthis"
+                href="https://www.linkedin.com/shareArticle?mini=true&url=https://readthis.io{{ page.url }}&title={{ title | urlencode }}&summary={{ description | urlencode }}"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Share on LinkedIn"
                 class="text-white hover:text-secondary transition-colors">
-                <span class="icon linkedin w-6 h-6 bg-primary"></span>
+                <span class="icon linkedin w-6 h-6 bg-primary hover:bg-secondary"></span>
               </a>
             </div>
           </div>
