@@ -27,8 +27,6 @@ export const build = async (mode: "production" | "debug") => {
 
   await fs.ensureDir(ctx.outputDirectory);
 
-  // TODO: this method should return the mapped filenames, so we can use the
-  // content hashed based name, instead of the real one.
   ctx.staticFonts = await generateFonts(ctx);
   await generateImages(ctx);
   ctx.staticStyles = await generateStyles(ctx);
@@ -40,5 +38,4 @@ export const build = async (mode: "production" | "debug") => {
   await generateAboutUs(ctx);
   await generateContact(ctx);
   await generatePrivacy(ctx);
-  await generateStyles(ctx);
 };

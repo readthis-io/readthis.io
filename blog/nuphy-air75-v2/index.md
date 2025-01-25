@@ -1,6 +1,6 @@
 ---
 title: "NuPhy Air75 V2 Review: A Technical Deep Dive"
-featured_image: /images/blog/nuphy_keyboard.webp
+featured_image: nuphy_keyboard.webp
 tags:
   - keyboard
   - hardware
@@ -23,7 +23,7 @@ Here's my unboxing of the Ionic White variant with Cowberry Keys:
 
 The keyboard arrived in a surprisingly compact box. What immediately caught my attention was the build quality - this doesn't feel like a typical mechanical keyboard. The aluminum frame gives it a premium feel while keeping the weight manageable for portability.
 
-![NuPhy Air75 V2 Side View](/images/blog/nuphy_keyboard2.webp)
+![NuPhy Air75 V2 Side View](nuphy_keyboard2.webp)
 
 ## Developer's Perspective
 

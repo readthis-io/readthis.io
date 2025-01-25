@@ -30,7 +30,15 @@ const marked = new Marked({
         return hljs.highlight(code, { language }).value;
       },
     }),
-  );
+  )
+  .use({
+    renderer: {
+      image: (img) => {
+        console.log(img);
+        return `<img src="${img.href}" alt=${img.text} />`;
+      },
+    },
+  });
 
 export const renderMarkdown = async (markdown: string): Promise<string> => {
   const rendered = await marked.parse(markdown);

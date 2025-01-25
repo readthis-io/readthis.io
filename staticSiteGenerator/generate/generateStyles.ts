@@ -45,7 +45,7 @@ const generateStyle = async (
 
   let result = css.toString();
   for (const [name, key] of Object.entries(ctx.staticFonts)) {
-    result = result.replace(name, key);
+    result = result.replaceAll(name, key);
   }
 
   return {
