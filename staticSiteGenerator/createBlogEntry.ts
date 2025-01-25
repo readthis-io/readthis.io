@@ -24,8 +24,14 @@ export const createBlogEntry = async (
 ): Promise<BlogEntry> => {
   return {
     descriptionMarkdown: frontMatter.data.description,
-    description: await renderMarkdown(frontMatter.data.description),
-    html: await renderMarkdown(frontMatter.content),
+    description: await renderMarkdown(
+      frontMatter.data.description,
+      path.dirname(frontMatter.path),
+    ),
+    html: await renderMarkdown(
+      frontMatter.content,
+      path.dirname(frontMatter.path),
+    ),
     markdown: frontMatter.content,
     slug: createSlug(frontMatter.data.slug, extractFileName(frontMatter.path)),
     tags: frontMatter.data.tags,

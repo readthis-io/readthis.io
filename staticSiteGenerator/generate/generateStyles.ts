@@ -16,7 +16,7 @@ import { Context, Styles } from "../Context.js";
 
 const prodProcessor = postcss(
   sass({
-    silenceDeprecations: ["legacy-js-api"],
+    api: "modern",
   }),
   tailwind(),
   preset(),
