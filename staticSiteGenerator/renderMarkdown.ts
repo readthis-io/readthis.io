@@ -5,7 +5,6 @@ import linkify from "marked-linkify-it";
 import hljs from "highlight.js";
 // import footnote from "marked-footnote";
 import alert from "marked-alert";
-
 // @ts-expect-error No Typing available
 import table from "marked-extended-tables";
 

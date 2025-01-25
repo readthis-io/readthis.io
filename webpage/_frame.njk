@@ -46,7 +46,7 @@
 
     <!-- Styles -->
     {% for style in styles %}
-      <link rel="stylesheet" href="/{{ style }}"/>
+      <link rel="stylesheet" href="{{ style }}"/>
     {% endfor %}
     
     <!-- Favicon -->
@@ -170,7 +170,9 @@
           <div class="text-left md:text-right">
             <h4 class="font-mono text-secondary mb-4">// ReadThis</h4>
             <p class="text-white/70 text-sm">
-              © 2025 ReadThis.io <br/> All rights reserved.
+              {{ generationTime }} <br />
+              © 2025 - {{ year }} ReadThis.io <br/>
+              All rights reserved.
             </p>
           </div>
         </div>

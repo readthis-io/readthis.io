@@ -36,6 +36,8 @@ export const makeContext = (
     outputDirectory: path.join("dist", "webpage"),
     blogsPerPage: 6,
     categories: extractCategories(entries),
-    styles: {},
+    staticStyles: {},
+    generationTime: new Date().toISOString(),
+    year: new Date().getFullYear().toString(),
   };
 };

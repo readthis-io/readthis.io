@@ -18,4 +18,6 @@ export interface Context {
   blogsPerPage: number;
   categories: Category[];
   staticStyles: Styles;
+  generationTime: string;
+  year: string;
 }
