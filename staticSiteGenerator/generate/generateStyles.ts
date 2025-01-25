@@ -14,9 +14,24 @@ import sass from "@csstools/postcss-sass";
 
 import { Context, Styles } from "../Context.js";
 
-const prodProcessor = postcss(sass(), tailwind(), preset(), prefixer(), nano());
+const prodProcessor = postcss(
+  sass({
+    silenceDeprecations: ["legacy-js-api"],
+  }),
+  tailwind(),
+  preset(),
+  prefixer(),
+  nano(),
+);
 
-const debugProcessor = postcss(sass(), tailwind(), preset(), prefixer());
+const debugProcessor = postcss(
+  sass({
+    silenceDeprecations: ["legacy-js-api"],
+  }),
+  tailwind(),
+  preset(),
+  prefixer(),
+);
 
 const generateHash = (content: string) => {
   const step1 = crypto.SHA512(content);

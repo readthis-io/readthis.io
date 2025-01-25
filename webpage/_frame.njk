@@ -44,10 +44,6 @@
     {% endfor %}
     {% endif %}
 
-    <!-- Styles -->
-    {% for style in styles %}
-      <link rel="stylesheet" href="{{ style }}"/>
-    {% endfor %}
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico"/>
@@ -178,5 +174,10 @@
         </div>
       </div>
     </footer>
+
+    <!-- Styles -->
+    {% for style in styles %}
+      <link rel="stylesheet" href="{{ style }}" defer />
+    {% endfor %}
   </body>
 </html>
