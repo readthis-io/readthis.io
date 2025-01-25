@@ -12,10 +12,9 @@ export const generateImprint = async (ctx: Context): Promise<void> => {
     {
       heading: "ReadThis",
       title: "ReadThis",
-      styles: ["imprint.css"],
-      ...ctx,
+      styles: ["imprint"],
     },
-    ctx.mode === "production" ? "Minify" : "Do Not Minify",
+    ctx,
   );
 
   await fs.ensureDir(path.join(ctx.outputDirectory, "imprint"));

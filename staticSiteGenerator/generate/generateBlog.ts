@@ -25,15 +25,14 @@ const generateBlogEntry = async (
       heading: entry.title,
       title: entry.title,
       featured_image: entry.featuredImage,
-      styles: ["blog.css"],
+      styles: ["blog"],
       blog: entry.html,
       tags: entry.tags,
       topic: entry.topic,
       author: entry.author,
       readingTime: entry.readingTime,
-      categories: ctx.categories,
     },
-    ctx.mode === "production" ? "Minify" : "Do Not Minify",
+    ctx,
   );
 
   await fs.ensureDir(path.join(ctx.outputDirectory, "blog", entry.slug));

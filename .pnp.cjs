@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/js", "npm:9.16.0"],\
           ["@types/autoprefixer", "npm:10.2.4"],\
           ["@types/browser-sync", "npm:2.29.0"],\
+          ["@types/crypto-js", "npm:4.2.2"],\
           ["@types/fs-extra", "npm:11.0.4"],\
           ["@types/html-minifier", "npm:4.0.5"],\
           ["@types/node", "npm:22.10.2"],\
@@ -40,6 +41,7 @@ const RAW_RUNTIME_STATE =
           ["browser-sync", "npm:3.0.3"],\
           ["chalk", "npm:5.3.0"],\
           ["chokidar", "npm:4.0.1"],\
+          ["crypto-js", "npm:4.2.0"],\
           ["cssnano", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:7.0.6"],\
           ["eslint", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:9.16.0"],\
           ["fs-extra", "npm:11.2.0"],\
@@ -1837,6 +1839,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/crypto-js", [\
+      ["npm:4.2.2", {\
+        "packageLocation": "../../.yarn/berry/cache/@types-crypto-js-npm-4.2.2-21357d525e-10c0.zip/node_modules/@types/crypto-js/",\
+        "packageDependencies": [\
+          ["@types/crypto-js", "npm:4.2.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/estree", [\
       ["npm:1.0.6", {\
         "packageLocation": "../../.yarn/berry/cache/@types-estree-npm-1.0.6-b5e23f2ea2-10c0.zip/node_modules/@types/estree/",\
@@ -2874,6 +2885,15 @@ const RAW_RUNTIME_STATE =
           ["path-key", "npm:3.1.1"],\
           ["shebang-command", "npm:2.0.0"],\
           ["which", "npm:2.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["crypto-js", [\
+      ["npm:4.2.0", {\
+        "packageLocation": "../../.yarn/berry/cache/crypto-js-npm-4.2.0-d6f7744e63-10c0.zip/node_modules/crypto-js/",\
+        "packageDependencies": [\
+          ["crypto-js", "npm:4.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6951,6 +6971,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/js", "npm:9.16.0"],\
           ["@types/autoprefixer", "npm:10.2.4"],\
           ["@types/browser-sync", "npm:2.29.0"],\
+          ["@types/crypto-js", "npm:4.2.2"],\
           ["@types/fs-extra", "npm:11.0.4"],\
           ["@types/html-minifier", "npm:4.0.5"],\
           ["@types/node", "npm:22.10.2"],\
@@ -6960,6 +6981,7 @@ const RAW_RUNTIME_STATE =
           ["browser-sync", "npm:3.0.3"],\
           ["chalk", "npm:5.3.0"],\
           ["chokidar", "npm:4.0.1"],\
+          ["crypto-js", "npm:4.2.0"],\
           ["cssnano", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:7.0.6"],\
           ["eslint", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:9.16.0"],\
           ["fs-extra", "npm:11.2.0"],\

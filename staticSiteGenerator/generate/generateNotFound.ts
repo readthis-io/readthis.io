@@ -12,10 +12,9 @@ export const generateNotFound = async (ctx: Context): Promise<void> => {
     {
       heading: "ReadThis",
       title: "ReadThis",
-      styles: ["notFound.css"],
-      ...ctx,
+      styles: ["notFound"],
     },
-    ctx.mode === "production" ? "Minify" : "Do Not Minify",
+    ctx,
   );
 
   await fs.ensureDir(path.join(ctx.outputDirectory, "not-found"));

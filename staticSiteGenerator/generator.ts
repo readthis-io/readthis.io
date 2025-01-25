@@ -31,7 +31,7 @@ export const build = async (mode: "production" | "debug") => {
   // content hashed based name, instead of the real one.
   await generateFonts(ctx);
   await generateImages(ctx);
-  await generateStyles(ctx);
+  ctx.staticStyles = await generateStyles(ctx);
   await generateBlogEntries(ctx);
   await generateIndex(ctx);
   await generateNotFound(ctx);

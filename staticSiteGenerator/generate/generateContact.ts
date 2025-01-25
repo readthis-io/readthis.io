@@ -12,10 +12,9 @@ export const generateContact = async (ctx: Context): Promise<void> => {
     {
       heading: "Contact Us",
       title: "Contact Us - ReadThis",
-      styles: ["contact.css"],
-      ...ctx,
+      styles: ["contact"],
     },
-    ctx.mode === "production" ? "Minify" : "Do Not Minify",
+    ctx,
   );
 
   await fs.ensureDir(path.join(ctx.outputDirectory, "contact"));

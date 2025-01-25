@@ -3,7 +3,7 @@ import nun from "nunjucks";
 import { minify } from "html-minifier";
 import fs from "fs-extra";
 
-import { Category } from "./Context.js";
+import { Context } from "./Context.js";
 
 /**
  * Parameters used in _frame.njk.
@@ -12,21 +12,24 @@ export interface PageFrameParameter {
   styles: string[];
   title: string;
   heading: string;
-  categories: Category[];
 }
 
 export const renderTemplate = async <TTemplate>(
   fileName: string,
   data: TTemplate & PageFrameParameter,
-  mode: "Minify" | "Do Not Minify",
+  context: Context,
 ): Promise<string> => {
   const nunEnv = new nun.Environment(
     new nun.FileSystemLoader([path.resolve("webpage")]),
   );
   const file = await fs.readFile(fileName, "utf-8");
-  const compiled = nunEnv.renderString(file, data);
+  const compiled = nunEnv.renderString(file, {
+    ...context,
+    ...data,
+    styles: data.styles.map((style) => context.staticStyles[style]),
+  });
 
-  if (mode === "Minify") {
+  if (context.mode === "production") {
     const uglified = minify(compiled, {
       collapseBooleanAttributes: true,
       collapseInlineTagWhitespace: true,

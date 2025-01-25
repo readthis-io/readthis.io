@@ -28,14 +28,13 @@ const renderCategory = async (
     {
       heading: `ReadThis- ${category.category}`,
       title: `ReadThis - ${category.category}`,
-      styles: ["category.css"],
+      styles: ["category"],
       category: category.category,
       entries: chunks[0],
       current: 1,
       total: chunks.length,
-      categories: ctx.categories,
     },
-    ctx.mode === "production" ? "Minify" : "Do Not Minify",
+    ctx,
   );
 
   await fs.ensureDir(path.join(ctx.outputDirectory, "category", category.slug));
@@ -56,14 +55,13 @@ const renderPagination = async (
       {
         heading: `ReadThis- ${category.category}`,
         title: `ReadThis - ${category.category}`,
-        styles: ["category.css"],
+        styles: ["category"],
         category: category.category,
         entries: chunks[page],
         current: page + 1,
         total: chunks.length,
-        categories: ctx.categories,
       },
-      ctx.mode === "production" ? "Minify" : "Do Not Minify",
+      ctx,
     );
 
     await fs.ensureDir(

@@ -11,16 +11,21 @@ import packageJson from "../package.json" with { type: "json" };
  * Main Entry, using YARGS to call different jobs.
  */
 const main = () => {
-  console.log(chalk.green("Welcome to the static site generator."));
+  console.log(chalk.white("Welcome to the static site generator."));
   console.log(chalk.green(`Version ${packageJson.version}`));
+  console.log();
   console.log(chalk.green("Use --help if you are stuck."));
+  console.log(
+    chalk.green("Main modes are `watch debug` and `build production`"),
+  );
+  console.log();
 
   yargs(hideBin(process.argv))
     .usage("generator watch")
     .version(packageJson.version)
     .command(
       "build [mode]",
-      "Build the Static Site",
+      "Build the Static Site (mode: debug (default), production).",
       (yargs) => {
         return yargs.positional("mode", {
           describe: "Wether to generate production or debug code.",
@@ -38,7 +43,7 @@ const main = () => {
     )
     .command(
       "watch [mode]",
-      "Build and Serve the site and watch for changes.",
+      "Build and Serve the site and watch for changes (mode: debug (default), production).",
       (yargs) => {
         return yargs.positional("mode", {
           describe: "Wether to generate production or debug code.",

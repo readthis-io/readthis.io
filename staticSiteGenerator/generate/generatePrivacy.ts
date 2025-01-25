@@ -12,10 +12,9 @@ export const generatePrivacy = async (ctx: Context): Promise<void> => {
     {
       heading: "Data Privacy",
       title: "Data Privacy - ReadThis",
-      styles: ["privacy.css"],
-      ...ctx,
+      styles: ["privacy"],
     },
-    ctx.mode === "production" ? "Minify" : "Do Not Minify",
+    ctx,
   );
 
   await fs.ensureDir(path.join(ctx.outputDirectory, "privacy"));

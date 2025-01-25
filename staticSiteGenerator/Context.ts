@@ -7,10 +7,15 @@ export interface Category {
   count: number;
 }
 
+export interface Styles {
+  [name: string]: string;
+}
+
 export interface Context {
   mode: "production" | "debug";
   outputDirectory: string;
   entries: BlogEntry[];
   blogsPerPage: number;
   categories: Category[];
+  staticStyles: Styles;
 }
