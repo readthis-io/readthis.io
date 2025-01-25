@@ -62,10 +62,9 @@ const writeStyle = async (
   ctx: Context,
 ): Promise<{ key: string; file: string }> => {
   const base =
-    //ctx.mode === "debug"
-    //  ? path.basename(obj.path, ".scss")
-    // :
-    generateHash(obj.style);
+    ctx.mode === "debug"
+      ? path.basename(obj.path, ".scss")
+      : generateHash(obj.style);
 
   const target = path.join(
     ctx.outputDirectory,

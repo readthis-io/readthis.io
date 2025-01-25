@@ -21,10 +21,9 @@ const generateFont = async (
 ): Promise<{ key: string; name: string }> => {
   const base = path.basename(fontPath);
   const targetName =
-    // ctx.mode === "debug"
-    //   ? base
-    //   :
-    `${await generateHash(fontPath)}${path.extname(base)}`;
+    ctx.mode === "debug"
+      ? base
+      : `${await generateHash(fontPath)}${path.extname(base)}`;
   const targetPath = path.join(
     ctx.outputDirectory,
     "static",
