@@ -6,16 +6,16 @@ import preset from "postcss-preset-env";
 import nano from "cssnano";
 import tailwind from "tailwindcss";
 import path from "path";
-import crypto from "crypto-js";
-import slugify from "slugify";
 
 //@ts-expect-error there are no typings for this library.
 import sass from "@csstools/postcss-sass";
 
 import { Context, Styles } from "../Context.js";
+import { generateHashFromContent } from "../helper/hash.js";
 
 const prodProcessor = postcss(
   sass({
+    silenceDeprecations: ["legacy-js-api"],
     api: "modern",
   }),
   tailwind(),
@@ -27,19 +27,12 @@ const prodProcessor = postcss(
 const debugProcessor = postcss(
   sass({
     silenceDeprecations: ["legacy-js-api"],
+    api: "modern",
   }),
   tailwind(),
   preset(),
   prefixer(),
 );
-
-const generateHash = (content: string) => {
-  const step1 = crypto.SHA512(content);
-  const step2 = crypto.enc.Base64.stringify(step1);
-  const step3 = step2.substring(0, 18);
-  const step4 = slugify.default(step3);
-  return step4;
-};
 
 const generateStyle = async (
   obj: {
@@ -76,10 +69,7 @@ const writeStyle = async (
   },
   ctx: Context,
 ): Promise<{ key: string; file: string }> => {
-  const base =
-    ctx.mode === "debug"
-      ? path.basename(obj.path, ".scss")
-      : generateHash(obj.style);
+  const base = generateHashFromContent(obj.style);
 
   const target = path.join(
     ctx.outputDirectory,
