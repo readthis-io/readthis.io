@@ -38,7 +38,9 @@ export const makeContext = (
     categories: extractCategories(entries),
     staticStyles: {},
     staticFonts: {},
+    staticImages: {},
     generationTime: new Date().toISOString(),
     year: new Date().getFullYear().toString(),
+    defaultFeatureImageKey: "defaultFeatureImage.webp",
   };
 };

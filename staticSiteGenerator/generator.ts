@@ -28,8 +28,10 @@ export const build = async (mode: "production" | "debug") => {
   await fs.ensureDir(ctx.outputDirectory);
 
   ctx.staticFonts = await generateFonts(ctx);
-  await generateImages(ctx);
+  ctx.staticImages = await generateImages(ctx);
+  console.log(ctx.staticImages);
   ctx.staticStyles = await generateStyles(ctx);
+
   await generateBlogEntries(ctx);
   await generateIndex(ctx);
   await generateNotFound(ctx);

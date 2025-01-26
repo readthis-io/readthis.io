@@ -15,6 +15,10 @@ export interface Fonts {
   [name: string]: string;
 }
 
+export interface Images {
+  [name: string]: string;
+}
+
 export interface Context {
   mode: "production" | "debug";
   outputDirectory: string;
@@ -23,6 +27,8 @@ export interface Context {
   categories: Category[];
   staticStyles: Styles;
   staticFonts: Fonts;
+  staticImages: Images;
   generationTime: string;
+  defaultFeatureImageKey: string;
   year: string;
 }

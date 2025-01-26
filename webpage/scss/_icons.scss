@@ -1,51 +1,49 @@
 .icon {
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    @apply inline-block;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  @apply inline-block;
 }
 
-
 .arrow {
-    mask-image: url('images/icons/arrow.svg');
-    -webkit-mask-image: url('images/icons/arrow.svg');
+  mask-image: url("icons/arrow.svg");
+  -webkit-mask-image: url("icons/arrow.svg");
 }
 
 .chevron {
-    mask-image: url('images/icons/chevron.svg');
-    -webkit-mask-image: url('images/icons/chevron.svg');
+  mask-image: url("icons/chevron.svg");
+  -webkit-mask-image: url("icons/chevron.svg");
 }
 
 .search {
-    mask-image: url('images/icons/search.svg');
-    -webkit-mask-image: url('images/icons/search.svg');
+  mask-image: url("icons/search.svg");
+  -webkit-mask-image: url("icons/search.svg");
 }
 
 .linkedin {
-    mask-image: url('images/icons/linkedin.svg');
-    -webkit-mask-image: url('images/icons/linkedin.svg');
+  mask-image: url("icons/linkedin.svg");
+  -webkit-mask-image: url("icons/linkedin.svg");
 }
 
 .twitter {
-    mask-image: url('images/icons/twitter.svg');
-    -webkit-mask-image: url('images/icons/twitter.svg');
+  mask-image: url("icons/twitter.svg");
+  -webkit-mask-image: url("icons/twitter.svg");
 }
 
 .github {
-    mask-image: url('images/icons/github.svg');
-    -webkit-mask-image: url('images/icons/github.svg');
+  mask-image: url("icons/github.svg");
+  -webkit-mask-image: url("icons/github.svg");
 }
 
 .pen {
-    mask-image: url('images/icons/pen.svg');
-    -webkit-mask-image: url('images/icons/pen.svg');
+  mask-image: url("icons/pen.svg");
+  -webkit-mask-image: url("icons/pen.svg");
 }
 
 .time {
-    mask-image: url('images/icons/time.svg');
-    -webkit-mask-image: url('images/icons/time.svg');
+  mask-image: url("icons/time.svg");
+  -webkit-mask-image: url("icons/time.svg");
 }
-

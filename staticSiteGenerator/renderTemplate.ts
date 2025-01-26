@@ -17,20 +17,25 @@ export interface PageFrameParameter {
 export const renderTemplate = async <TTemplate>(
   fileName: string,
   data: TTemplate & PageFrameParameter,
-  context: Context,
+  ctx: Context,
 ): Promise<string> => {
   const nunEnv = new nun.Environment(
     new nun.FileSystemLoader([path.resolve("webpage")]),
   );
   const file = await fs.readFile(fileName, "utf-8");
   const compiled = nunEnv.renderString(file, {
-    ...context,
+    ...ctx,
     ...data,
-    styles: data.styles.map((style) => context.staticStyles[style]),
+    styles: data.styles.map((style) => ctx.staticStyles[style]),
   });
 
-  if (context.mode === "production") {
-    const uglified = minify(compiled, {
+  let result = compiled;
+  for (const [name, key] of Object.entries(ctx.staticImages)) {
+    result = result.replaceAll(name, key);
+  }
+
+  if (ctx.mode === "production") {
+    const uglified = minify(result, {
       collapseBooleanAttributes: true,
       collapseInlineTagWhitespace: true,
       collapseWhitespace: true,
@@ -60,5 +65,5 @@ export const renderTemplate = async <TTemplate>(
     return uglified;
   }
 
-  return compiled;
+  return result;
 };

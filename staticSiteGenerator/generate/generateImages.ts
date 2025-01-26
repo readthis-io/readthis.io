@@ -2,21 +2,34 @@ import path from "path";
 import fs from "fs-extra";
 import { glob } from "glob";
 
-import { Context } from "../Context.js";
+import { Context, Images } from "../Context.js";
+import { generateHashFromFile } from "../helper/hash.js";
 
-export const generateImages = async (context: Context): Promise<void> => {
+export const generateImages = async (context: Context): Promise<Images> => {
   const imagePaths = await glob(
-    "webpage/**/images/**/*.{jpg,jpeg,png,gif,webp,svg}",
+    "webpage/images/**/*.{jpg,jpeg,png,gif,webp,svg,ico}",
   );
 
-  await Promise.all(
-    imagePaths.map(async (imagePath) => {
-      const relativePath = imagePath.replace("webpage/", "");
-      const targetPath = path.join(context.outputDirectory, relativePath);
+  const targetPath = path.join(context.outputDirectory, "static", "images");
+  await fs.ensureDir(targetPath);
 
-      await fs.ensureDir(path.dirname(targetPath));
+  const generateImage = async (
+    imagePath: string,
+  ): Promise<{ key: string; hash: string }> => {
+    const hash = await generateHashFromFile(imagePath);
+    const ext = path.extname(imagePath);
+    const target = path.join(targetPath, `${hash}${ext}`);
+    await fs.copy(imagePath, target);
 
-      await fs.copy(imagePath, targetPath);
-    }),
-  );
+    return {
+      key: path.relative("webpage/images", imagePath),
+      hash: `/static/images/${hash}${ext}`,
+    };
+  };
+
+  const generated = await Promise.all(imagePaths.map(generateImage));
+  return generated.reduce<Images>((acc, next) => {
+    acc[next.key] = next.hash;
+    return acc;
+  }, {});
 };

@@ -1,6 +1,5 @@
 ---
 title: "NuPhy Air75 V2 Review: A Technical Deep Dive"
-featured_image: nuphy_keyboard.webp
 tags:
   - keyboard
   - hardware

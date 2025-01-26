@@ -12,11 +12,7 @@
           class="group flex flex-col bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
           {# Image Section #}
           <div class="relative h-68">
-            {% if entry.featured_image %}
               <img src="{{ entry.featured_image }}" alt="{{ entry.title }}" class="w-full h-full object-cover"/>
-            {% else %}
-              <img src="/images/blog/nuphy_keyboard.webp" alt="{{ entry.title }}" class="w-full h-full object-cover"/>
-            {% endif %}
           </div>
           {# Content Section #}
           <div class="p-6 flex flex-col flex-grow">

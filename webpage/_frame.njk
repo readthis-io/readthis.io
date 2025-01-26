@@ -23,7 +23,7 @@
     <meta property="og:url" content="https://readthis.io{{ page.url }}"/>
     <meta property="og:title" content="{{ title }}{% if not isHomePage %} - ReadThis{% endif %}"/>
     <meta property="og:description" content="{{ description | default('Technical insights and best practices from experienced developers. Deep dives into system architecture, performance optimization, and engineering case studies.') }}"/>
-    <meta property="og:image" content="https://readthis.io{{ featured_image | default('/images/readthis_default.webp') }}"/>
+    <meta property="og:image" content="https://readthis.io{{ featured_image | default('readthis_default.webp') }}"/>
     <meta
     property="og:site_name" content="ReadThis"/> <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image"/>
@@ -32,7 +32,7 @@
     <meta name="twitter:description" content="{{ description | default('Technical insights and best practices from experienced developers. Deep dives into system architecture, performance optimization, and engineering case studies.') }}"/>
     <meta
       name="twitter:image"
-      content="https://readthis.io{{ featured_image | default('/images/readthis_default.webp') }}"/>
+      content="https://readthis.io{{ featured_image | default('readthis_default.webp') }}"/>
     <meta
     name="twitter:creator" content="@readthis"/> <!-- Additional SEO -->
     <meta name="robots" content="index, follow"/>
@@ -49,16 +49,16 @@
     {% endif %}
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png"/>
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png"/>
   </head>
   <body class="bg-white">
     <header class="bg-primary">
       <div class="container mx-auto flex items-center justify-between px-6 py-4">
         <div class="flex items-center">
           <a href="/" class="flex items-center">
-            <img src="/images/readthis_logo.svg" alt="ReadThis Logo" class="h-8 w-auto"/>
+            <img src="readthis_logo.svg" alt="ReadThis Logo" class="h-8 w-auto"/>
           </a>
         </div>
         <div class="flex items-center space-x-6">
