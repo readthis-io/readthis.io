@@ -12,14 +12,21 @@ export const watch = async (mode: "production" | "debug") => {
 
   browserSync({ server: ctx.outputDirectory });
 
-  chokidar.watch(["blog/", "webpage/"]).on("all", async (event, path) => {
-    console.log("Detected Change: ", event, path);
+  chokidar
+    .watch(["./blog", "./webpage"], {
+      atomic: true,
+      awaitWriteFinish: true,
+      ignoreInitial: true,
+      interval: 100,
+    })
+    .on("all", async (event, path) => {
+      console.log("Detected Change: ", event, path);
 
-    try {
-      await ms("Rebuild", build, mode);
-      browserSync.reload();
-    } catch (e) {
-      console.log("Compilation failed", e);
-    }
-  });
+      try {
+        await ms("Rebuild", build, mode);
+        browserSync.reload();
+      } catch (e) {
+        console.log("Compilation failed", e);
+      }
+    });
 };
