@@ -1,11 +1,13 @@
 import yargs from "yargs";
 import chalk from "chalk";
+import fs from "fs-extra";
 import { hideBin } from "yargs/helpers";
 
 import { build } from "./generator.js";
 import { watch } from "./watch.js";
 
 import packageJson from "../package.json" with { type: "json" };
+import { ms } from "./helper/ms.js";
 
 /**
  * Main Entry, using YARGS to call different jobs.
@@ -38,7 +40,8 @@ const main = () => {
 
         // Apparently YARGS typing fails for choices, and defaults back to type
         // string;
-        await build(arg.mode as "debug" | "production");
+        await fs.rm("dist/webpage", { force: true, recursive: true });
+        await ms("Complete Build", build, arg.mode as "debug" | "production");
       },
     )
     .command(
@@ -56,7 +59,7 @@ const main = () => {
 
         // Apparently YARGS typing fails for choices, and defaults back to type
         // string;
-        await build(arg.mode as "debug" | "production");
+        await ms("Complete Build", build, arg.mode as "debug" | "production");
         await watch(arg.mode as "debug" | "production");
       },
     )

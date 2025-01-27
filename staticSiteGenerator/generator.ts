@@ -13,6 +13,9 @@ import { generateFonts } from "./generate/generateFonts.js";
 import { generateImages } from "./generate/generateImages.js";
 import { generateContact } from "./generate/generateContact.js";
 import { generatePrivacy } from "./generate/generatePrivacy.js";
+import { generateFavIcon } from "./generate/generateFavIcon.js";
+import { generateManifest } from "./generate/generateManifest.js";
+import { ms } from "./helper/ms.js";
 
 /**
  * Generates the static website, parsing all source elements, including the
@@ -22,22 +25,23 @@ import { generatePrivacy } from "./generate/generatePrivacy.js";
  * @param mode Apply production steps, like minification or not.
  */
 export const build = async (mode: "production" | "debug") => {
-  const entries = await parseBlogEntries();
+  const entries = await ms("Parse Entries", parseBlogEntries);
   const ctx = makeContext(mode, entries);
 
   await fs.ensureDir(ctx.outputDirectory);
 
-  ctx.staticFonts = await generateFonts(ctx);
-  ctx.staticImages = await generateImages(ctx);
-  console.log(ctx.staticImages);
-  ctx.staticStyles = await generateStyles(ctx);
+  ctx.staticFonts = await ms("Generate Fonts", generateFonts, ctx);
+  ctx.staticImages = await ms("Generate Images", generateImages, ctx);
+  ctx.staticStyles = await ms("Generate Styles", generateStyles, ctx);
 
-  await generateBlogEntries(ctx);
-  await generateIndex(ctx);
-  await generateNotFound(ctx);
-  await generateCategories(ctx);
-  await generateImprint(ctx);
-  await generateAboutUs(ctx);
-  await generateContact(ctx);
-  await generatePrivacy(ctx);
+  await ms("Writing Page Blog Entries", generateBlogEntries, ctx);
+  await ms("Writing Page Index", generateIndex, ctx);
+  await ms("Writing Page Not Found", generateNotFound, ctx);
+  await ms("Writing Page Categories", generateCategories, ctx);
+  await ms("Writing Page Imprint", generateImprint, ctx);
+  await ms("Writing Page About Us", generateAboutUs, ctx);
+  await ms("Writing Page Contact", generateContact, ctx);
+  await ms("Writing Page Privacy", generatePrivacy, ctx);
+  await ms("Writing FavIcon", generateFavIcon, ctx);
+  await ms("Writing Manifest", generateManifest, ctx);
 };

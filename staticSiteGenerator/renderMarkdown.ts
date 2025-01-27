@@ -41,11 +41,12 @@ export const renderMarkdown = async (
         image: (decl) => {
           const name = generateHashFromFileSync(path.join(srcDir, decl.href));
           const ext = path.extname(decl.href);
-          fs.ensureDirSync(path.dirname("dist/webpage/static/images"));
-          fs.copySync(
-            path.join(srcDir, decl.href),
-            path.join("dist/webpage/static/images", `${name}${ext}`),
+          const targetPath = path.join(
+            "dist/webpage/static/images",
+            `${name}${ext}`,
           );
+          fs.ensureDirSync(path.dirname("dist/webpage/static/images"));
+          fs.copySync(path.join(srcDir, decl.href), targetPath);
           return `<img src="/static/images/${name}${ext}" title="${decl.title}" alt="${decl.text}"/>`;
         },
       },

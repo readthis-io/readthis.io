@@ -4,6 +4,7 @@ import browserSync from "browser-sync";
 import { build } from "./generator.js";
 import { parseBlogEntries } from "./parseBlogEntries.js";
 import { makeContext } from "./makeContext.js";
+import { ms } from "./helper/ms.js";
 
 export const watch = async (mode: "production" | "debug") => {
   const entries = await parseBlogEntries();
@@ -15,7 +16,7 @@ export const watch = async (mode: "production" | "debug") => {
     console.log("Detected Change: ", event, path);
 
     try {
-      await build(mode);
+      await ms("Rebuild", build, mode);
       browserSync.reload();
     } catch (e) {
       console.log("Compilation failed", e);

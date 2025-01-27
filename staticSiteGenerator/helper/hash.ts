@@ -18,7 +18,7 @@ export const generateHashFromFile = async (name: string) => {
   return generateHashFromContent(array);
 };
 
-export const generateHashFromFileSync = async (name: string) => {
+export const generateHashFromFileSync = (name: string) => {
   const content = fs.readFileSync(name);
   const array = crypto.lib.WordArray.create(content);
   return generateHashFromContent(array);
