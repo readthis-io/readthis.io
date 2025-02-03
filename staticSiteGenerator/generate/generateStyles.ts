@@ -10,7 +10,7 @@ import path from "path";
 //@ts-expect-error there are no typings for this library.
 import sass from "@csstools/postcss-sass";
 
-import { Context, Styles } from "../Context.js";
+import { StyleGenerationContext, Styles } from "../Context.js";
 import { generateHashFromContent } from "../helper/hash.js";
 
 const prodProcessor = postcss(
@@ -39,7 +39,7 @@ const generateStyle = async (
     path: string;
     content: string;
   },
-  ctx: Context,
+  ctx: StyleGenerationContext,
 ): Promise<{
   path: string;
   style: string;
@@ -71,7 +71,7 @@ const writeStyle = async (
     path: string;
     style: string;
   },
-  ctx: Context,
+  ctx: StyleGenerationContext,
 ): Promise<{ key: string; file: string }> => {
   const base = generateHashFromContent(obj.style);
 
@@ -89,7 +89,9 @@ const writeStyle = async (
   };
 };
 
-export const generateStyles = async (ctx: Context): Promise<Styles> => {
+export const generateStyles = async (
+  ctx: StyleGenerationContext,
+): Promise<Styles> => {
   const paths = await glob("webpage/**/[^_]*.[s]css");
   await fs.ensureDir(path.join(ctx.outputDirectory, "static", "styles"));
 

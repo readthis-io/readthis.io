@@ -1,9 +1,9 @@
 import path from "path";
 import fs from "fs-extra";
 
-import { Context } from "../Context.js";
 import { renderTemplate } from "../renderTemplate.js";
 import { BlogEntry } from "../BlogEntry.js";
+import { GenerationContext } from "../Context.js";
 
 interface IndexParameter {
   blogs: BlogEntry[];
@@ -17,14 +17,19 @@ function* splitInChunks<T>(arr: T[], chunkSize: number): Generator<T[]> {
   }
 }
 
-const renderIndex = async (chunks: BlogEntry[][], ctx: Context) => {
+const renderIndex = async (chunks: BlogEntry[][], ctx: GenerationContext) => {
   const html = await renderTemplate<IndexParameter>(
     "webpage/index.njk",
     {
       heading: "ReadThis",
       title: "ReadThis",
       styles: ["index"],
-      blogs: chunks[0],
+      blogs: chunks[0].map((x) => ({
+        ...x,
+        featuredImage: x.featuredImage
+          ? ctx.staticImages[x.featuredImage]
+          : ctx.staticImages[ctx.defaultFeatureImageKey],
+      })),
       current: 1,
       total: chunks.length,
     },
@@ -34,7 +39,10 @@ const renderIndex = async (chunks: BlogEntry[][], ctx: Context) => {
   await fs.writeFile(path.join(ctx.outputDirectory, "index.html"), html);
 };
 
-const renderPagination = async (chunks: BlogEntry[][], ctx: Context) => {
+const renderPagination = async (
+  chunks: BlogEntry[][],
+  ctx: GenerationContext,
+) => {
   for (let page = 0; page < chunks.length; page++) {
     const html = await renderTemplate<IndexParameter>(
       "webpage/index.njk",
@@ -42,7 +50,12 @@ const renderPagination = async (chunks: BlogEntry[][], ctx: Context) => {
         heading: "ReadThis",
         title: "ReadThis",
         styles: ["index.css"],
-        blogs: chunks[page],
+        blogs: chunks[page].map((x) => ({
+          ...x,
+          featuredImage: x.featuredImage
+            ? ctx.staticImages[x.featuredImage]
+            : ctx.staticImages[ctx.defaultFeatureImageKey],
+        })),
         current: page + 1,
         total: chunks.length,
       },
@@ -57,7 +70,7 @@ const renderPagination = async (chunks: BlogEntry[][], ctx: Context) => {
   }
 };
 
-export const generateIndex = async (ctx: Context): Promise<void> => {
+export const generateIndex = async (ctx: GenerationContext): Promise<void> => {
   const chunks = [...splitInChunks(ctx.entries, ctx.blogsPerPage)];
   await renderIndex(chunks, ctx);
   await renderPagination(chunks, ctx);

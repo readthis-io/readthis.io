@@ -1,12 +1,14 @@
 import path from "path";
 import fs from "fs-extra";
 
-import { Context } from "../Context.js";
+import { GenerationContext } from "../Context.js";
 import { renderTemplate } from "../renderTemplate.js";
 
 type NotFound = object;
 
-export const generateNotFound = async (ctx: Context): Promise<void> => {
+export const generateNotFound = async (
+  ctx: GenerationContext,
+): Promise<void> => {
   const html = await renderTemplate<NotFound>(
     "webpage/notFound.njk",
     {

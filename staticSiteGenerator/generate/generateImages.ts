@@ -2,15 +2,24 @@ import path from "path";
 import fs from "fs-extra";
 import { glob } from "glob";
 
-import { Context, Images } from "../Context.js";
+import { GenerationContext, Images } from "../Context.js";
 import { generateHashFromFile } from "../helper/hash.js";
 
-export const generateImages = async (context: Context): Promise<Images> => {
-  const imagePaths = await glob(
-    "webpage/images/**/*.{jpg,jpeg,png,gif,webp,svg,ico}",
-  );
+const processPath = async (
+  source: string,
+  ctx: GenerationContext,
+): Promise<
+  {
+    key: string;
+    hash: string;
+  }[]
+> => {
+  const imagePaths = await glob([
+    `${source}/**/*.{jpg,jpeg,png,gif,webp,svg,ico}`,
+    // "blog/**/*.{jpg,jpeg,png,gif,webp,svg,ico}",
+  ]);
 
-  const targetPath = path.join(context.outputDirectory, "static", "images");
+  const targetPath = path.join(ctx.outputDirectory, "static", "images");
   await fs.ensureDir(targetPath);
 
   const generateImage = async (
@@ -22,13 +31,22 @@ export const generateImages = async (context: Context): Promise<Images> => {
     await fs.copy(imagePath, target);
 
     return {
-      key: path.relative("webpage/images", imagePath),
+      key: path.relative(source, imagePath),
       hash: `/static/images/${hash}${ext}`,
     };
   };
 
   const generated = await Promise.all(imagePaths.map(generateImage));
-  return generated.reduce<Images>((acc, next) => {
+  return generated;
+};
+
+export const generateImages = async (
+  context: GenerationContext,
+): Promise<Images> => {
+  return [
+    ...(await processPath("webpage/images", context)),
+    ...(await processPath("blog/", context)),
+  ].reduce<Images>((acc, next) => {
     acc[next.key] = next.hash;
     return acc;
   }, {});

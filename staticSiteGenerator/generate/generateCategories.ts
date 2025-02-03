@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
 
-import { Category, Context } from "../Context.js";
+import { Category, GenerationContext } from "../Context.js";
 import { renderTemplate } from "../renderTemplate.js";
 import { BlogEntry } from "../BlogEntry.js";
 
@@ -21,7 +21,7 @@ function* splitInChunks<T>(arr: T[], chunkSize: number): Generator<T[]> {
 const renderCategory = async (
   category: Category,
   chunks: BlogEntry[][],
-  ctx: Context,
+  ctx: GenerationContext,
 ) => {
   const html = await renderTemplate<CategoryParameter>(
     "webpage/category.njk",
@@ -30,7 +30,12 @@ const renderCategory = async (
       title: `ReadThis - ${category.category}`,
       styles: ["category"],
       category: category.category,
-      entries: chunks[0],
+      entries: chunks[0].map((x) => ({
+        ...x,
+        featuredImage: x.featuredImage
+          ? ctx.staticImages[x.featuredImage]
+          : ctx.staticImages[ctx.defaultFeatureImageKey],
+      })),
       current: 1,
       total: chunks.length,
     },
@@ -47,7 +52,7 @@ const renderCategory = async (
 const renderPagination = async (
   category: Category,
   chunks: BlogEntry[][],
-  ctx: Context,
+  ctx: GenerationContext,
 ) => {
   for (let page = 0; page < chunks.length; page++) {
     const html = await renderTemplate<CategoryParameter>(
@@ -57,7 +62,12 @@ const renderPagination = async (
         title: `ReadThis - ${category.category}`,
         styles: ["category"],
         category: category.category,
-        entries: chunks[page],
+        entries: chunks[page].map((x) => ({
+          ...x,
+          featuredImage: x.featuredImage
+            ? ctx.staticImages[x.featuredImage]
+            : ctx.staticImages[ctx.defaultFeatureImageKey],
+        })),
         current: page + 1,
         total: chunks.length,
       },
@@ -85,7 +95,9 @@ const renderPagination = async (
   }
 };
 
-export const generateCategories = async (ctx: Context): Promise<void> => {
+export const generateCategories = async (
+  ctx: GenerationContext,
+): Promise<void> => {
   for (const category of ctx.categories) {
     const chunks = [...splitInChunks(category.entries, ctx.blogsPerPage)];
     await renderCategory(category, chunks, ctx);

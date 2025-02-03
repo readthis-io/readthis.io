@@ -2,7 +2,62 @@ import path from "path";
 import slugify from "slugify";
 
 import { BlogEntry } from "./BlogEntry.js";
-import { Category, Context } from "./Context.js";
+import {
+  PreparationContext,
+  Styles,
+  Fonts,
+  Images,
+  ParsingContext,
+  GenerationContext,
+  Category,
+  StyleGenerationContext,
+} from "./Context.js";
+
+export const makePreparationContext = (
+  mode: "debug" | "production",
+): PreparationContext => {
+  return {
+    generationTime: new Date().toISOString(),
+    year: new Date().getFullYear().toString(),
+    defaultFeatureImageKey: "defaultFeatureImage.webp",
+    blogsPerPage: 6,
+    outputDirectory: path.join("dist", "webpage"),
+    mode: mode,
+  };
+};
+
+export const makeStyleGenerationContext = (
+  ctx: PreparationContext,
+  staticFonts: Fonts,
+  staticImages: Images,
+): StyleGenerationContext => {
+  return {
+    ...ctx,
+    staticFonts: staticFonts,
+    staticImages: staticImages,
+  };
+};
+
+export const makeParsingContext = (
+  ctx: StyleGenerationContext,
+  staticStyles: Styles,
+): ParsingContext => {
+  return {
+    ...ctx,
+    staticStyles: staticStyles,
+  };
+};
+
+export const makeGenerationContext = (
+  ctx: ParsingContext,
+  entries: BlogEntry[],
+): GenerationContext => {
+  return {
+    ...ctx,
+    entries: entries,
+    categories: extractCategories(entries),
+  };
+};
 
 const extractCategories = (entries: BlogEntry[]): Category[] => {
   const categories: {
@@ -24,23 +79,4 @@ const extractCategories = (entries: BlogEntry[]): Category[] => {
   }
 
   return Object.values(categories).sort((a, b) => a.count - b.count);
-};
-
-export const makeContext = (
-  mode: "production" | "debug",
-  entries: BlogEntry[],
-): Context => {
-  return {
-    mode: mode,
-    entries: entries,
-    outputDirectory: path.join("dist", "webpage"),
-    blogsPerPage: 6,
-    categories: extractCategories(entries),
-    staticStyles: {},
-    staticFonts: {},
-    staticImages: {},
-    generationTime: new Date().toISOString(),
-    year: new Date().getFullYear().toString(),
-    defaultFeatureImageKey: "defaultFeatureImage.webp",
-  };
 };

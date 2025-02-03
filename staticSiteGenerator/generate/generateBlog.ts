@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
 
-import { Context } from "../Context.js";
+import { GenerationContext } from "../Context.js";
 import { BlogEntry } from "../BlogEntry.js";
 import { renderTemplate } from "../renderTemplate.js";
 
@@ -10,22 +10,23 @@ interface BlogParameter {
   topic: string;
   tags: string[];
   title: string;
-  featured_image?: string;
+  featuredImage?: string;
   author: string;
   readingTime: string;
 }
 
 const generateBlogEntry = async (
   entry: BlogEntry,
-  ctx: Context,
+  ctx: GenerationContext,
 ): Promise<void> => {
   const html = await renderTemplate<BlogParameter>(
     "webpage/blog.njk",
     {
       heading: entry.title,
       title: entry.title,
-      featured_image:
-        entry.featuredImage ?? ctx.staticImages[ctx.defaultFeatureImageKey],
+      featuredImage: entry.featuredImage
+        ? ctx.staticImages[entry.featuredImage]
+        : ctx.staticImages[ctx.defaultFeatureImageKey],
       styles: ["blog"],
       blog: entry.html,
       tags: entry.tags,
@@ -43,6 +44,6 @@ const generateBlogEntry = async (
   );
 };
 
-export const generateBlogEntries = async (ctx: Context) => {
+export const generateBlogEntries = async (ctx: GenerationContext) => {
   await Promise.all(ctx.entries.map((entry) => generateBlogEntry(entry, ctx)));
 };

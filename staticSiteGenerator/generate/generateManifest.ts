@@ -1,9 +1,11 @@
 import fs from "fs-extra";
 import path from "path";
 
-import { Context } from "../Context.js";
+import { GenerationContext } from "../Context.js";
 
-export const generateManifest = async (ctx: Context): Promise<void> => {
+export const generateManifest = async (
+  ctx: GenerationContext,
+): Promise<void> => {
   let manifest = await fs.readFile(
     "webpage/images/favicon/site.webmanifest",
     "utf-8",

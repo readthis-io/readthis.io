@@ -7,14 +7,13 @@ import footnote from "marked-footnote";
 import alert from "marked-alert";
 // @ts-expect-error No Typing available
 import table from "marked-extended-tables";
-import fs from "fs-extra";
-import path from "path";
 
-import { generateHashFromFileSync } from "./helper/hash.js";
+import { ParsingContext } from "./Context.js";
 
 export const renderMarkdown = async (
   markdown: string,
-  srcDir: string,
+  parentDir: string,
+  ctx: ParsingContext,
 ): Promise<string> => {
   const marked = new Marked({
     async: true,
@@ -39,15 +38,8 @@ export const renderMarkdown = async (
     .use({
       renderer: {
         image: (decl) => {
-          const name = generateHashFromFileSync(path.join(srcDir, decl.href));
-          const ext = path.extname(decl.href);
-          const targetPath = path.join(
-            "dist/webpage/static/images",
-            `${name}${ext}`,
-          );
-          fs.ensureDirSync(path.dirname("dist/webpage/static/images"));
-          fs.copySync(path.join(srcDir, decl.href), targetPath);
-          return `<img src="/static/images/${name}${ext}" title="${decl.title}" alt="${decl.text}"/>`;
+          const resourcePath = `${parentDir}/${decl.href}`;
+          return `<img src="${ctx.staticImages[resourcePath]}" title="${decl.title}" alt="${decl.text}"/>`;
         },
       },
     });

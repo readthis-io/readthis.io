@@ -19,16 +19,25 @@ export interface Images {
   [name: string]: string;
 }
 
-export interface Context {
-  mode: "production" | "debug";
-  outputDirectory: string;
-  entries: BlogEntry[];
+export interface PreparationContext {
+  mode: "debug" | "production";
+  generationTime: string;
+  year: string;
+  defaultFeatureImageKey: string;
   blogsPerPage: number;
-  categories: Category[];
-  staticStyles: Styles;
+  outputDirectory: string;
+}
+
+export interface StyleGenerationContext extends PreparationContext {
   staticFonts: Fonts;
   staticImages: Images;
-  generationTime: string;
-  defaultFeatureImageKey: string;
-  year: string;
+}
+
+export interface ParsingContext extends StyleGenerationContext {
+  staticStyles: Styles;
+}
+
+export interface GenerationContext extends ParsingContext {
+  categories: Category[];
+  entries: BlogEntry[];
 }

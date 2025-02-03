@@ -3,7 +3,7 @@ import nun from "nunjucks";
 import { minify } from "html-minifier";
 import fs from "fs-extra";
 
-import { Context } from "./Context.js";
+import { GenerationContext } from "./Context.js";
 
 /**
  * Parameters used in _frame.njk.
@@ -17,7 +17,7 @@ export interface PageFrameParameter {
 export const renderTemplate = async <TTemplate>(
   fileName: string,
   data: TTemplate & PageFrameParameter,
-  ctx: Context,
+  ctx: GenerationContext,
 ): Promise<string> => {
   const nunEnv = new nun.Environment(
     new nun.FileSystemLoader([path.resolve("webpage")]),

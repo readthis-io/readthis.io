@@ -2,13 +2,11 @@ import chokidar from "chokidar";
 import browserSync from "browser-sync";
 
 import { build } from "./generator.js";
-import { parseBlogEntries } from "./parseBlogEntries.js";
-import { makeContext } from "./makeContext.js";
 import { ms } from "./helper/ms.js";
+import { makePreparationContext } from "./makeContext.js";
 
 export const watch = async (mode: "production" | "debug") => {
-  const entries = await parseBlogEntries();
-  const ctx = makeContext(mode, entries);
+  const ctx = makePreparationContext(mode);
 
   browserSync({ server: ctx.outputDirectory });
 

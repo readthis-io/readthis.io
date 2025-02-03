@@ -5,7 +5,6 @@ import { parseBlogEntries } from "./parseBlogEntries.js";
 import { generateBlogEntries } from "./generate/generateBlog.js";
 import { generateIndex } from "./generate/generateIndex.js";
 import { generateNotFound } from "./generate/generateNotFound.js";
-import { makeContext } from "./makeContext.js";
 import { generateCategories } from "./generate/generateCategories.js";
 import { generateImprint } from "./generate/generateImprint.js";
 import { generateAboutUs } from "./generate/generateAboutUs.js";
@@ -16,6 +15,17 @@ import { generatePrivacy } from "./generate/generatePrivacy.js";
 import { generateFavIcon } from "./generate/generateFavIcon.js";
 import { generateManifest } from "./generate/generateManifest.js";
 import { ms } from "./helper/ms.js";
+import {
+  makeGenerationContext,
+  makeParsingContext,
+  makePreparationContext,
+  makeStyleGenerationContext,
+} from "./makeContext.js";
+import {
+  GenerationContext,
+  ParsingContext,
+  PreparationContext,
+} from "./Context.js";
 
 /**
  * Generates the static website, parsing all source elements, including the
@@ -25,17 +35,14 @@ import { ms } from "./helper/ms.js";
  * @param mode Apply production steps, like minification or not.
  */
 export const build = async (mode: "production" | "debug") => {
-  const entries = await ms("Parse Entries", parseBlogEntries);
-  const ctx = makeContext(mode, entries);
+  const parseCtx = await prepare(makePreparationContext(mode));
+  const genCtx = await parse(parseCtx);
+  await generate(genCtx);
+};
 
-  await fs.ensureDir(ctx.outputDirectory);
-
-  ctx.staticFonts = await ms("Generate Fonts", generateFonts, ctx);
-  ctx.staticImages = await ms("Generate Images", generateImages, ctx);
-  ctx.staticStyles = await ms("Generate Styles", generateStyles, ctx);
-
-  await ms("Writing Page Blog Entries", generateBlogEntries, ctx);
+const generate = async (ctx: GenerationContext) => {
   await ms("Writing Page Index", generateIndex, ctx);
+  await ms("Writing Page Blog Entries", generateBlogEntries, ctx);
   await ms("Writing Page Not Found", generateNotFound, ctx);
   await ms("Writing Page Categories", generateCategories, ctx);
   await ms("Writing Page Imprint", generateImprint, ctx);
@@ -44,4 +51,21 @@ export const build = async (mode: "production" | "debug") => {
   await ms("Writing Page Privacy", generatePrivacy, ctx);
   await ms("Writing FavIcon", generateFavIcon, ctx);
   await ms("Writing Manifest", generateManifest, ctx);
+};
+
+const prepare = async (ctx: PreparationContext) => {
+  await fs.ensureDir(ctx.outputDirectory);
+
+  const fonts = await ms("Generate Fonts", generateFonts, ctx);
+  const images = await ms("Generate Images", generateImages, ctx);
+
+  const styleCtx = makeStyleGenerationContext(ctx, fonts, images);
+  const styles = await ms("Generate Styles", generateStyles, styleCtx);
+
+  return makeParsingContext(styleCtx, styles);
+};
+
+const parse = async (ctx: ParsingContext): Promise<GenerationContext> => {
+  const entries = await ms("Parse Entries", parseBlogEntries, ctx);
+  return makeGenerationContext(ctx, entries);
 };
