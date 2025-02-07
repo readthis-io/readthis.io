@@ -12,8 +12,10 @@
     <article
       class="blong-post-content max-w-4xl mx-auto pb-24">
       {# Hero Section with Image #}
-      <div class="mb-8 rounded-lg border-2 border-primary overflow-hidden">
-          <img src="{{ featuredImage }}" alt="{{ blog.title }}" class="w-full h-[400px] object-cover"/>
+      <div class="mb-8 rounded-md border border-primary overflow-hidden aspect-[21/9] bg-gray-light">
+        <img src="{{ featuredImage }}?width=640&quality=60" srcset="{{ featuredImage }}?width=640&quality=60 640w, {{ featuredImage }}?width=960&quality=75 960w, {{ featuredImage }}?width=1280&quality=80 1280w" sizes="(max-width: 768px) 100vw,
+                             (max-width: 1536px) 960px,
+                             1280px" alt="{{ title }}" class="w-full h-full object-cover" width="1280" height="540" fetchpriority="high" decoding="async"/>
       </div>
       {# Article Header #}
       <header
@@ -48,31 +50,6 @@
       <footer class="mt-12 pt-8 border-t border-primary/10">
         <div
           class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          {# Share Links #}
-          <div class="flex items-center gap-4">
-            <span class="font-mono text-primary/70">// Share this article</span>
-            <div class="flex gap-3">
-              <!-- Twitter Share -->
-              <a
-                href="https://twitter.com/intent/tweet?url=https://readthis.io{{ page.url }}&text={{ title | urlencode }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Share on Twitter"
-                class="text-white hover:text-secondary transition-colors">
-                <span class="icon twitter w-6 h-6 bg-primary hover:bg-secondary"></span>
-              </a>
-              
-              <!-- LinkedIn Share -->
-              <a
-                href="https://www.linkedin.com/shareArticle?mini=true&url=https://readthis.io{{ page.url }}&title={{ title | urlencode }}&summary={{ description | urlencode }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Share on LinkedIn"
-                class="text-white hover:text-secondary transition-colors">
-                <span class="icon linkedin w-6 h-6 bg-primary hover:bg-secondary"></span>
-              </a>
-            </div>
-          </div>
           {# Back to Blog #}
           <a href="/" class="group flex items-center gap-2 text-primary hover:text-secondary transition-colors">
             <span class="icon arrow rotate-180 w-4 h-4 bg-primary group-hover:bg-secondary transition-colors"></span>

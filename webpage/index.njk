@@ -7,8 +7,19 @@
           href="/blog/{{ blog.slug }}"
           class="blog-card group flex flex-col bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
           {# Image Section #}
-          <div class="relative h-68">
-              <img src="{{ blog.featuredImage }}" alt="{{ blog.title }}" class="w-full h-full object-cover"/>
+          <div class="image-container bg-gray-light relative pb-[52%]">  
+            <img 
+              src="{{ blog.featuredImage }}?width=364&quality=75" 
+              srcset="{{ blog.featuredImage }}?width=364&quality=75 364w,
+                      {{ blog.featuredImage }}?width=728&quality=75 728w" 
+              sizes="364px"
+              alt="{{ blog.title }}" 
+              class="absolute inset-0 w-full h-full object-cover"
+              width="364"
+              height="189"
+              {% if loop.index <= 2 %}loading="eager"{% else %}loading="lazy"{% endif %}
+              decoding="async"
+            />
           </div>
           {# Content Section #}
           <div class="px-6 py-4 flex flex-col flex-grow">

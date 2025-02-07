@@ -22,7 +22,7 @@ Here's my unboxing of the Ionic White variant with Cowberry Keys:
 
 The keyboard arrived in a surprisingly compact box. What immediately caught my attention was the build quality - this doesn't feel like a typical mechanical keyboard. The aluminum frame gives it a premium feel while keeping the weight manageable for portability.
 
-![NuPhy Air75 V2 Side View](nuphy_keyboard2.webp)
+![NuPhy Air75 V2 Side View](nuphy_keyboards2.webp)
 
 ## Developer's Perspective
 

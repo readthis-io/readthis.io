@@ -15,7 +15,7 @@
       name="keywords"
       content="technical blog, software development, {{ keywords | default('system architecture, engineering, development,
         programming') }}"/>
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/manifest.json"/>
     <meta
     name="author" content="{{ author | default('Aiko Jansen, Senad Redzic') }}"/> <!-- Canonical URL -->
     <link
@@ -31,9 +31,7 @@
     <meta name="twitter:url" content="https://readthis.io{{ page.url }}"/>
     <meta name="twitter:title" content="{{ title }}{% if not isHomePage %} - ReadThis{% endif %}"/>
     <meta name="twitter:description" content="{{ description | default('Technical insights and best practices from experienced developers. Deep dives into system architecture, performance optimization, and engineering case studies.') }}"/>
-    <meta
-      name="twitter:image"
-      content="https://readthis.io{{ featuredImage }}"/>
+    <meta name="twitter:image" content="https://readthis.io{{ featuredImage }}"/>
     <meta
     name="twitter:creator" content="@readthis"/> <!-- Additional SEO -->
     <meta name="robots" content="index, follow"/>
@@ -48,28 +46,40 @@
         <meta property="article:tag" content="{{ tag }}"/>
       {% endfor %}
     {% endif %}
-    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png"/>
     <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png"/>
+    <!-- Styles -->
+    {% for style in styles %}
+      <link rel="stylesheet" href="{{ style }}"/>
+    {% endfor %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T4C8RXX5T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-4T4C8RXX5T');
+    </script>
   </head>
   <body class="bg-white">
-    <header class="bg-primary">
-      <div class="container mx-auto flex items-center justify-between px-6 py-4">
-        <div class="flex items-center">
+    <header class="bg-primary h-20">
+      <div class="container mx-auto flex items-center space-x-6 justify-between h-full px-6">
+        <div class="flex items-center h-16">
           <a href="/" class="flex items-center">
-            <img src="readthis_logo.svg" alt="ReadThis Logo" class="h-8 w-auto"/>
+            <img src="readthis_logo.svg" alt="ReadThis Logo" class="h-16" width="180" height="180"/>
           </a>
         </div>
         <div class="flex items-center space-x-6">
           {{ components.secondaryButton("/about", "About") }}
-          {{ components.primaryButton("/contact", "Contact Us") }}
+          {{ components.outlinedButton("/contact", "Contact") }}
         </div>
       </div>
     </header>
     <div
-      class="container mx-auto px-6 flex flex-col md:flex-row gap-8 mt-6">
+      class="container mx-auto px-6 flex flex-col md:flex-row gap-8 mt-6 flex-grow">
       <!-- Mobile Topics Dropdown -->
       <details class="md:hidden ">
         <summary class="w-full flex items-center justify-between px-4 py-2 bg-primary text-white rounded-sm cursor-pointer">
@@ -101,7 +111,7 @@
                 <a href="/category/{{ category.slug }}" class="flex items-center text-primary hover:text-secondary transition-colors">
                   <span class="bg-secondary mr-2 icon arrow w-4 h-4"></span>
                   {{ category.category }}
-                  <span class="ml-auto text-secondary">({{ category.count }})</span>
+                  <span class="ml-auto text-primary">({{ category.count }})</span>
                 </a>
               </li>
             {% endfor %}
@@ -119,7 +129,7 @@
           class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Company Links -->
           <div>
-            <h4 class="font-mono text-secondary mb-4">// Company</h4>
+            <div class="font-mono text-secondary mb-6 text-lg">// Company</div>
             <ul class="space-y-2">
               <li>
                 <a href="/about" class="text-white hover:text-secondary transition-colors">
@@ -140,34 +150,40 @@
           </div>
           <!-- Social Media -->
           <div>
-            <h4 class="font-mono text-secondary mb-4">// Connect</h4>
+            <div class="font-mono text-secondary mb-6 text-lg">// Connect</div>
             <div class="flex space-x-4">
               <a
                 href="https://github.com/readthis-io"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow ReadThis on GitHub"
                 class="text-white hover:text-secondary transition-colors">
-                <span class="icon github w-6 h-6 bg-white"></span>
+                <span class="icon github w-6 h-6 bg-white" aria-hidden="true"></span>
+                <span class="sr-only">GitHub</span>
               </a>
               <a
                 href="https://twitter.com/readthis"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow ReadThis on Twitter"
                 class="text-white hover:text-secondary transition-colors">
-                <span class="icon twitter w-6 h-6 bg-white"></span>
+                <span class="icon twitter w-6 h-6 bg-white" aria-hidden="true"></span>
+                <span class="sr-only">Twitter</span>
               </a>
               <a
                 href="https://linkedin.com/company/readthis-io"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow ReadThis on LinkedIn"
                 class="text-white hover:text-secondary transition-colors">
-                <span class="icon linkedin w-6 h-6 bg-white"></span>
+                <span class="icon linkedin w-6 h-6 bg-white" aria-hidden="true"></span>
+                <span class="sr-only">LinkedIn</span>
               </a>
             </div>
           </div>
           <!-- Copyright -->
           <div class="text-left md:text-right">
-            <h4 class="font-mono text-secondary mb-4">// ReadThis</h4>
+            <div class="font-mono text-secondary mb-6 text-lg">// ReadThis</div>
             <p class="text-white/70 text-sm">
               {{ generationTime }} <br/> © 2025 - {{ year }} ReadThis.io <br/> All rights reserved.
             </p>
@@ -175,10 +191,6 @@
         </div>
       </div>
     </footer>
-
-    <!-- Styles -->
-    {% for style in styles %}
-      <link rel="stylesheet" href="{{ style }}" />
-    {% endfor %}
+   
   </body>
 </html>

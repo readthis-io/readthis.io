@@ -11,8 +11,22 @@
           href="/blog/{{ entry.slug }}"
           class="group flex flex-col bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
           {# Image Section #}
-          <div class="relative h-68">
-              <img src="{{ entry.featuredImage }}" alt="{{ entry.title }}" class="w-full h-full object-cover"/>
+          <div class="image-container bg-gray-light">
+              <img 
+                src="{{ entry.featuredImage }}?width=320&quality=60" 
+                srcset="{{ entry.featuredImage }}?width=320&quality=60 320w,
+                        {{ entry.featuredImage }}?width=480&quality=75 480w,
+                        {{ entry.featuredImage }}?width=640&quality=80 640w"
+                sizes="(max-width: 768px) 100vw,
+                       (max-width: 1536px) 50vw,
+                       480px"
+                alt="{{ entry.title }}" 
+                class="w-full h-full object-cover"
+                width="480"
+                height="270"
+                loading="lazy"
+                decoding="async"
+              />
           </div>
           {# Content Section #}
           <div class="p-6 flex flex-col flex-grow">
