@@ -49,7 +49,8 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon/favicon.ico"/>
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png"/>
+    <link
+    rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png"/>
     <!-- Styles -->
     {% for style in styles %}
       <link rel="stylesheet" href="{{ style }}"/>
@@ -58,9 +59,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T4C8RXX5T"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
-
       gtag('config', 'G-4T4C8RXX5T');
     </script>
   </head>
@@ -74,7 +76,12 @@
         </div>
         <div class="flex items-center space-x-6">
           {{ components.secondaryButton("/about", "About") }}
-          {{ components.outlinedButton("/contact", "Contact") }}
+          <a
+            href="/contact"
+            class="px-4 py-2 bg-transparent text-secondary border border-secondary rounded-sm hover:bg-secondary hover:text-white
+              transition-colors">
+            Contact
+          </a>
         </div>
       </div>
     </header>
@@ -191,6 +198,5 @@
         </div>
       </div>
     </footer>
-   
   </body>
 </html>

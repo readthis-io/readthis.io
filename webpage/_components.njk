@@ -4,32 +4,27 @@
     {{ text }}
   </a>
 {% endmacro %}
-
 {# Secondary Button/Link #}
 {% macro secondaryButton(href, text) %}
   <a href="{{ href }}" class="text-white hover:text-secondary transition-colors">
     {{ text }}
   </a>
 {% endmacro %}
-
-
 {# Outlined Button/Link #}
 {% macro outlinedButton(href, text) %}
-  <a href="{{ href }}" class="px-4 py-2 bg-transparent text-secondary border border-secondary rounded-sm hover:bg-secondary hover:text-white transition-colors">
+  <a href="{{ href }}" class="px-4 py-2 bg-transparent text-primary border border-primary rounded-sm hover:bg-primary hover:text-white transition-colors">
     {{ text }}
   </a>
 {% endmacro %}
-
 {# Navigation Link #}
 {% macro navLink(href, text) %}
   <a href="{{ href }}" class="text-white hover:text-secondary transition-colors">
     {{ text }}
   </a>
 {% endmacro %}
-
 {# Inline Link #}
 {% macro link(href, text) %}
   <a href="{{ href }}" class="text-secondary hover:text-primary transition-colors">
     {{ text }}
   </a>
-{% endmacro %} 
+{% endmacro %}
