@@ -15,6 +15,7 @@ export const generateImprint = async (
       heading: "ReadThis",
       title: "ReadThis",
       styles: ["imprint"],
+      slug: "imprint",
     },
     ctx,
   );

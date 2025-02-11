@@ -15,6 +15,7 @@ export const generateAboutUs = async (
       heading: "ReadThis",
       title: "ReadThis",
       styles: ["about"],
+      slug: "about",
     },
     ctx,
   );

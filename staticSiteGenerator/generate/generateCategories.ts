@@ -38,6 +38,7 @@ const renderCategory = async (
       })),
       current: 1,
       total: chunks.length,
+      slug: `category/${category.slug}`,
     },
     ctx,
   );
@@ -70,6 +71,7 @@ const renderPagination = async (
         })),
         current: page + 1,
         total: chunks.length,
+        slug: `category/${category.slug}/${(page + 1).toString()}`,
       },
       ctx,
     );

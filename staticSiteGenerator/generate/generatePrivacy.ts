@@ -15,6 +15,7 @@ export const generatePrivacy = async (
       heading: "Data Privacy",
       title: "Data Privacy - ReadThis",
       styles: ["privacy"],
+      slug: "privacy",
     },
     ctx,
   );

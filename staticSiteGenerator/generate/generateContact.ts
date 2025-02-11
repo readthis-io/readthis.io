@@ -15,6 +15,7 @@ export const generateContact = async (
       heading: "Contact Us",
       title: "Contact Us - ReadThis",
       styles: ["contact"],
+      slug: "contact",
     },
     ctx,
   );

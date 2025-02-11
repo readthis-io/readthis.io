@@ -33,6 +33,7 @@ const generateBlogEntry = async (
       topic: entry.topic,
       author: entry.author,
       readingTime: entry.readingTime,
+      slug: `blog/${entry.slug}`,
     },
     ctx,
   );

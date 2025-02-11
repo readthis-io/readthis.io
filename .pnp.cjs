@@ -36,6 +36,7 @@ const RAW_RUNTIME_STATE =
           ["@types/html-minifier", "npm:4.0.5"],\
           ["@types/node", "npm:22.10.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
+          ["@types/uglify-js", "npm:3.17.5"],\
           ["@types/yargs", "npm:17.0.33"],\
           ["autoprefixer", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:10.4.20"],\
           ["browser-sync", "npm:3.0.3"],\
@@ -68,6 +69,7 @@ const RAW_RUNTIME_STATE =
           ["tsx", "npm:4.19.2"],\
           ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
           ["typescript-eslint", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:8.18.0"],\
+          ["uglify-js", "npm:3.19.3"],\
           ["yargs", "npm:17.7.2"],\
           ["zod", "npm:3.24.1"]\
         ],\
@@ -6976,6 +6978,7 @@ const RAW_RUNTIME_STATE =
           ["@types/html-minifier", "npm:4.0.5"],\
           ["@types/node", "npm:22.10.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
+          ["@types/uglify-js", "npm:3.17.5"],\
           ["@types/yargs", "npm:17.0.33"],\
           ["autoprefixer", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:10.4.20"],\
           ["browser-sync", "npm:3.0.3"],\
@@ -7008,6 +7011,7 @@ const RAW_RUNTIME_STATE =
           ["tsx", "npm:4.19.2"],\
           ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
           ["typescript-eslint", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:8.18.0"],\
+          ["uglify-js", "npm:3.19.3"],\
           ["yargs", "npm:17.7.2"],\
           ["zod", "npm:3.24.1"]\
         ],\

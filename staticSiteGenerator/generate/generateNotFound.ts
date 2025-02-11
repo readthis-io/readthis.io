@@ -15,6 +15,7 @@ export const generateNotFound = async (
       heading: "ReadThis",
       title: "ReadThis",
       styles: ["notFound"],
+      slug: "not-found",
     },
     ctx,
   );

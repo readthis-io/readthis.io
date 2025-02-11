@@ -92,7 +92,7 @@ const writeStyle = async (
 export const generateStyles = async (
   ctx: StyleGenerationContext,
 ): Promise<Styles> => {
-  const paths = await glob("webpage/**/[^_]*.[s]css");
+  const paths = await glob(["webpage/**/[^_]*.scss", "webpage/**/[^_]*.css"]);
   await fs.ensureDir(path.join(ctx.outputDirectory, "static", "styles"));
 
   const files = await Promise.all(

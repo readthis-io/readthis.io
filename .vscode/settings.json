@@ -22,14 +22,13 @@
     "readthis",
     "Redzic",
     "Senad",
+    "silktide",
     "stylelintcache",
     "tseslint",
     "vuepress",
     "wscript"
   ],
-  "editor.rulers": [
-    80
-  ],
+  "editor.rulers": [80],
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true

@@ -19,6 +19,10 @@ export interface Images {
   [name: string]: string;
 }
 
+export interface Scripts {
+  [name: string]: string;
+}
+
 export interface PreparationContext {
   mode: "debug" | "production";
   generationTime: string;
@@ -31,6 +35,7 @@ export interface PreparationContext {
 export interface StyleGenerationContext extends PreparationContext {
   staticFonts: Fonts;
   staticImages: Images;
+  staticScripts: Scripts;
 }
 
 export interface ParsingContext extends StyleGenerationContext {

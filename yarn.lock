@@ -1264,7 +1264,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uglify-js@npm:*":
+"@types/uglify-js@npm:*, @types/uglify-js@npm:^3.17.5":
   version: 3.17.5
   resolution: "@types/uglify-js@npm:3.17.5"
   dependencies:
@@ -4966,6 +4966,7 @@ __metadata:
     "@types/html-minifier": "npm:^4"
     "@types/node": "npm:^22.10.2"
     "@types/nunjucks": "npm:^3"
+    "@types/uglify-js": "npm:^3.17.5"
     "@types/yargs": "npm:^17.0.33"
     autoprefixer: "npm:^10.4.20"
     browser-sync: "npm:^3.0.3"
@@ -4998,6 +4999,7 @@ __metadata:
     tsx: "npm:^4.19.2"
     typescript: "npm:^5.7.2"
     typescript-eslint: "npm:^8.18.0"
+    uglify-js: "npm:^3.19.3"
     yargs: "npm:^17.7.2"
     zod: "npm:^3.24.1"
   languageName: unknown
@@ -5719,7 +5721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uglify-js@npm:^3.5.1":
+"uglify-js@npm:^3.19.3, uglify-js@npm:^3.5.1":
   version: 3.19.3
   resolution: "uglify-js@npm:3.19.3"
   bin:

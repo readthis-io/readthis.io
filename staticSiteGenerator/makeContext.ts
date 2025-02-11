@@ -11,6 +11,7 @@ import {
   GenerationContext,
   Category,
   StyleGenerationContext,
+  Scripts,
 } from "./Context.js";
 
 export const makePreparationContext = (
@@ -30,11 +31,13 @@ export const makeStyleGenerationContext = (
   ctx: PreparationContext,
   staticFonts: Fonts,
   staticImages: Images,
+  staticScripts: Scripts,
 ): StyleGenerationContext => {
   return {
     ...ctx,
     staticFonts: staticFonts,
     staticImages: staticImages,
+    staticScripts: staticScripts,
   };
 };
 

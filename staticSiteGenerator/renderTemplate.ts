@@ -12,6 +12,7 @@ export interface PageFrameParameter {
   styles: string[];
   title: string;
   heading: string;
+  slug: string;
 }
 
 export const renderTemplate = async <TTemplate>(
@@ -26,7 +27,11 @@ export const renderTemplate = async <TTemplate>(
   const compiled = nunEnv.renderString(file, {
     ...ctx,
     ...data,
-    styles: data.styles.map((style) => ctx.staticStyles[style]),
+    styles: [
+      ctx.staticStyles["silktide-consent-manager.css"],
+      ...data.styles.map((style) => ctx.staticStyles[style]),
+    ],
+    scripts: [ctx.staticScripts["silktide-consent-manager"]],
   });
 
   let result = compiled;

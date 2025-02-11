@@ -55,6 +55,7 @@
     "@types/html-minifier": "^4",
     "@types/node": "^22.10.2",
     "@types/nunjucks": "^3",
+    "@types/uglify-js": "^3.17.5",
     "@types/yargs": "^17.0.33",
     "autoprefixer": "^10.4.20",
     "browser-sync": "^3.0.3",
@@ -87,6 +88,7 @@
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.0",
+    "uglify-js": "^3.19.3",
     "yargs": "^17.7.2",
     "zod": "^3.24.1"
   }

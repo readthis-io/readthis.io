@@ -26,6 +26,7 @@ import {
   ParsingContext,
   PreparationContext,
 } from "./Context.js";
+import { generateJavascript } from "./generate/generateJavascript.js";
 
 /**
  * Generates the static website, parsing all source elements, including the
@@ -58,9 +59,12 @@ const prepare = async (ctx: PreparationContext) => {
 
   const fonts = await ms("Generate Fonts", generateFonts, ctx);
   const images = await ms("Generate Images", generateImages, ctx);
+  const scripts = await ms("Generate Javascript", generateJavascript, ctx);
 
-  const styleCtx = makeStyleGenerationContext(ctx, fonts, images);
+  const styleCtx = makeStyleGenerationContext(ctx, fonts, images, scripts);
   const styles = await ms("Generate Styles", generateStyles, styleCtx);
+
+  console.log(styles);
 
   return makeParsingContext(styleCtx, styles);
 };

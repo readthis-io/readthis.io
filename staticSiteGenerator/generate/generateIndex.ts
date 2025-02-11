@@ -32,6 +32,7 @@ const renderIndex = async (chunks: BlogEntry[][], ctx: GenerationContext) => {
       })),
       current: 1,
       total: chunks.length,
+      slug: "/",
     },
     ctx,
   );
@@ -49,7 +50,7 @@ const renderPagination = async (
       {
         heading: "ReadThis",
         title: "ReadThis",
-        styles: ["index.css"],
+        styles: ["index"],
         blogs: chunks[page].map((x) => ({
           ...x,
           featuredImage: x.featuredImage
@@ -58,6 +59,7 @@ const renderPagination = async (
         })),
         current: page + 1,
         total: chunks.length,
+        slug: `/${page}`,
       },
       ctx,
     );
