@@ -10,17 +10,18 @@
 -------------------------------- */
 /* Wrapper (Global) */
 #silktide-wrapper {
-              --focus: 0 0 0 2px #ffffff, 0 0 0 4px #000000, 0 0 0 6px #ffffff;
-              --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
-              --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
-              --primaryColor: #533BE2;
-              --backgroundColor: #FFFFFF;
-              --textColor: #4B494B;
-              --backdropBackgroundColor: #00000033;
-              --backdropBackgroundBlur: 0px;
-              --cookieIconColor: #533BE2;
-              --cookieIconBackgroundColor: #FFFFFF;
-              position: fixed;
+  /* Match ReadThis CI Colors */
+  --primaryColor: #080F1E;          /* Your primary color */
+  --backgroundColor: #FFFFFF;       /* White background */
+  --textColor: #080F1E;            /* Primary text color */
+  --backdropBackgroundColor: #02021E33;  /* Black with opacity */
+  --backdropBackgroundBlur: 4px;
+  --cookieIconColor: #080F1E;      /* Secondary color for icon */
+  --cookieIconBackgroundColor: #FFFFFF;
+  --focus: unset /* Secondary color focus ring */
+  --boxShadow: 0 4px 6px -1px #02021E1A, 0 2px 4px -2px #02021E1A;
+  --fontFamily: "Roboto", sans-serif;  /* Your primary font */
+  position: fixed;
   bottom: 0;
   right: 0;
   width: 100%;
@@ -93,10 +94,7 @@
   cursor: pointer;
   border-radius: 5px;
 }
-
-#silktide-wrapper .st-button--primary {
-}
-
+ 
 #silktide-wrapper .st-button--primary:hover {
   background-color: var(--backgroundColor);
   color: var(--primaryColor);
@@ -468,18 +466,20 @@
 #silktide-cookie-icon {
   display: none;
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 20px;
+  left: 20px;
   justify-content: center;
   align-items: center;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  padding: 0px;
   border: none;
+  box-shadow:  0px 0px 1px 0px #ffffff;
+  padding: 0px;
+   
   background-color: var(--cookieIconColor);
   cursor: pointer;
-  box-shadow: 0px 0px 6px 0px #0000001a;
+ 
   pointer-events: auto;
   animation: silktide-fadeIn 0.3s ease-in-out forwards;
 }
