@@ -64,8 +64,6 @@ const prepare = async (ctx: PreparationContext) => {
   const styleCtx = makeStyleGenerationContext(ctx, fonts, images, scripts);
   const styles = await ms("Generate Styles", generateStyles, styleCtx);
 
-  console.log(styles);
-
   return makeParsingContext(styleCtx, styles);
 };
 

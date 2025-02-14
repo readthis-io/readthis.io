@@ -57,7 +57,7 @@ const generateStyle = async (
   }
 
   for (const [name, key] of Object.entries(ctx.staticImages)) {
-    result = result.replaceAll(name, key);
+    result = result.replaceAll(name, key.src);
   }
 
   return {

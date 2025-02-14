@@ -39,7 +39,7 @@ export const renderMarkdown = async (
       renderer: {
         image: (decl) => {
           const resourcePath = `${parentDir}/${decl.href}`;
-          return `<img src="${ctx.staticImages[resourcePath]}" title="${decl.title}" alt="${decl.text}"/>`;
+          return `<img srcset="${ctx.staticImages[resourcePath].srcset}" title="${decl.title}" alt="${decl.text}"/>`;
         },
       },
     });

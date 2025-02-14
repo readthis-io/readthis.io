@@ -36,7 +36,7 @@ export const renderTemplate = async <TTemplate>(
 
   let result = compiled;
   for (const [name, key] of Object.entries(ctx.staticImages)) {
-    result = result.replaceAll(name, key);
+    result = result.replaceAll(name, key.srcset);
   }
 
   if (ctx.mode === "production") {

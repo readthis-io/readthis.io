@@ -16,9 +16,8 @@
       content="technical blog, software development, {{ keywords | default('system architecture, engineering, development,
         programming') }}"/>
     <link rel="manifest" href="/manifest.json"/>
-    <meta
-    name="author" content="{{ author | default('Aiko Jansen, Senad Redzic') }}"/>  
-    <link rel="canonical" href="https://readthis.io/{{ slug }}"/> 
+    <meta name="author" content="{{ author | default('Aiko Jansen, Senad Redzic') }}"/>
+    <link rel="canonical" href="https://readthis.io/{{ slug }}"/>
     <meta property="og:type" content="{{ ogType | default('website') }}"/>
     <meta property="og:url" content="https://readthis.io/{{ slug }}"/>
     <meta property="og:title" content="{{ title }}{% if not isHomePage %} - ReadThis{% endif %}"/>
@@ -62,8 +61,8 @@
     <header class="bg-primary h-20">
       <div class="container mx-auto flex items-center space-x-6 justify-between h-full px-6">
         <div class="flex items-center h-16">
-          <a href="/" class="flex items-center">
-            <img src="readthis_logo.svg" alt="ReadThis Logo" class="h-16" width="180" height="180"/>
+          <a href="/" class="flex items-center justify-center">
+            <img srcset="readthis_logo.svg" alt="ReadThis Logo" width="180"/>
           </a>
         </div>
         <div class="flex items-center space-x-6">

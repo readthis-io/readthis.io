@@ -1,9 +1,32 @@
 import path from "path";
 import fs from "fs-extra";
 import { glob } from "glob";
+import sharp from "sharp";
+import crypto from "crypto-js";
 
 import { GenerationContext, Images } from "../Context.js";
-import { generateHashFromFile } from "../helper/hash.js";
+import {
+  generateHashFromContent,
+  generateHashFromFile,
+} from "../helper/hash.js";
+
+const optimizeImage = async (
+  imagePath: string,
+  targetSize: number,
+  targetPath: string,
+): Promise<String> => {
+  const imageBuffer = await sharp(imagePath)
+    .resize(targetSize)
+    .toFormat("webp")
+    .toBuffer();
+  const hash = generateHashFromContent(
+    crypto.lib.WordArray.create(imageBuffer),
+  );
+
+  const target = path.join(targetPath, `${hash}.webp`);
+  await fs.writeFile(target, imageBuffer);
+  return hash;
+};
 
 const processPath = async (
   source: string,
@@ -11,31 +34,28 @@ const processPath = async (
 ): Promise<
   {
     key: string;
-    hash: string;
+    srcHash: string;
+    srcsetHash: string;
   }[]
 > => {
-  const imagePaths = await glob([
-    `${source}/**/*.{jpg,jpeg,png,gif,webp,svg,ico}`,
-    // "blog/**/*.{jpg,jpeg,png,gif,webp,svg,ico}",
-  ]);
+  const imagePaths = await glob([`${source}/**/*.{jpg,jpeg,png,gif,webp,svg}`]);
 
   const targetPath = path.join(ctx.outputDirectory, "static", "images");
   await fs.ensureDir(targetPath);
 
   const generateImage = async (
     imagePath: string,
-  ): Promise<{ key: string; hash: string }> => {
-    const hash = await generateHashFromFile(imagePath);
-    const ext = path.extname(imagePath);
-    const target = path.join(targetPath, `${hash}${ext}`);
-    await fs.copy(imagePath, target);
+  ): Promise<{ key: string; srcHash: string; srcsetHash: string }> => {
+    const img1 = await optimizeImage(imagePath, 320, targetPath);
+    const img2 = await optimizeImage(imagePath, 640, targetPath);
+    const img3 = await optimizeImage(imagePath, 1280, targetPath);
 
     return {
       key: path.relative(source, imagePath),
-      hash: `/static/images/${hash}${ext}`,
+      srcHash: `/static/images/${img1}.webp`,
+      srcsetHash: `/static/images/${img1}.webp 320w, /static/images/${img2}.webp 640w, /static/images/${img3}.webp 1280w`,
     };
   };
-
   const generated = await Promise.all(imagePaths.map(generateImage));
   return generated;
 };
@@ -47,7 +67,7 @@ export const generateImages = async (
     ...(await processPath("webpage/images", context)),
     ...(await processPath("blog/", context)),
   ].reduce<Images>((acc, next) => {
-    acc[next.key] = next.hash;
+    acc[next.key] = { src: next.srcHash, srcset: next.srcsetHash };
     return acc;
   }, {});
 };

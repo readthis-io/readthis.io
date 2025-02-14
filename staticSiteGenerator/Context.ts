@@ -16,7 +16,10 @@ export interface Fonts {
 }
 
 export interface Images {
-  [name: string]: string;
+  [name: string]: {
+    src: string;
+    srcset: string;
+  };
 }
 
 export interface Scripts {
