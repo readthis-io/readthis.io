@@ -1,6 +1,9 @@
 name: Generate static site
 run-name: ${{ github.actor }} has triggered the generation. 🚀
-on: [push]
+on: 
+  push: 
+    branches: 
+    - master
 jobs:
   Generate-Static-Site:
     runs-on: ubuntu-latest
@@ -16,3 +19,4 @@ jobs:
       - name: Install yarn
         run: yarn install
       - run: yarn start build production
+      - run: ./publish.sh
