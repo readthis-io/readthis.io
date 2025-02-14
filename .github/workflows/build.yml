@@ -2,7 +2,7 @@ name: Generate static site
 run-name: ${{ github.actor }} has triggered the generation. 🚀
 on: [push]
 jobs:
-  Generate-Static-Sites:
+  Generate-Static-Site:
     runs-on: ubuntu-latest
     steps:
       - name: Install Nodejs
@@ -11,8 +11,8 @@ jobs:
           node-version: "20.12.0"
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Install corepack
+        run: corepack enable  
       - name: Install yarn
         run: yarn install
-      - name: Install corepack
-        run: corepack enable
       - run: yarn start build production
