@@ -59,14 +59,14 @@ const processPath = async (
       };
     }
 
-    const img1 = await optimizeImage(imagePath, 480, targetPath);
-    const img2 = await optimizeImage(imagePath, 720, targetPath);
-    const img3 = await optimizeImage(imagePath, 1440, targetPath);
+    const img1 = await optimizeImage(imagePath, 400, targetPath);
+    const img2 = await optimizeImage(imagePath, 800, targetPath);
+    const img3 = await optimizeImage(imagePath, 1200, targetPath);
 
     return {
       key: path.relative(source, imagePath),
-      srcHash: `/static/images/${img2}.webp`,
-      srcsetHash: `/static/images/${img1}.webp 480w, /static/images/${img2}.webp 720w, /static/images/${img3}.webp 1440w`,
+      srcHash: `/static/images/${img1}.webp`,
+      srcsetHash: `/static/images/${img1}.webp 400w, /static/images/${img2}.webp 800w, /static/images/${img3}.webp 1200w`,
     };
   };
 

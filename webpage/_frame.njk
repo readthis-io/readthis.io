@@ -180,83 +180,45 @@
     {% for script in scripts %}
       <script src="{{ script }}"></script>
     {% endfor %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T4C8RXX5T"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      // Set consent defaults
+      function gtag(){dataLayer.push(arguments);}
+      
       gtag('consent', 'default', {
-        analytics_storage: localStorage.getItem('silktideCookieChoice_analytics') === 'true'
-          ? 'granted'
-          : 'denied',
-        ad_storage: localStorage.getItem('silktideCookieChoice_marketing') === 'true'
-          ? 'granted'
-          : 'denied',
-        ad_user_data: localStorage.getItem('silktideCookieChoice_marketing') === 'true'
-          ? 'granted'
-          : 'denied',
-        ad_personalization: localStorage.getItem('silktideCookieChoice_marketing') === 'true'
-          ? 'granted'
-          : 'denied',
-        functionality_storage: localStorage.getItem('silktideCookieChoice_necessary') === 'true'
-          ? 'granted'
-          : 'denied',
-        security_storage: localStorage.getItem('silktideCookieChoice_necessary') === 'true'
-          ? 'granted'
-          : 'denied'
+        'analytics_storage': 'denied'
       });
-      gtag('js', new Date());
-      gtag('config', 'G-4T4C8RXX5T');
-      gtag("page", "{{ slug }}")
     </script>
+
+    {# Cookie Consent Handler #}
     <script>
       silktideCookieBannerManager.updateCookieBannerConfig({
-        background: {
-          showBackground: true
-        },
         cookieTypes: [
           {
             id: 'necessary',
             name: 'Essential',
-            description: 'These keep read{this}.io working properly. They handle basic functions.',
+            description: 'These keep read{this}.io working properly.',
             required: true
-          }, {
+          },
+          {
             id: 'analytics',
             name: 'Analytics',
-            description: 'We use Google Analytics to understand how people use our site. This helps us write better articles and fix issues.',
+            description: 'We use Google Analytics to understand how people use our site.',
             required: false,
-            onAccept: function () {
-              gtag('consent', 'update', {'analytics_storage': 'granted'});
-            },
-            onReject: function () {
-              gtag('consent', 'update', {'analytics_storage': 'denied'});
+            onAccept: function() {
+              // Load GA only after consent
+              const script = document.createElement('script');
+              script.src = 'https://www.googletagmanager.com/gtag/js?id=G-4T4C8RXX5T';
+              script.async = true;
+              document.head.appendChild(script);
+              
+              gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+              });
+              gtag('js', new Date());
+              gtag('config', 'G-4T4C8RXX5T');
             }
-          }, {
-            id: 'external',
-            name: 'Content',
-            description: 'Allows us to show code examples, video tutorials, and other helpful resources from trusted sources like GitHub and YouTu' +
-                'be.',
-            required: false
           }
-        ],
-        text: {
-          banner: {
-            description: `<p class="text-primary/70">We believe in being transparent about data. Choose what you're comfortable sharing with us.</p>`,
-            acceptAllButtonText: 'Accept All',
-            rejectNonEssentialButtonText: 'Essential Only',
-            preferencesButtonText: 'Customize'
-          },
-          preferences: {
-            title: 'Your Privacy Choices',
-            description: `<p class="text-primary/70">Control what data read{this}.io can use. Essential cookies can't be disabled as they keep the site working.</p>`
-          }
-        },
-        position: {
-          banner: 'bottomCenter',
-          cookieIcon: 'bottomRight'
-        }
+        ]
       });
     </script>
   </body>

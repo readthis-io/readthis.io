@@ -8,22 +8,7 @@
           class="blog-card group flex flex-col bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
           {# Image Section #}
           <div class="image-container bg-gray-light relative pb-[52%]">
-            <img 
-              srcset="{{ blog.featuredImage.srcset }}" 
-              sizes="(min-width: 768px) 50vw, 100vw"
-              src="{{ blog.featuredImage.src }}"
-              alt="{{ blog.title }}" 
-              class="absolute inset-0 w-full h-full object-cover" 
-              width="364" 
-              height="189" 
-              {% if loop.first %}
-                fetchpriority="high"
-                loading="eager"
-              {% else %}
-                loading="lazy"
-              {% endif %}
-              decoding="async"
-            />
+            <img srcset="{{ blog.featuredImage.srcset }}" sizes="(min-width: 768px) 40vw, 95vw" src="{{ blog.featuredImage.src }}" alt="{{ blog.title }}" class="absolute inset-0 w-full h-full object-cover" {% if loop.first %} fetchpriority="high" loading="eager" {% else %} loading="lazy" {% endif %} decoding="async"/>
           </div>
           {# Content Section #}
           <div class="px-6 py-4 flex flex-col flex-grow">
