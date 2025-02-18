@@ -6,8 +6,9 @@ tags:
   - mechanical
   - productivity
 topic: hardware
+image: /images/nuphy-air75-v2.png
 description: "A practical review of the NuPhy Air75 V2 mechanical keyboard from a developer's perspective. Learn how this keyboard can improve your coding experience."
-created: "2024-06-01T10:00:00Z"
+created: "2024-12-01T10:00:00Z"
 author: Senad Redzic
 ---
 
