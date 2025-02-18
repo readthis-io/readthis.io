@@ -150,44 +150,56 @@ When discussing security-related code:
 
 ### The Art of Asking Questions
 
-After spending countless nights debugging ML pipelines and architecting distributed systems, I've learned something crucial: the quality of your questions determines the quality of your solutions. When I first started using LLMs, I made the same mistake as everyone else - asking for quick fixes. Now, I treat them as architectural thought partners, and here's how:
+After spending countless nights debugging ML pipelines and managing distributed systems, I've learned something crucial: the quality of your questions determines the quality of your solutions. When I first started using LLMs, I made the same mistake as everyone else - asking for quick fixes. Now, I treat them as architectural thought partners, and here's how:
 
-1. **Start High, Go Deep**
+Let me break down my questioning strategy that consistently produces results:
 
-   ```
-   ❌ "Give me code for an ML pipeline"
-
-   ✅ "I'm building a recommendation system that needs to:
-   - Process user behavior in real-time
-   - Update models daily without downtime
-   - Handle 10M+ users
-   Let's discuss potential architectures before diving into implementation."
-   ```
-
-2. **Focus on Understanding**
+1. **Start with System Context**
 
    ```
-   ❌ "How do I fix this error?"
+   "Our recommendation engine handles 50M daily predictions across 3 regions.
+   Current architecture:
+   - Real-time feature computation on Spark
+   - Model serving via TensorFlow Serving
+   - Multi-stage caching layer
 
-   ✅ "My distributed training job is failing with OOM errors.
-   Current setup:
-   - 8 GPU nodes
-   - Batch size 256
-   - Complex transformer architecture
-   What areas should I investigate first?"
+   We're seeing latency spikes during feature computation.
+   Let's analyze potential bottlenecks before jumping to solutions."
    ```
 
-3. **Challenge Assumptions**
+   This sets the stage for meaningful discussion. The LLM now understands the scale, complexity, and specific area of concern.
+
+2. **Explore Decision Boundaries**
 
    ```
-   ❌ "What's the best database for my app?"
+   "We're considering two approaches for our feature store:
+   1. Redis + Time-series DB combination
+   2. Custom solution built on PostgreSQL
 
-   ✅ "I'm assuming PostgreSQL for our ML metadata store because:
-   - We need ACID transactions
-   - Complex query support
-   - JSON field capabilities
-   What trade-offs am I missing in this decision?"
+   Key requirements:
+   - Sub-5ms read latency
+   - Support for vector operations
+   - Real-time feature updates
+
+   What critical factors am I missing in this trade-off analysis?"
    ```
+
+   By presenting my current thinking, I get targeted insights rather than generic solutions.
+
+3. **Challenge Core Assumptions**
+
+   ```
+   "Current assumptions about our ML pipeline:
+   - Batch processing is sufficient (4h window)
+   - Data consistency > Availability
+   - Cold starts are acceptable
+
+   Which of these assumptions might break at 100x scale?"
+   ```
+
+   This forces both me and the LLM to think about fundamental limitations.
+
+The key is to treat these conversations like high-level architectural discussions. I'm not looking for code - I'm pressure testing ideas and uncovering blind spots. This approach has helped me catch critical design flaws early and build more resilient systems.
 
 ## Conclusion
 
