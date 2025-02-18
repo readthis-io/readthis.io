@@ -14,7 +14,7 @@ author: Senad Redzic
 featured: true
 ---
 
-## Rethinking AI's Role
+## Thinking With AI
 
 Let me tell you a story about how I was wrong about AI in development.
 
