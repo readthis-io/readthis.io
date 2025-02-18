@@ -48,7 +48,19 @@ After months of refining my approach, I've developed three fundamental rules:
    I discuss architecture, debate trade-offs, and explore edge cases. The implementation remains my responsibility.
 
 3. **Different Models for Different Conversations**
-   Each LLM has its strengths. I'll show you how I leverage them all.
+
+   Not all LLMs are created equal. I've found that each model has its own "personality" and strengths. Some are better at deep technical discussions, others excel at spotting patterns in code, and some are particularly good at architectural thinking.
+
+   The key is understanding these differences. For example:
+
+   - Some models are better at maintaining long-term context
+   - Others are more precise with technical details
+   - Some excel at creative problem-solving
+   - Others are better at systematic analysis
+
+   By matching the model to the type of conversation I want to have, I get much better results.
+
+   The goal isn't to find the "best" model, but to understand how each one thinks and leverage that for different types of problems. This approach has made my development process much more efficient.
 
 ## Why Rubber Ducks?
 
