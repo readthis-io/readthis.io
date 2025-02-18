@@ -42,14 +42,16 @@ But here's the crucial part: they do this without writing a single line of code 
 After months of refining my approach, I've developed three fundamental rules:
 
 1. **Never Ask for Direct Solutions**
-   Instead of "How do I implement X?", I ask "What should I consider when implementing X?" or "What are the potential pitfalls of approach Y?"
+
+Instead of "How do I implement X?", I ask "What should I consider when implementing X?" or "What are the potential pitfalls of approach Y?"
 
 2. **Use LLMs as Thought Partners**
-   I discuss architecture, debate trade-offs, and explore edge cases. The implementation remains my responsibility.
+
+I discuss architecture, debate trade-offs, and explore edge cases. The implementation remains my responsibility.
 
 3. **Different Models for Different Conversations**
 
-   Not all LLMs are created equal. I've found that each model has its own "personality" and strengths. Some are better at deep technical discussions, others excel at spotting patterns in code, and some are particularly good at architectural thinking.
+   Not all LLMs are created equal.
 
    The key is understanding these differences. For example:
 
@@ -59,8 +61,6 @@ After months of refining my approach, I've developed three fundamental rules:
    - Others are better at systematic analysis
 
    By matching the model to the type of conversation I want to have, I get much better results.
-
-   The goal isn't to find the "best" model, but to understand how each one thinks and leverage that for different types of problems. This approach has made my development process much more efficient.
 
 ## Why Rubber Ducks?
 
