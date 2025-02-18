@@ -23,7 +23,7 @@
     <meta property="og:url" content="https://readthis.io/{{ slug }}"/>
     <meta property="og:title" content="{{ title }}{% if not isHomePage %} - ReadThis{% endif %}"/>
     <meta property="og:description" content="{{ description | default('Technical insights and best practices from experienced developers. Deep dives into system architecture, performance optimization, and engineering case studies.') }}"/>
-    <meta property="og:image" content="https://readthis.io{{ featuredImage }}"/>
+    <meta property="og:image" content="https://readthis.io{{ featuredImage.src }}"/>
     <meta property="og:image:width" content="1280"/>
     <meta property="og:image:height" content="720"/>
     <meta property="og:site_name" content="ReadThis"/>
@@ -32,7 +32,7 @@
     <meta name="twitter:url" content="https://readthis.io/{{ slug }}"/>
     <meta name="twitter:title" content="{{ title }}{% if not isHomePage %} - ReadThis{% endif %}"/>
     <meta name="twitter:description" content="{{ description | default('Technical insights and best practices from experienced developers. Deep dives into system architecture, performance optimization, and engineering case studies.') }}"/>
-    <meta name="twitter:image" content="https://readthis.io{{ featuredImage }}"/>
+    <meta name="twitter:image" content="https://readthis.io{{ featuredImage.src }}"/>
     <meta name="twitter:image:width" content="1280"/>
     <meta name="twitter:image:height" content="720"/>
     <!-- Additional SEO -->
