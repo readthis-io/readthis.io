@@ -14,7 +14,7 @@ author: Senad Redzic
 featured: true
 ---
 
-## The Awakening
+## Rethinking AI's Role
 
 Let me tell you a story about how I was wrong about AI in development.
 
