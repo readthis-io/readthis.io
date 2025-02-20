@@ -25,8 +25,8 @@ const generateBlogEntry = async (
       heading: entry.title,
       title: entry.title,
       featuredImage: entry.featuredImage
-        ? ctx.staticImages[entry.featuredImage]
-        : ctx.staticImages[ctx.defaultFeatureImageKey],
+        ? ctx.staticImages[entry.featuredImage].srcset
+        : ctx.staticImages[ctx.defaultFeatureImageKey].srcset,
       styles: ["blog"],
       blog: entry.html,
       tags: entry.tags,
