@@ -18,6 +18,8 @@
     <link rel="manifest" href="/manifest.json"/>
     <meta name="author" content="{{ author | default('Aiko Jansen, Senad Redzic') }}"/>
     <link rel="canonical" href="https://readthis.io/{{ slug }}"/>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="https://readthis.io/feed.rss" />
+
     <!-- OpenGraph -->
     <meta property="og:type" content="{{ ogType | default('website') }}"/>
     <meta property="og:url" content="https://readthis.io/{{ slug }}"/>

@@ -27,6 +27,7 @@ import {
   PreparationContext,
 } from "./Context.js";
 import { generateJavascript } from "./generate/generateJavascript.js";
+import { generateRssFeed } from "./generate/generateRssFeed.js";
 
 /**
  * Generates the static website, parsing all source elements, including the
@@ -52,6 +53,7 @@ const generate = async (ctx: GenerationContext) => {
   await ms("Writing Page Privacy", generatePrivacy, ctx);
   await ms("Writing FavIcon", generateFavIcon, ctx);
   await ms("Writing Manifest", generateManifest, ctx);
+  await ms("Writing RSS Feed", generateRssFeed, ctx);
 };
 
 const prepare = async (ctx: PreparationContext) => {

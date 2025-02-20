@@ -10,4 +10,5 @@ export interface BlogEntry {
   featuredImage?: string;
   author: string;
   readingTime: string;
+  created: string;
 }

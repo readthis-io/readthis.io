@@ -37,6 +37,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.10.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/uglify-js", "npm:3.17.5"],\
+          ["@types/xml2js", "npm:0.4.14"],\
           ["@types/yargs", "npm:17.0.33"],\
           ["autoprefixer", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:10.4.20"],\
           ["browser-sync", "npm:3.0.3"],\
@@ -71,6 +72,7 @@ const RAW_RUNTIME_STATE =
           ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
           ["typescript-eslint", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:8.18.0"],\
           ["uglify-js", "npm:3.19.3"],\
+          ["xml2js", "npm:0.6.2"],\
           ["yargs", "npm:17.7.2"],\
           ["zod", "npm:3.24.1"]\
         ],\
@@ -2195,6 +2197,16 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/uglify-js", "npm:3.17.5"],\
           ["source-map", "npm:0.6.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/xml2js", [\
+      ["npm:0.4.14", {\
+        "packageLocation": "../../.yarn/berry/cache/@types-xml2js-npm-0.4.14-595cc9c3cf-10c0.zip/node_modules/@types/xml2js/",\
+        "packageDependencies": [\
+          ["@types/xml2js", "npm:0.4.14"],\
+          ["@types/node", "npm:22.10.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7208,6 +7220,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.10.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/uglify-js", "npm:3.17.5"],\
+          ["@types/xml2js", "npm:0.4.14"],\
           ["@types/yargs", "npm:17.0.33"],\
           ["autoprefixer", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:10.4.20"],\
           ["browser-sync", "npm:3.0.3"],\
@@ -7242,6 +7255,7 @@ const RAW_RUNTIME_STATE =
           ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
           ["typescript-eslint", "virtual:a80d33db144cad3a911658cf4b3112306ff740a22f258da3414742c29b9cd4d7e9ee2f3423ff6565700cb6a7df4dccc6af72f76afb7c4a725227a9d9ae1feaa2#npm:8.18.0"],\
           ["uglify-js", "npm:3.19.3"],\
+          ["xml2js", "npm:0.6.2"],\
           ["yargs", "npm:17.7.2"],\
           ["zod", "npm:3.24.1"]\
         ],\
@@ -7381,6 +7395,15 @@ const RAW_RUNTIME_STATE =
           ["chokidar", "npm:4.0.1"],\
           ["immutable", "npm:5.0.3"],\
           ["source-map-js", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["sax", [\
+      ["npm:1.4.1", {\
+        "packageLocation": "../../.yarn/berry/cache/sax-npm-1.4.1-503b1923cb-10c0.zip/node_modules/sax/",\
+        "packageDependencies": [\
+          ["sax", "npm:1.4.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8294,6 +8317,26 @@ const RAW_RUNTIME_STATE =
           "@types/utf-8-validate",\
           "bufferutil",\
           "utf-8-validate"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["xml2js", [\
+      ["npm:0.6.2", {\
+        "packageLocation": "../../.yarn/berry/cache/xml2js-npm-0.6.2-64cd781d74-10c0.zip/node_modules/xml2js/",\
+        "packageDependencies": [\
+          ["xml2js", "npm:0.6.2"],\
+          ["sax", "npm:1.4.1"],\
+          ["xmlbuilder", "npm:11.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["xmlbuilder", [\
+      ["npm:11.0.1", {\
+        "packageLocation": "../../.yarn/berry/cache/xmlbuilder-npm-11.0.1-b8b04dc929-10c0.zip/node_modules/xmlbuilder/",\
+        "packageDependencies": [\
+          ["xmlbuilder", "npm:11.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\

@@ -36,6 +36,7 @@ export const createBlogEntry = async (
       path.relative("blog", path.dirname(frontMatter.path)),
       ctx,
     ),
+    created: frontMatter.data.created,
     markdown: frontMatter.content,
     slug: createSlug(frontMatter.data.slug, extractFileName(frontMatter.path)),
     tags: frontMatter.data.tags,
