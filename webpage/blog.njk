@@ -13,7 +13,7 @@
       class="blong-post-content max-w-4xl mx-auto pb-24">
       {# Hero Section with Image #}
       <div class="mb-8 rounded-md border border-primary overflow-hidden aspect-[21/9] bg-gray-light">
-        <img srcset="{{ featuredImage.srcset }}" alt="{{ title }}" class="w-full h-full object-cover" width="1280" height="540" fetchpriority="low" decoding="async"/>
+        <img srcset="{{ featuredImage }}" alt="{{ title }}" class="w-full h-full object-cover" width="1280" height="540" fetchpriority="low" decoding="async"/>
       </div>
       {# Article Header #}
       <header
@@ -59,7 +59,7 @@
             </span>
             <div class="flex gap-3">
               <a
-                href="https://twitter.com/intent/tweet?text=Read this! {{ title | urlencode }}&url=https://readthis.io/{{ slug }}"
+                href="https://twitter.com/intent/tweet?text=Read this! {{ title | urlencode }}&url=https://readthis.io/{{ slug }}/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-primary hover:text-secondary transition-colors"
@@ -75,7 +75,7 @@
                 <span class="icon linkedin w-5 h-5 bg-primary hover:bg-secondary transition-colors"></span>
               </a>
               <a
-                href="https://www.facebook.com/sharer.php?u=https://readthis.io/{{ slug }}"
+                href="https://www.facebook.com/sharer.php?u=https://readthis.io/{{ slug }}/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-primary hover:text-secondary transition-colors"
