@@ -16,13 +16,11 @@ featured: true
 
 ## Thinking With AI
 
-Let me tell you a story about how I was wrong about AI in development.
-
 Like many developers, I initially dismissed LLMs as glorified code generators. I watched colleagues copy-paste solutions from ChatGPT, creating what I call "zombie codebases" - they walk and talk, but there's no soul inside. No understanding. No intentionality.
 
-Then something changed. During a particularly frustrating debugging session, I found myself explaining my problem to ChatGPT, just like I used to do with my rubber duck. But unlike my faithful plastic companion, it asked questions back. Good questions. Questions that made me think.
+Then something changed. During a particularly frustrating debugging session, I found myself explaining my problem to ChatGPT. Not asking for a solution, but thinking out loud about the architecture. The responses were thoughtful questions that challenged my assumptions and exposed blind spots in my thinking.
 
-That's when it hit me: I'd been looking at LLMs all wrong.
+That's when I realized: The true power of LLMs are intelligent conversation partners that can help us think through complex problems - much like the classic rubber duck debugging method, but with the ability to challenge our assumptions and push our thinking further.
 
 ## The Rubber Duck Revolution
 
