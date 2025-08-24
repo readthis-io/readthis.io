@@ -67,8 +67,6 @@ AI-powered no-code platforms can generate custom solutions on demand. They don't
 
 Manufacturing is where the AI-no-code combination shines brightest. Manufacturing systems are complex, domain-specific, and constantly evolving. Traditional software development struggles with these requirements because developers don't understand manufacturing processes.
 
-Our RockQ platform demonstrates this perfectly. We've built a system where manufacturing engineers can describe their processes in natural language, and the AI creates working applications that handle quality control, predictive maintenance, and workflow management.
-
 The key insight is that the AI doesn't just translate requirements into code. It understands manufacturing concepts, industry standards, and best practices. It can make intelligent decisions about data structures, user interfaces, and system architecture based on manufacturing domain knowledge.
 
 ### The Real Cost of Traditional Development
