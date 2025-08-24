@@ -12,7 +12,7 @@ export const generateManifest = async (
   );
 
   for (const [name, key] of Object.entries(ctx.staticImages)) {
-    manifest = manifest.replaceAll(name, key);
+    manifest = manifest.replaceAll(name, key.src);
   }
 
   await fs.writeFile(path.join(ctx.outputDirectory, "manifest.json"), manifest);

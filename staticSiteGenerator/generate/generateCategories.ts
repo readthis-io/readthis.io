@@ -6,7 +6,9 @@ import { renderTemplate } from "../renderTemplate.js";
 import { BlogEntry } from "../BlogEntry.js";
 
 interface CategoryParameter {
-  entries: BlogEntry[];
+  entries: (Omit<BlogEntry, "featuredImage"> & {
+    featuredImage: { src: string; srcset: string };
+  })[];
   total: number;
   category: string;
   current: number;

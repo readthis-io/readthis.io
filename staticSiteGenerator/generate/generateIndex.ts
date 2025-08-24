@@ -6,7 +6,9 @@ import { BlogEntry } from "../BlogEntry.js";
 import { GenerationContext } from "../Context.js";
 
 interface IndexParameter {
-  blogs: BlogEntry[];
+  blogs: (Omit<BlogEntry, "featuredImage"> & {
+    featuredImage: { src: string; srcset: string };
+  })[];
   total: number;
   current: number;
 }
