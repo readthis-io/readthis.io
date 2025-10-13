@@ -27,11 +27,11 @@ author: Senad Redzic
 
 ## Why Architecture Matters
 
-You can write Cucumber tests in an afternoon. You can't maintain them without architecture.
+You can write Cucumber tests in an afternoon. Maintaining them requires architecture.
 
-The difference between tests that rot and tests that scale is architecture. Type safety prevents refactoring disasters. Shared context eliminates global state. Proper waits stop flaky failures.
+Architecture makes the difference between tests that rot and tests that scale. Type safety prevents refactoring disasters. Shared context eliminates global state. Proper waits stop flaky failures.
 
-This isn't about following best practices. It's about patterns that survive production.
+These patterns survive production because they solve real problems.
 
 ## The Problem Most Teams Hit
 
@@ -53,7 +53,7 @@ We bundle because:
 - **Dependency management**: One bundle, no node_modules in CI
 - **Consistency**: Same build pipeline as our application
 
-⚙️ **Note**: If you don't need these benefits, skip Webpack. Use `cucumber-js --import ts-node/register` and you're done.
+**Note**: If you don't need these benefits, skip Webpack. Use `cucumber-js --import ts-node/register` and you're done.
 
 Our stack:
 
@@ -114,7 +114,7 @@ Given("I am logged in", async function (this: CustomWorld) {
 });
 ```
 
-💡 **Tip**: The `this: CustomWorld` type annotation gives you autocomplete and compile-time safety. Without it, you're back to `any`.
+**Tip**: The `this: CustomWorld` type annotation gives you autocomplete and compile-time safety. Without it, you're back to `any`.
 
 ## Setup and Teardown
 
@@ -199,7 +199,7 @@ When("the user submits the form", async function (this: CustomWorld) {
 });
 ```
 
-💡 **Tip**: Use `data-testid` attributes. They're stable, semantic, and survive UI refactoring.
+**Tip**: Use `data-testid` attributes. They're stable, semantic, and survive UI refactoring.
 
 ### ✅ Better: Reusable with Parameters
 
@@ -461,7 +461,7 @@ export default {
 }
 ```
 
-⚙️ **Note**: If you don't need bundling, skip Webpack entirely. Use `cucumber-js --import ts-node/register` and point `--require` to your TypeScript files.
+**Note**: If you don't need bundling, skip Webpack entirely. Use `cucumber-js --import ts-node/register` and point `--require` to your TypeScript files.
 
 ## CI/CD Integration
 
@@ -542,7 +542,7 @@ After(async function (this: CustomWorld, { result }) {
 });
 ```
 
-💡 **Tip**: Attach screenshots, HTML, and logs. Future you will thank past you when debugging CI failures.
+**Tip**: Attach screenshots, HTML, and logs. Future you will thank past you when debugging CI failures.
 
 ## Common Mistakes
 
