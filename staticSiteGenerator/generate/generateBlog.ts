@@ -10,7 +10,10 @@ interface BlogParameter {
   topic: string;
   tags: string[];
   title: string;
-  featuredImage?: string;
+  featuredImage?: {
+    src: string;
+    srcset: string;
+  };
   author: string;
   readingTime: string;
 }
@@ -25,8 +28,8 @@ const generateBlogEntry = async (
       heading: entry.title,
       title: entry.title,
       featuredImage: entry.featuredImage
-        ? ctx.staticImages[entry.featuredImage].srcset
-        : ctx.staticImages[ctx.defaultFeatureImageKey].srcset,
+        ? ctx.staticImages[entry.featuredImage]
+        : ctx.staticImages[ctx.defaultFeatureImageKey],
       styles: ["blog"],
       blog: entry.html,
       tags: entry.tags,
