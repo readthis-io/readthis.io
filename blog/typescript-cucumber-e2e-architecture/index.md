@@ -10,7 +10,7 @@ tags:
   - quality-engineering
 topic: testing
 description: "We built a production-grade Cucumber E2E testing infrastructure for TypeScript and discovered patterns that actually work. Here's what matters for reliable testing."
-created: "2025-01-15T10:00:00Z"
+created: "2025-10-13T10:00:00Z"
 featuredImage: typescript-cucumber-e2e-post.jpg
 author: Senad Redzic
 ---
