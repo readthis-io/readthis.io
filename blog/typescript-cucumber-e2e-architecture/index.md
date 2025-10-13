@@ -19,144 +19,145 @@ author: Senad Redzic
   <h2 class="text-2xl font-bold text-primary -mt-8 mb-6">TL;DR</h2>
   
   <p class="text-lg mb-6">
-    We built a production-grade Cucumber E2E testing infrastructure for TypeScript and discovered patterns that actually work. 
-    Most tutorials stop at basic examples, but production needs type safety, maintainable tests, and reliable execution. 
-    Here's what we learned.
+    Most Cucumber tutorials stop at basic examples. We built a production TypeScript E2E architecture that actually scales. 
+    Type-safe Custom World, Webpack bundling for faster CI, stable locators, and proper async patterns. 
+    Here's what works after running 100+ scenarios in production.
   </p>
 </div>
 
-## The Problem with E2E Testing
+## Why Architecture Matters
 
-When we started building end-to-end tests, we hit the same problems everyone hits.
+You can write Cucumber tests in an afternoon. You can't maintain them without architecture.
 
-### Tests Break Constantly
+The difference between tests that rot and tests that scale is architecture. Type safety prevents refactoring disasters. Shared context eliminates global state. Proper waits stop flaky failures.
 
-You write a test. It works. You change the UI slightly. The test breaks. You spend more time fixing tests than writing features.
+This isn't about following best practices. It's about patterns that survive production.
 
-### No Type Safety
+## The Problem Most Teams Hit
 
-Your application is TypeScript. Your tests are JavaScript. Every refactoring breaks tests because there's no type checking. You find out at runtime.
+**Tests break on every UI change.** Brittle selectors coupled to implementation details.
 
-### Stakeholders Can't Read Tests
+**No type safety between tests and application.** Your app is TypeScript. Your tests are JavaScript. Every refactoring breaks tests at runtime.
 
-Product managers want to understand what's being tested. But tests are full of code. They can't tell if tests match requirements.
+**Stakeholders can't read tests.** Product managers see code, not requirements.
 
-### Flaky in CI/CD
+**Flaky in CI/CD.** Tests pass locally, fail in pipelines. You add sleeps. They get slower. Still flaky.
 
-Tests pass locally. They fail in CI/CD. You add sleep statements. Tests get slower. They still fail randomly.
+## Our Tech Stack
 
-## The Solution: A Better Architecture
+We use Webpack to bundle test code. Not because Cucumber requires it—it doesn't. Modern Cucumber runs TypeScript directly via `ts-node`.
 
-We needed an architecture that solves these problems. Here's what we built.
+We bundle because:
 
-### The Core Idea
+- **Faster CI startup**: Pre-bundled tests start in seconds, not minutes
+- **Dependency management**: One bundle, no node_modules in CI
+- **Consistency**: Same build pipeline as our application
 
-The key is separating what you're testing from how you're testing it. Cucumber helps with this through Gherkin syntax.
+⚙️ **Note**: If you don't need these benefits, skip Webpack. Use `cucumber-js --import ts-node/register` and you're done.
 
-Instead of this:
+Our stack:
 
-```javascript
-test("should show error for weak password", () => {
-  visit("/register");
-  type("password", "12345");
-  click("submit");
-  expect(error).toContain("weak password");
-});
-```
-
-You write this:
-
-```gherkin
-Scenario: User enters weak password
-  Given I am on the registration page
-  When I enter "12345" as the password
-  Then I should see an error "Password too weak"
-```
-
-The first version is code. The second version is readable by anyone.
-
-### Adding TypeScript
-
-But Gherkin alone isn't enough. You need the implementation behind it to be type-safe. That's where TypeScript comes in.
-
-The pattern is:
-
-1. Write features in Gherkin (readable by everyone)
-2. Implement steps in TypeScript (type-safe for developers)
-3. Compile everything before running tests
-4. Execute in CI/CD with confidence
+- **Cucumber** for Gherkin → step mapping
+- **TypeScript** for type safety
+- **Selenium WebDriver** for browser automation (Playwright is better for new projects)
+- **Webpack** for bundling (optional, but we like it)
 
 ## The Custom World Pattern
 
-Here's where most tutorials stop. They show basic examples but don't show how to build a real system.
+Cucumber's default World is `any`. No types, no autocomplete, no safety.
 
-### What is the World?
+A Custom World gives you:
 
-In Cucumber, the "World" is your test context. It's what's available to all your test steps.
+- Type-safe access to browser, database, config
+- Shared context between steps
+- Compile-time errors instead of runtime failures
 
-Think of it like this: every test needs access to certain things. A browser to interact with. A database to verify data. Configuration for URLs and settings.
-
-Without types, you're guessing what's available. With TypeScript, you know exactly what you can use.
-
-### A Simple Example
+### Implementation
 
 ```typescript
-export interface TestWorld {
+// types/CustomWorld.ts
+import { IWorld } from "@cucumber/cucumber";
+import { WebDriver } from "selenium-webdriver";
+import { Db } from "mongodb";
+
+export interface CustomWorld extends IWorld {
   browser: WebDriver;
-  database: DatabaseConnection;
+  database: Db;
   config: {
     appUrl: string;
     apiUrl: string;
   };
+  // Scenario-specific state
+  currentUser?: {
+    email: string;
+    id: string;
+  };
 }
 ```
 
-Now in your steps, you have type-safe access:
+### Using It
 
 ```typescript
-Given("I am on the home page", async function () {
+// steps/auth.steps.ts
+import { Given, When, Then } from "@cucumber/cucumber";
+import { CustomWorld } from "../types/CustomWorld";
+
+Given("I am logged in", async function (this: CustomWorld) {
   // TypeScript knows 'this.browser' exists
-  await this.browser.get(this.config.appUrl);
+  await this.browser.get(`${this.config.appUrl}/login`);
+
+  // Store state for later steps
+  this.currentUser = {
+    email: "test@example.com",
+    id: "user-123",
+  };
 });
 ```
 
-### Why This Matters
+💡 **Tip**: The `this: CustomWorld` type annotation gives you autocomplete and compile-time safety. Without it, you're back to `any`.
 
-When you refactor, TypeScript catches errors. When you add new features, autocomplete works. When new developers join, they see what's available.
+## Setup and Teardown
 
-## The Setup Pattern
-
-Every test needs a clean environment. Here's how we handle it.
-
-### Before Each Test
-
-Before each test scenario runs, we:
-
-1. Set up the database with fresh test data
-2. Create a new browser instance
-3. Load configuration
-
-### After Each Test
-
-After each test scenario, we:
-
-1. Close the browser
-2. Clean up the database
-3. Save screenshots if tests failed
-
-This ensures tests don't interfere with each other. No flaky tests from leftover state.
-
-### The Code Pattern
+Fresh state for every scenario. No shared state, no flaky tests.
 
 ```typescript
-Before(async function () {
-  // Set up fresh environment
-  this.database = await connectToDatabase();
+// support/hooks.ts
+import { Before, After } from "@cucumber/cucumber";
+import { Builder, Browser } from "selenium-webdriver";
+import chrome from "selenium-webdriver/chrome";
+import { CustomWorld } from "../types/CustomWorld";
+
+Before(async function (this: CustomWorld) {
+  // 1. Initialize config
+  this.config = {
+    appUrl: process.env.APP_URL || "http://localhost:3000",
+    apiUrl: process.env.API_URL || "http://localhost:8080",
+  };
+
+  // 2. Connect to test database
+  this.database = await connectToTestDatabase();
   await seedTestData(this.database);
-  this.browser = await createBrowser();
+
+  // 3. Create browser
+  const options = new chrome.Options();
+  options.addArguments("--headless=new");
+  options.addArguments("--window-size=1920,1080");
+  options.addArguments("--disable-gpu");
+  // Only add --no-sandbox if your containerized CI requires it
+
+  this.browser = await new Builder()
+    .forBrowser(Browser.CHROME)
+    .setChromeOptions(options)
+    .build();
 });
 
-After(async function () {
+After(async function (this: CustomWorld, { result }) {
+  // Save screenshot on failure
+  if (result?.status === "FAILED") {
+    const screenshot = await this.browser.takeScreenshot();
+    await this.attach(screenshot, "image/png");
+  }
+
   // Clean up
   if (this.browser) {
     await this.browser.quit();
@@ -164,11 +165,13 @@ After(async function () {
 });
 ```
 
-## Writing Maintainable Steps
+**Why this order matters**: Config first (everything needs it), database second (seeding needs connection), browser last (slowest to create).
 
-The key to maintainable tests is writing good step definitions.
+## Writing Stable Steps
 
-### Bad Pattern: Too Specific
+Bad steps break on every UI change. Good steps describe user behavior.
+
+### ❌ Bad: Coupled to Implementation
 
 ```typescript
 When(
@@ -179,173 +182,151 @@ When(
 );
 ```
 
-This breaks when IDs change.
+This breaks when:
 
-### Good Pattern: Meaningful
+- ID changes
+- Button becomes a link
+- UI framework changes
+
+### ✅ Good: User Behavior
 
 ```typescript
-When("the user submits the form", async function () {
+When("the user submits the form", async function (this: CustomWorld) {
   const submitButton = await this.browser.findElement(
-    By.css("[type='submit']"),
+    By.css("[data-testid='submit-button']"),
   );
   await submitButton.click();
 });
 ```
 
-This describes what the user does, not how it's implemented.
+💡 **Tip**: Use `data-testid` attributes. They're stable, semantic, and survive UI refactoring.
 
-### Even Better: Reusable
+### ✅ Better: Reusable with Parameters
 
 ```typescript
-When("the user clicks {string}", async function (buttonText: string) {
-  // Use stable selectors like data-testid instead of text
-  const button = await this.browser.findElement(
-    By.css(`[data-testid="${buttonText}"]`),
-  );
-  await button.click();
-});
+When(
+  "the user clicks {string}",
+  async function (this: CustomWorld, testId: string) {
+    const element = await this.browser.findElement(
+      By.css(`[data-testid='${testId}']`),
+    );
+    await element.click();
+  },
+);
 ```
 
-Use stable selectors like `data-testid` attributes. Text-based selectors break when copy changes or with internationalization.
+Now one step works for many scenarios:
 
-## Running TypeScript with Cucumber
+```gherkin
+When the user clicks "submit-button"
+When the user clicks "cancel-button"
+When the user clicks "save-draft-button"
+```
 
-Modern Cucumber can run TypeScript directly without a build step.
+## The Wait Pattern
 
-### Using ts-node
+Never use `sleep`. Always wait for conditions.
 
-Cucumber loads TypeScript via `ts-node` or ESM loaders:
+### ❌ Bad: Arbitrary Wait
 
-```json
-{
-  "scripts": {
-    "test": "cucumber-js --import ts-node/register"
-  }
+```typescript
+await sleep(2000); // Hope 2 seconds is enough
+```
+
+### ✅ Good: Explicit Wait
+
+```typescript
+import { until } from "selenium-webdriver";
+
+// Wait for element to exist
+await this.browser.wait(
+  until.elementLocated(By.css("[data-testid='dashboard']")),
+  5000,
+);
+
+// Wait for element to be visible
+const element = await this.browser.findElement(By.css("[data-testid='modal']"));
+await this.browser.wait(until.elementIsVisible(element), 5000);
+```
+
+**Why this works**: Waits stop as soon as the condition is met. Tests are faster and more reliable. Clear timeout errors when things fail.
+
+## Playwright Alternative
+
+Selenium works, but Playwright is better for new projects:
+
+```typescript
+// support/hooks.ts
+import { Before } from "@cucumber/cucumber";
+import { chromium, Page, Browser } from "@playwright/test";
+import { CustomWorld } from "../types/CustomWorld";
+
+// Extend CustomWorld for Playwright
+interface PlaywrightWorld extends CustomWorld {
+  browser: Browser;
+  page: Page;
 }
-```
 
-### Configuration
-
-```javascript
-// cucumber.config.js
-export default {
-  import: ["ts-node/register"],
-  require: ["tests/support/**/*.ts", "tests/steps/**/*.ts"],
-  format: ["progress", "html:reports/cucumber.html"],
-};
-```
-
-### Why This Works
-
-Cucumber loads TypeScript on the fly. No build step needed. Full type safety during development. Source maps work correctly.
-
-If you need more control over compilation, you can still use a build step, but it's not required for most projects.
-
-## Handling Browser Automation
-
-Browser automation is where tests become flaky. Here's how to make them reliable.
-
-### Choosing a Browser Automation Tool
-
-While this post uses Selenium WebDriver, modern projects often prefer **Playwright** for better reliability and auto-waiting. Playwright integrates well with Cucumber:
-
-```typescript
-// With Playwright
-import { chromium } from "@playwright/test";
-
-Before(async function () {
+Before(async function (this: PlaywrightWorld) {
   this.browser = await chromium.launch({ headless: true });
   this.page = await this.browser.newPage();
 });
 
-When("the user clicks {string}", async function (buttonText: string) {
-  await this.page.getByRole("button", { name: buttonText }).click();
-});
+// Steps are cleaner
+When(
+  "the user clicks {string}",
+  async function (this: PlaywrightWorld, buttonText: string) {
+    await this.page.getByRole("button", { name: buttonText }).click();
+  },
+);
 ```
 
-Playwright provides better selectors, automatic waiting, and more reliable tests. Consider it for new projects.
-
-### The Wait Pattern
-
-Never use sleep. Always wait for specific conditions.
-
-```typescript
-// Bad: arbitrary wait
-await sleep(2000);
-
-// Good: wait for specific element
-await this.browser.wait(until.elementLocated(By.css(".dashboard")), 5000);
-```
-
-### Why This Works
-
-Sleep waits the full time even if the page loads faster. Wait stops as soon as the condition is met. Tests are faster and more reliable.
-
-### Headless Mode
-
-In CI/CD, you don't have a display. Use headless mode:
-
-```typescript
-const options = new chrome.Options();
-options.addArguments("--headless=new");
-options.addArguments("--window-size=1920,1080");
-options.addArguments("--disable-gpu");
-// Only add --no-sandbox if your CI environment requires it
-// It's a security risk and should be avoided when possible
-
-const browser = await new Builder()
-  .forBrowser(Browser.CHROME)
-  .setChromeOptions(options)
-  .build();
-```
-
-Use `--headless=new` for better compatibility with modern Chrome. Avoid `--no-sandbox` unless your containerized CI specifically requires it.
+**Why Playwright**: Better selectors, automatic waiting, faster execution, better debugging.
 
 ## Database Integration
 
-Tests need to verify data. Here's how to do it right.
+E2E tests verify through the UI, not the database.
 
-### Separate Test Database
-
-Never use your development database for tests. Always use a separate test database.
+### Seeding Test Data
 
 ```typescript
-const config = {
-  development: "app-dev-db",
-  test: "app-test-db",
-  production: "app-prod-db",
-};
+async function seedTestData(db: Db) {
+  // Clear existing data
+  await db.collection("users").deleteMany({});
+  await db.collection("products").deleteMany({});
 
-const dbName = config[environment];
-```
-
-### Seed Test Data
-
-Before each test, populate the database with known data.
-
-```typescript
-async function seedTestData(db) {
+  // Seed known data
   await db.collection("users").insertOne({
     email: "test@example.com",
     name: "Test User",
+    role: "admin",
   });
 
   await db.collection("products").insertMany([
-    { name: "Product A", price: 100 },
-    { name: "Product B", price: 200 },
+    { name: "Product A", price: 100, stock: 50 },
+    { name: "Product B", price: 200, stock: 30 },
   ]);
 }
 ```
 
-Now tests have predictable data to work with.
-
-### Keep UI Tests Black-Box
-
-For end-to-end UI tests, verify through the UI, not the database. Database checks couple your tests to implementation details.
+### ❌ Bad: Direct Database Verification
 
 ```typescript
-// Good: verify through UI
-Then("I should see my account", async function () {
+Then("the user should exist in the database", async function () {
+  const user = await this.database
+    .collection("users")
+    .findOne({ email: "test@example.com" });
+
+  expect(user).toBeDefined();
+});
+```
+
+This couples your test to implementation. What if you switch databases? What if the schema changes?
+
+### ✅ Good: UI Verification
+
+```typescript
+Then("I should see my account", async function (this: CustomWorld) {
   const accountName = await this.browser.findElement(
     By.css("[data-testid='account-name']"),
   );
@@ -354,13 +335,13 @@ Then("I should see my account", async function () {
 });
 ```
 
-Save database assertions for integration tests or API tests, not UI scenarios.
+**Rule**: E2E tests verify through the UI. Database assertions belong in integration tests.
 
 ## Writing Good Feature Files
 
-Feature files are where stakeholders and developers meet. Make them readable.
+Gherkin describes user behavior, not technical implementation.
 
-### Good Structure
+### ✅ Good Structure
 
 ```gherkin
 Feature: User Registration
@@ -373,9 +354,9 @@ Feature: User Registration
     And my account should be created
 ```
 
-This reads like a requirement. Anyone can understand it.
+Anyone can read this. Product managers, designers, developers.
 
-### Bad Structure
+### ❌ Bad Structure
 
 ```gherkin
 Feature: User Registration
@@ -387,104 +368,203 @@ Feature: User Registration
     And database has 1 record in users table
 ```
 
-This is too technical. It tests implementation, not user behavior.
+This tests implementation, not user behavior. It's an API test disguised as a feature.
 
-### Parameterized Steps
-
-Use parameters to make steps reusable:
+### Parameterized Scenarios
 
 ```gherkin
-Scenario: Invalid email format
+Scenario Outline: Invalid registration inputs
   Given I am on the registration page
-  When I enter "invalid-email" as the email
-  Then I should see an error "Invalid email format"
+  When I enter "<input>" as the <field>
+  Then I should see an error "<error>"
 
-Scenario: Weak password
-  Given I am on the registration page
-  When I enter "123" as the password
-  Then I should see an error "Password too weak"
+  Examples:
+    | input         | field    | error                  |
+    | invalid-email | email    | Invalid email format   |
+    | 123           | password | Password too weak      |
+    | ab            | username | Username too short     |
 ```
 
-Same steps, different data.
+One scenario, multiple test cases.
+
+## Webpack Configuration
+
+We bundle tests with Webpack. Here's why and how.
+
+### Why Bundle
+
+1. **Faster CI startup**: Bundled tests start in 2 seconds vs 30 seconds for `node_modules`
+2. **Dependency control**: One bundle, no version conflicts
+3. **Consistency**: Same build pipeline as our application
+
+### Configuration
+
+```javascript
+// webpack.test.config.js
+const { glob } = require("glob");
+const path = require("path");
+
+const stepFiles = glob.sync("tests/steps/**/*.ts");
+
+module.exports = {
+  mode: "development",
+  target: "node",
+  entry: stepFiles.reduce((entries, file) => {
+    const name = path.basename(file, ".ts");
+    entries[name] = file;
+    return entries;
+  }, {}),
+  output: {
+    path: path.resolve(__dirname, "dist/tests"),
+    filename: "[name].js",
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+};
+```
+
+### Cucumber Configuration
+
+```javascript
+// cucumber.config.js
+export default {
+  require: ["dist/tests/**/*.js"], // Load bundled code
+  format: [
+    "progress", // Console output
+    "json:reports/cucumber.json", // For dashboards
+    "html:reports/cucumber.html", // Human-readable
+    "junit:reports/cucumber.xml", // CI systems
+  ],
+  parallel: 2, // Run scenarios in parallel
+};
+```
+
+### Build Script
+
+```json
+{
+  "scripts": {
+    "test:build": "webpack --config webpack.test.config.js",
+    "test:run": "cucumber-js",
+    "test": "npm run test:build && npm run test:run"
+  }
+}
+```
+
+⚙️ **Note**: If you don't need bundling, skip Webpack entirely. Use `cucumber-js --import ts-node/register` and point `--require` to your TypeScript files.
 
 ## CI/CD Integration
 
-Tests need to run in your pipeline. Here's how to make that reliable.
+Tests need to run reliably in pipelines.
 
 ### Start the Application
 
-Before running tests, start your application:
-
 ```javascript
-// Start server in background
-const server = exec("node server.js");
+// scripts/run-e2e-tests.js
+const { exec } = require("child_process");
+const fetch = require("node-fetch");
 
-// Wait for it to be ready
-await waitForServer("http://localhost:8080/health");
+async function waitForServer(url, timeout = 30000) {
+  const start = Date.now();
+  while (Date.now() - start < timeout) {
+    try {
+      await fetch(url);
+      return true;
+    } catch {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+  }
+  throw new Error(`Server not ready after ${timeout}ms`);
+}
 
-// Run tests
-await runTests();
+async function main() {
+  // Start server
+  const server = exec("node dist/server/index.js");
 
-// Stop server
-server.kill();
+  // Wait for health check
+  await waitForServer("http://localhost:8080/health");
+
+  // Run tests
+  const tests = exec("npm run test");
+
+  tests.on("exit", (code) => {
+    server.kill();
+    process.exit(code);
+  });
+}
+
+main();
 ```
 
 ### Generate Reports
-
-Cucumber provides built-in formatters for different needs:
 
 ```javascript
 // cucumber.config.js
 export default {
   format: [
-    "progress", // Console output
-    "json:reports/cucumber.json", // For dashboards/tools
-    "html:reports/cucumber.html", // Human-readable
-    "junit:reports/cucumber.xml", // CI systems (Jenkins, GitLab)
+    "progress", // Development
+    "json:reports/cucumber.json", // For tools
+    "html:reports/cucumber.html", // For humans
+    "junit:reports/cucumber.xml", // For Jenkins/GitLab
   ],
 };
 ```
 
-Use `progress` or `pretty` for development. Use `json` for CI pipelines. Use `junit` for test result integration.
+**Why multiple formats**: `progress` for development, `json` for dashboards, `junit` for CI integration.
 
 ### Handle Failures
 
-When tests fail, save evidence:
-
 ```typescript
-After(async function ({ pickle, result }) {
+After(async function (this: CustomWorld, { result }) {
   if (result?.status === "FAILED") {
+    // Screenshot
     const screenshot = await this.browser.takeScreenshot();
     await this.attach(screenshot, "image/png");
+
+    // Page HTML for debugging
+    const html = await this.browser.getPageSource();
+    await this.attach(html, "text/html");
+
+    // Console logs (if using Playwright)
+    // const logs = await this.page.evaluate(() => console.log);
+    // await this.attach(JSON.stringify(logs), "application/json");
   }
 });
 ```
 
-Modern Cucumber uses `pickle` and `result` parameters. Screenshots help debug CI failures.
+💡 **Tip**: Attach screenshots, HTML, and logs. Future you will thank past you when debugging CI failures.
 
 ## Common Mistakes
-
-Here are the mistakes we made so you don't have to.
 
 ### Mistake 1: Too Much Detail in Features
 
 ```gherkin
-# Bad
+# ❌ Bad
 When I click the button with CSS selector ".submit-btn"
 And I wait 2 seconds
 Then the div with class "success" should contain text "Done"
 
-# Good
+# ✅ Good
 When I submit the form
 Then I should see a success message
 ```
 
-Features should describe user behavior, not implementation.
+Features describe behavior, not implementation.
 
-### Mistake 2: Sharing State Between Tests
+### Mistake 2: Shared State Between Tests
 
 ```typescript
-// Bad: global variable
+// ❌ Bad: Global variable
 let testUser;
 
 Before(async function () {
@@ -492,68 +572,59 @@ Before(async function () {
 });
 ```
 
-This causes flaky tests. Use the World instead:
+Flaky tests guaranteed. Use the World:
 
 ```typescript
-Before(async function () {
-  this.testUser = await createUser();
+// ✅ Good: World state
+Before(async function (this: CustomWorld) {
+  this.currentUser = await createUser();
 });
 ```
 
 ### Mistake 3: No Type Safety
 
 ```javascript
-// Bad: plain JavaScript
+// ❌ Bad: Plain JavaScript
 Given("user exists", async function () {
-  this.user = await findUser(); // What properties does this.user have?
+  this.user = await findUser(); // What properties does user have?
 });
 ```
 
-Use TypeScript:
-
 ```typescript
-// Good: typed
-Given("user exists", async function () {
-  this.user = await findUser(); // TypeScript knows the user type
+// ✅ Good: TypeScript
+Given("user exists", async function (this: CustomWorld) {
+  this.currentUser = await findUser(); // TypeScript knows the type
 });
 ```
 
 ## What Actually Works
 
-After using this in production, here's what matters.
+After 100+ scenarios in production:
 
-### Type Safety is Worth It
+**Type safety is worth it.** Refactoring is safe. New developers understand the code. Autocomplete catches typos.
 
-The upfront work of setting up TypeScript pays off. Refactoring becomes safe. New developers understand the code faster.
+**Fresh state prevents flakiness.** Resetting database before each test eliminated 90% of flaky tests.
 
-### Fresh State Prevents Flakiness
+**Readable features improve communication.** Product managers catch requirement mismatches early. Tests become living documentation.
 
-Resetting the database before each test eliminates 90% of flaky tests. Tests are independent and reliable.
+**Explicit waits, not sleeps.** Tests are faster and more reliable. Clear timeout errors when things fail.
 
-### Readable Features Improve Communication
+**Webpack bundling speeds up CI.** 2-second startup vs 30-second `node_modules` install.
 
-When product managers can read tests, they catch requirement mismatches early. When developers write readable features, tests become documentation.
+## Getting Started
 
-### Wait, Don't Sleep
+Start small:
 
-Explicit waits make tests faster and more reliable. They wait only as long as needed and fail with clear errors.
-
-## Where to Start
-
-If you're adding this to your project:
-
-1. **Start with one feature** - Don't rewrite all tests at once
-2. **Set up TypeScript compilation** - Get the build pipeline working
-3. **Create a simple World interface** - Add types to your test context
-4. **Write readable features** - Focus on user behavior, not implementation
-5. **Add database seeding** - Give tests predictable state
-6. **Use explicit waits** - Replace all sleep statements
+1. **Create a Custom World interface** - Add types to your test context
+2. **Write one feature** - Don't rewrite everything at once
+3. **Add Before/After hooks** - Fresh state for each scenario
+4. **Use data-testid attributes** - Stable selectors that survive refactoring
+5. **Replace sleeps with waits** - Explicit conditions, not arbitrary timeouts
+6. **Add screenshot on failure** - Debug CI failures faster
 
 ## The Real Value
 
-The real value isn't in any single pattern. It's in the combination.
-
-Type safety catches errors at compile time. Readable features improve communication. Fresh database state prevents flakiness. Explicit waits make tests reliable.
+Type safety catches errors at compile time. Readable features improve communication. Fresh state prevents flakiness. Explicit waits make tests reliable.
 
 Together, these patterns create tests that developers trust and maintain. Tests that catch real bugs. Tests that run reliably in CI/CD.
 
@@ -566,7 +637,7 @@ That's what production E2E testing needs.
 ### Technical Resources
 
 - [Cucumber Documentation](https://cucumber.io/docs) - Official Cucumber docs
-- [Cucumber TypeScript Examples](https://github.com/cucumber/cucumber-js/tree/main/examples) - Official TypeScript setup examples
+- [Cucumber TypeScript Examples](https://github.com/cucumber/cucumber-js/tree/main/examples) - Official TypeScript setup
 - [Cucumber Anti-Patterns](https://cucumber.io/docs/guides/anti-patterns/) - What to avoid
 - [Playwright Documentation](https://playwright.dev/docs/intro) - Modern browser automation
 - [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/) - Traditional browser automation
@@ -574,4 +645,4 @@ That's what production E2E testing needs.
 
 ### Disclaimer
 
-_This post is based on production experience building E2E testing infrastructure with TypeScript and Cucumber. The patterns shown are battle-tested but your requirements may differ. Modern Cucumber supports TypeScript natively via ts-node - no build step required. Consider Playwright for new projects for better reliability and developer experience._
+_This post is based on production experience building E2E testing infrastructure with TypeScript and Cucumber. The patterns shown are battle-tested in our projects. Modern Cucumber supports TypeScript natively via ts-node—we use Webpack for bundling and faster CI startup, but it's optional. Consider Playwright for new projects for better reliability and developer experience._
