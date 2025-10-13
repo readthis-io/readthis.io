@@ -198,49 +198,72 @@ This describes what the user does, not how it's implemented.
 
 ```typescript
 When("the user clicks {string}", async function (buttonText: string) {
+  // Use stable selectors like data-testid instead of text
   const button = await this.browser.findElement(
-    By.xpath(`//button[text()='${buttonText}']`),
+    By.css(`[data-testid="${buttonText}"]`),
   );
   await button.click();
 });
 ```
 
-Now one step works for many scenarios.
+Use stable selectors like `data-testid` attributes. Text-based selectors break when copy changes or with internationalization.
 
-## The Compilation Step
+## Running TypeScript with Cucumber
 
-This is crucial: TypeScript needs to compile to JavaScript before Cucumber can run it.
+Modern Cucumber can run TypeScript directly without a build step.
 
-### Why Compilation Matters
+### Using ts-node
 
-Cucumber is a JavaScript tool. It can't run TypeScript directly. You need a build step.
-
-We use Webpack to compile TypeScript step definitions to JavaScript. Then Cucumber runs the compiled output.
-
-### The Flow
-
-1. Developer writes steps in TypeScript
-2. Build script compiles to JavaScript
-3. Cucumber loads compiled JavaScript
-4. Tests run with full type safety
-
-### Simple Build Script
+Cucumber loads TypeScript via `ts-node` or ESM loaders:
 
 ```json
 {
   "scripts": {
-    "test:build": "webpack --config test.webpack.js",
-    "test:run": "cucumber-js",
-    "test": "npm run test:build && npm run test:run"
+    "test": "cucumber-js --import ts-node/register"
   }
 }
 ```
 
-Run `npm test` and everything happens automatically.
+### Configuration
+
+```javascript
+// cucumber.config.js
+export default {
+  import: ["ts-node/register"],
+  require: ["tests/support/**/*.ts", "tests/steps/**/*.ts"],
+  format: ["progress", "html:reports/cucumber.html"],
+};
+```
+
+### Why This Works
+
+Cucumber loads TypeScript on the fly. No build step needed. Full type safety during development. Source maps work correctly.
+
+If you need more control over compilation, you can still use a build step, but it's not required for most projects.
 
 ## Handling Browser Automation
 
 Browser automation is where tests become flaky. Here's how to make them reliable.
+
+### Choosing a Browser Automation Tool
+
+While this post uses Selenium WebDriver, modern projects often prefer **Playwright** for better reliability and auto-waiting. Playwright integrates well with Cucumber:
+
+```typescript
+// With Playwright
+import { chromium } from "@playwright/test";
+
+Before(async function () {
+  this.browser = await chromium.launch({ headless: true });
+  this.page = await this.browser.newPage();
+});
+
+When("the user clicks {string}", async function (buttonText: string) {
+  await this.page.getByRole("button", { name: buttonText }).click();
+});
+```
+
+Playwright provides better selectors, automatic waiting, and more reliable tests. Consider it for new projects.
 
 ### The Wait Pattern
 
@@ -264,8 +287,11 @@ In CI/CD, you don't have a display. Use headless mode:
 
 ```typescript
 const options = new chrome.Options();
-options.addArguments("--headless");
-options.addArguments("--no-sandbox");
+options.addArguments("--headless=new");
+options.addArguments("--window-size=1920,1080");
+options.addArguments("--disable-gpu");
+// Only add --no-sandbox if your CI environment requires it
+// It's a security risk and should be avoided when possible
 
 const browser = await new Builder()
   .forBrowser(Browser.CHROME)
@@ -273,7 +299,7 @@ const browser = await new Builder()
   .build();
 ```
 
-Tests run without a visible browser window.
+Use `--headless=new` for better compatibility with modern Chrome. Avoid `--no-sandbox` unless your containerized CI specifically requires it.
 
 ## Database Integration
 
@@ -313,19 +339,22 @@ async function seedTestData(db) {
 
 Now tests have predictable data to work with.
 
-### Verify in Steps
+### Keep UI Tests Black-Box
+
+For end-to-end UI tests, verify through the UI, not the database. Database checks couple your tests to implementation details.
 
 ```typescript
-Then("the user should exist in the database", async function () {
-  const user = await this.database
-    .collection("users")
-    .findOne({ email: "test@example.com" });
-
-  if (!user) {
-    throw new Error("User not found");
-  }
+// Good: verify through UI
+Then("I should see my account", async function () {
+  const accountName = await this.browser.findElement(
+    By.css("[data-testid='account-name']"),
+  );
+  const text = await accountName.getText();
+  expect(text).toBe("Test User");
 });
 ```
+
+Save database assertions for integration tests or API tests, not UI scenarios.
 
 ## Writing Good Feature Files
 
@@ -402,34 +431,36 @@ server.kill();
 
 ### Generate Reports
 
-CI/CD tools need specific report formats:
+Cucumber provides built-in formatters for different needs:
 
-```json
-{
-  "format": [
-    "json:reports/cucumber.json",
-    "html:reports/cucumber.html",
-    "junit:reports/cucumber.xml"
-  ]
-}
+```javascript
+// cucumber.config.js
+export default {
+  format: [
+    "progress", // Console output
+    "json:reports/cucumber.json", // For dashboards/tools
+    "html:reports/cucumber.html", // Human-readable
+    "junit:reports/cucumber.xml", // CI systems (Jenkins, GitLab)
+  ],
+};
 ```
 
-Different formats for different tools: JSON for dashboards, HTML for humans, JUnit for CI systems.
+Use `progress` or `pretty` for development. Use `json` for CI pipelines. Use `junit` for test result integration.
 
 ### Handle Failures
 
 When tests fail, save evidence:
 
 ```typescript
-After(async function (scenario) {
-  if (scenario.result.status === "failed") {
+After(async function ({ pickle, result }) {
+  if (result?.status === "FAILED") {
     const screenshot = await this.browser.takeScreenshot();
-    this.attach(screenshot, "image/png");
+    await this.attach(screenshot, "image/png");
   }
 });
 ```
 
-Screenshots help debug failures.
+Modern Cucumber uses `pickle` and `result` parameters. Screenshots help debug CI failures.
 
 ## Common Mistakes
 
@@ -534,10 +565,13 @@ That's what production E2E testing needs.
 
 ### Technical Resources
 
-- [Cucumber Documentation](https://cucumber.io/docs)
-- [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [Cucumber Documentation](https://cucumber.io/docs) - Official Cucumber docs
+- [Cucumber TypeScript Examples](https://github.com/cucumber/cucumber-js/tree/main/examples) - Official TypeScript setup examples
+- [Cucumber Anti-Patterns](https://cucumber.io/docs/guides/anti-patterns/) - What to avoid
+- [Playwright Documentation](https://playwright.dev/docs/intro) - Modern browser automation
+- [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/) - Traditional browser automation
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) - TypeScript fundamentals
 
 ### Disclaimer
 
-_This post is based on production experience building E2E testing infrastructure with TypeScript and Cucumber. The patterns shown are battle-tested but your requirements may differ. Adapt these patterns to your specific needs._
+_This post is based on production experience building E2E testing infrastructure with TypeScript and Cucumber. The patterns shown are battle-tested but your requirements may differ. Modern Cucumber supports TypeScript natively via ts-node - no build step required. Consider Playwright for new projects for better reliability and developer experience._

@@ -13,7 +13,7 @@
       class="blong-post-content max-w-4xl mx-auto pb-24">
       {# Hero Section with Image #}
       <div class="mb-8 rounded-md border border-primary overflow-hidden aspect-[21/9] bg-gray-light">
-        <img srcset="{{ featuredImage }}" alt="{{ title }}" class="w-full h-full object-cover" width="1280" height="540" fetchpriority="low" decoding="async"/>
+        <img src="{{ featuredImage.src }}" srcset="{{ featuredImage.srcset }}" alt="{{ title }}" class="w-full h-full object-cover" width="1280" height="540" fetchpriority="low" decoding="async"/>
       </div>
       {# Article Header #}
       <header
