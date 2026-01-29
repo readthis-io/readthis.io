@@ -26,13 +26,9 @@ author: Senad Redzic
 
 I was chatting with a couple of colleagues the other day. We talked about AI, about Europe's place in the tech world, about geopolitics. The usual doom and gloom about how America has the software, China has the manufacturing, and Europe has... regulations?
 
-Then I asked them: "Do you know what the most important machine in the world is?"
+Then someone mentioned ASML. The most important machine in the world, they said. Built in Veldhoven, a small Dutch town of 45,000 people. Without it, the entire global tech industry stops.
 
-Someone guessed a supercomputer. Maybe a particle accelerator. Something American, probably.
-
-"It's Dutch," I said. "Built in Veldhoven, a town of 45,000 people. And without it, the entire global tech industry stops."
-
-They didn't believe me. Most people don't, until you explain what ASML actually does.
+We went down the rabbit hole together, piecing together just how insane this machine actually is. Most people have never heard of it. But once you understand what ASML does, you can't unsee it.
 
 ## What Is This Machine?
 
