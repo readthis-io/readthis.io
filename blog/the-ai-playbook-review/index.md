@@ -8,7 +8,7 @@ tags:
   - deployment
   - management
 topic: ai
-featuredImage: the-ai-playbook.png
+featuredImage: the-ai-playbook-hero.png
 description: "Eric Siegel wrote a book about the part of machine learning nobody talks about: getting models into production. Here's my review of The AI Playbook, from someone who deploys ML systems for a living."
 created: "2026-08-12T10:00:00Z"
 author: Senad Redzic
